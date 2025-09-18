@@ -10,7 +10,8 @@ export function useCaptcha(): UseCaptchaResult {
   const [captchaKey, setCaptchaKey] = useState(Date.now());
 
   // 生成帶有時間戳的驗證碼 URL 以避免快取
-  const captchaUrl = `${API_ENDPOINTS.CAPTCHA}?t=${captchaKey}`;
+  const baseUrl = `${process.env.NEXT_PUBLIC_API_URL || ''}${process.env.NEXT_PUBLIC_BASE_PATH || ''}`;
+  const captchaUrl = `${baseUrl}${API_ENDPOINTS.CAPTCHA}?t=${captchaKey}`;
 
   const refreshCaptcha = useCallback(() => {
     setCaptchaKey(Date.now());

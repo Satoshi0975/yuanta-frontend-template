@@ -1,12 +1,13 @@
 import { apiClient } from '@/lib/api';
 import type {
   DialogState,
-  DialogStep,
   LoginRequest,
   LoginResponse,
+  RecordDialogStep,
+  RecordResponse,
+  RegisterDialogStep,
   RegistrationRequest,
   RegistrationResponse,
-  RecordResponse,
 } from '@/lib/types';
 import { useState } from 'react';
 
@@ -17,10 +18,11 @@ import { useState } from 'react';
 
 // 查詢流程
 // 1. 登入 -> 取得帳號清單
-// 2. 查詢 -> 使用帳號清單作為完整帳號的下拉選單 -> 取得查詢成功的內容
-// 3. 顯示狀態 -> 成功 -> 顯示查詢成功的內容
+// 2. 顯示狀態 -> 查詢 -> 使用帳號清單作為完整帳號的下拉選單 -> 取得查詢成功的內容並顯示
 
-export const useDialogFlow = (initialStep: DialogStep = 'login') => {
+export const useDialogFlow = (
+  initialStep: RegisterDialogStep | RecordDialogStep = 'login'
+) => {
   const [dialogState, setDialogState] = useState<DialogState>({
     step: initialStep,
     data: {},
@@ -37,10 +39,10 @@ export const useDialogFlow = (initialStep: DialogStep = 'login') => {
   };
 
   // 設置錯誤狀態
-  const setError = (message: string) => {
+  const setError = (message: string, fieldErrors?: Record<string, string>) => {
     setDialogState({
       step: 'error',
-      data: { errorMessage: message },
+      data: { errorMessage: message, fieldErrors },
     });
   };
 
@@ -58,19 +60,25 @@ export const useDialogFlow = (initialStep: DialogStep = 'login') => {
       );
 
       if (response.success && response.data) {
-        // 根據業務邏輯決定下一步
-        // 這裡可以根據用戶狀態或其他條件來決定流程
-        const nextStep = determineNextStep(response.data);
-
+        console.log(response.fieldErrors);
         setDialogState({
-          step: nextStep,
+          step: 'registration',
           data: {
             user: response.data.user,
             accounts: response.data.accounts,
           },
         });
       } else {
-        throw new Error(response.message || '登入失敗');
+        // 處理 fieldErrors - 如果有欄位錯誤，保持在登入頁面並顯示錯誤
+        setDialogState((prev) => ({
+          step: 'login',
+          data: {
+            ...prev.data,
+            ...(response.fieldErrors
+              ? { fieldErrors: response.fieldErrors }
+              : { errorMessage: response.message }),
+          },
+        }));
       }
     } catch (error) {
       setError(error instanceof Error ? error.message : '登入失敗');
@@ -84,7 +92,7 @@ export const useDialogFlow = (initialStep: DialogStep = 'login') => {
     setIsLoading(true);
     try {
       const response = await apiClient.post<RegistrationResponse>(
-        '/api/register',
+        '/api/registration',
         values
       );
 
@@ -97,10 +105,28 @@ export const useDialogFlow = (initialStep: DialogStep = 'login') => {
           },
         }));
       } else {
-        throw new Error(response.message || '報名失敗');
+        // 如果有欄位錯誤，拋出包含 fieldErrors 的錯誤
+        if (response.fieldErrors) {
+          const error = new Error(response.message || '報名失敗');
+          (
+            error as unknown as { fieldErrors: Record<string, string> }
+          ).fieldErrors = response.fieldErrors;
+          throw error;
+        } else {
+          throw new Error(response.message || '報名失敗');
+        }
       }
     } catch (error) {
-      setError(error instanceof Error ? error.message : '報名失敗');
+      // 如果錯誤包含 fieldErrors，直接拋出讓表單處理
+      if (
+        (error as unknown as { fieldErrors: Record<string, string> })
+          .fieldErrors
+      ) {
+        throw error;
+      }
+      setError(
+        error instanceof Error ? error.message : '報名失敗，請稍後再試。'
+      );
     } finally {
       setIsLoading(false);
     }
@@ -114,7 +140,7 @@ export const useDialogFlow = (initialStep: DialogStep = 'login') => {
 
       if (response.success && response.data) {
         setDialogState((prev) => ({
-          step: 'results',
+          step: 'record',
           data: {
             ...prev.data,
             resultsData: response.data as RecordResponse,
@@ -130,16 +156,9 @@ export const useDialogFlow = (initialStep: DialogStep = 'login') => {
     }
   };
 
-  // 決定登入後的下一步
-  const determineNextStep = (data: LoginResponse): DialogStep => {
-    // 登入成功後，讓用戶選擇要報名還是查詢
-    // 如果只有一個帳號且有明確的業務邏輯，可以直接跳轉
-    return 'account-selection';
-  };
-
   // 從帳號選擇進入報名流程
   const handleAccountRegistration = (accountId: string) => {
-    setDialogState(prev => ({
+    setDialogState((prev) => ({
       step: 'registration',
       data: {
         ...prev.data,
@@ -150,8 +169,8 @@ export const useDialogFlow = (initialStep: DialogStep = 'login') => {
 
   // 從帳號選擇進入查詢流程
   const handleAccountResults = async (accountId: string) => {
-    setDialogState(prev => ({
-      step: 'results',
+    setDialogState((prev) => ({
+      step: 'record',
       data: {
         ...prev.data,
         selectedAccountId: accountId,
@@ -164,15 +183,15 @@ export const useDialogFlow = (initialStep: DialogStep = 'login') => {
   // 返回上一步
   const goBack = () => {
     switch (dialogState.step) {
-      case 'account-selection':
-        setDialogState((prev) => ({ ...prev, step: 'login' }));
-        break;
       case 'registration':
-      case 'results':
-        setDialogState((prev) => ({ ...prev, step: 'account-selection' }));
+      case 'record':
+        setDialogState((prev) => ({ ...prev, step: 'login' }));
         break;
       case 'error':
-        setDialogState((prev) => ({ ...prev, step: 'login' }));
+        setDialogState({
+          step: 'login',
+          data: {},
+        });
         break;
       default:
         break;
@@ -180,7 +199,10 @@ export const useDialogFlow = (initialStep: DialogStep = 'login') => {
   };
 
   // 跳轉到特定步驟
-  const goToStep = (step: DialogStep, data?: DialogState['data']) => {
+  const goToStep = (
+    step: RegisterDialogStep | RecordDialogStep,
+    data?: DialogState['data']
+  ) => {
     setDialogState({
       step,
       data: data || dialogState.data,

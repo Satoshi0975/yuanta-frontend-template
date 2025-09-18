@@ -2,40 +2,37 @@
 
 import { cn } from '@/lib/utils';
 import { RefreshCcw } from 'lucide-react';
-import { useEffect, useState } from 'react';
-
-const CAPTCHA_API = `${process.env.NEXT_PUBLIC_API_URL || ''}${process.env.NEXT_PUBLIC_BASE_PATH || ''}/api/captcha`;
+import { useCaptcha } from '@/hooks/useCaptcha';
 
 type CaptchaProps = {
   className?: string;
-  captchaKey?: number;
+  onRefresh?: () => void; // 可選的刷新回調
 };
 
-const Captcha = ({ className, captchaKey: key }: CaptchaProps) => {
-  const [captchaKey, setCaptchaKey] = useState<number>(key || Date.now()); // 初始的驗證碼key值
+const Captcha = ({ className, onRefresh }: CaptchaProps) => {
+  const { captchaUrl, refreshCaptcha } = useCaptcha();
 
-  useEffect(() => {
-    setCaptchaKey(Date.now());
-  }, [key]);
-
-  // 重新載入驗證碼圖片
-  const reloadCaptcha = () => {
-    const newCaptchaKey = Date.now();
-    setCaptchaKey(newCaptchaKey);
+  // 處理刷新動作
+  const handleRefresh = () => {
+    refreshCaptcha();
+    onRefresh?.(); // 如果有提供回調則執行
   };
 
   return (
     <div className={cn('flex shrink-0 items-center space-x-3', className)}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         className="reloadImg shrink-0"
-        src={`${CAPTCHA_API}?${captchaKey}`}
-        alt="reload"
-        onClick={reloadCaptcha}
+        src={captchaUrl}
+        alt="驗證碼"
+        onClick={handleRefresh}
         style={{ cursor: 'pointer' }}
+        loading="eager"
+        decoding="sync"
       />
       <RefreshCcw
         className="shrink-0 animate-none hover:animate-spin"
-        onClick={reloadCaptcha}
+        onClick={handleRefresh}
       />
     </div>
   );

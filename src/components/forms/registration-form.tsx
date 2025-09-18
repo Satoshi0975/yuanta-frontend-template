@@ -9,28 +9,35 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import type { RegistrationRequest } from '@/lib/types';
+import { registrationSchema } from '@/lib/validations';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { LoaderCircle, Tag, UserCircle2 } from 'lucide-react';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import Captcha from '../captcha';
 
 interface RegistrationFormProps {
   onSubmit: (values: RegistrationRequest) => Promise<void>;
-  defaultAccount?: string;
+  accountList?: string[];
 }
 
 const RegistrationForm = ({
   onSubmit,
-  defaultAccount = '',
+  accountList = [],
 }: RegistrationFormProps) => {
-  const [captchaKey, setCaptchaKey] = useState<number>(Date.now());
+  console.log(accountList);
 
   const form = useForm<RegistrationRequest>({
+    resolver: zodResolver(registrationSchema),
     defaultValues: {
-      fullAccount: defaultAccount,
+      fullAccount: accountList[0] || '',
       nickname: '',
-      captcha: '',
     },
   });
 
@@ -39,12 +46,24 @@ const RegistrationForm = ({
   const handleSubmit = async (values: RegistrationRequest) => {
     try {
       await onSubmit(values);
-    } catch (error) {
-      form.setError('root', {
-        type: 'server',
-        message: error instanceof Error ? error.message : '報名失敗',
-      });
-      setCaptchaKey(Date.now()); // 重新產生驗證碼
+    } catch (error: unknown) {
+      // 處理欄位錯誤
+      if (error && typeof error === 'object' && 'fieldErrors' in error) {
+        const fieldErrors = (error as { fieldErrors: Record<string, string> })
+          .fieldErrors;
+        Object.entries(fieldErrors).forEach(([field, message]) => {
+          form.setError(field as keyof RegistrationRequest, {
+            type: 'server',
+            message: message,
+          });
+        });
+      } else {
+        // 處理一般錯誤
+        form.setError('root', {
+          type: 'server',
+          message: error instanceof Error ? error.message : '報名失敗',
+        });
+      }
     }
   };
 
@@ -56,30 +75,38 @@ const RegistrationForm = ({
       >
         <div className="bg-y-card border-yt-blue-300 space-y-6 rounded-xl border-2 p-6">
           <div className="mb-4 text-center">
-            <h3 className="text-lg font-semibold text-gray-800">活動報名</h3>
             <p className="mt-2 text-sm text-gray-600">
               請填寫以下資料完成活動報名
             </p>
           </div>
-
           <FormField
             control={form.control}
             name="fullAccount"
-            rules={{ required: '請輸入完整帳號' }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="w-full !text-left">完整帳號</FormLabel>
                 <div className="flex items-center space-x-3">
                   <div className="relative w-full">
                     <FormControl>
-                      <Input
-                        className="peer w-full pl-10"
-                        type="text"
-                        placeholder="請輸入完整帳號"
-                        {...field}
-                      />
+                      <Select
+                        value={field.value}
+                        onValueChange={field.onChange}
+                        disabled={field.disabled}
+                        name={field.name}
+                      >
+                        <SelectTrigger className="w-full pl-10">
+                          <SelectValue placeholder="請選擇完整帳號" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {accountList.map((account) => (
+                            <SelectItem key={account} value={account}>
+                              {account}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                     </FormControl>
-                    <UserCircle2 className="absolute left-2 top-2 peer-focus-visible:text-blue-600" />
+                    <UserCircle2 className="absolute left-2 top-2 text-gray-400" />
                   </div>
                 </div>
                 <FormMessage />
@@ -90,11 +117,6 @@ const RegistrationForm = ({
           <FormField
             control={form.control}
             name="nickname"
-            rules={{
-              required: '請輸入暱稱',
-              minLength: { value: 2, message: '暱稱至少需要 2 個字元' },
-              maxLength: { value: 20, message: '暱稱不能超過 20 個字元' },
-            }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="w-full !text-left">參賽暱稱</FormLabel>
@@ -110,29 +132,6 @@ const RegistrationForm = ({
                     </FormControl>
                     <Tag className="absolute left-2 top-2 peer-focus-visible:text-blue-600" />
                   </div>
-                </div>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="captcha"
-            rules={{ required: '請輸入驗證碼' }}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="w-full !text-left">圖形驗證碼</FormLabel>
-                <div className="flex items-center justify-start space-x-3">
-                  <FormControl>
-                    <Input
-                      className="w-full max-w-52 bg-white"
-                      placeholder="請輸入驗證碼"
-                      {...field}
-                      type="text"
-                    />
-                  </FormControl>
-                  <Captcha captchaKey={captchaKey} />
                 </div>
                 <FormMessage />
               </FormItem>

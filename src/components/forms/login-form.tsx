@@ -1,4 +1,3 @@
-// import Captcha from '@/components/captcha';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -9,44 +8,62 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { loginSchema, type LoginFormData } from '@/lib/validations';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { LoaderCircle, Lock, UserCircle2 } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import Captcha from '../captcha';
 
-export type LoginInFormData = {
-  username: string;
-  password: string;
-  captcha: string;
-};
+interface LoginInFormProps {
+  onSubmit: (values: {
+    username: string;
+    password: string;
+    captcha: string;
+  }) => Promise<void>;
+  isLoading?: boolean;
+  error?: string | null;
+  fieldErrors?: Record<string, string>;
+}
 
-type Props = {
-  onSubmit: (values: LoginInFormData) => Promise<void>;
-};
-
-const LoginInForm = ({ onSubmit }: Props) => {
-  const [captchaKey, setCaptchaKey] = useState<number>(Date.now()); // 初始的驗證碼key值
-  const form = useForm<LoginInFormData>({
+const LoginInForm = ({
+  onSubmit,
+  isLoading = false,
+  error,
+  fieldErrors,
+}: LoginInFormProps) => {
+  const form = useForm<LoginFormData>({
+    resolver: zodResolver(loginSchema),
     defaultValues: {
       username: '',
       password: '',
       captcha: '',
     },
   });
-  const { isSubmitting } = form.formState;
 
-  const handleSubmit = async (value: LoginInFormData) => {
-    try {
-      await onSubmit(value);
-    } catch (error) {
-      console.log(error);
-      form.setError('root', {
-        type: 'server',
-        message: (error as Error).message,
+  // 當 fieldErrors 改變時，設置表單錯誤
+  useEffect(() => {
+    // 先清除所有之前的 server 錯誤
+    form.clearErrors();
+
+    // 如果有新的 fieldErrors，設置它們
+    if (fieldErrors) {
+      Object.entries(fieldErrors).forEach(([field, message]) => {
+        form.setError(field as keyof LoginFormData, {
+          type: 'server',
+          message,
+        });
       });
     }
-    setCaptchaKey(Date.now());
-    return;
+  }, [fieldErrors, form]);
+
+  const handleSubmit = async (values: LoginFormData) => {
+    try {
+      await onSubmit(values);
+    } catch {
+      // 登入失敗時重新整理驗證碼
+      form.setValue('captcha', '');
+    }
   };
 
   return (
@@ -61,7 +78,9 @@ const LoginInForm = ({ onSubmit }: Props) => {
             name="username"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="w-full !text-left">身分證字號</FormLabel>
+                <FormLabel className="w-full !text-left text-gray-700">
+                  身分證字號
+                </FormLabel>
                 <div className="flex items-center space-x-3">
                   <div className="relative w-full">
                     <FormControl>
@@ -76,6 +95,7 @@ const LoginInForm = ({ onSubmit }: Props) => {
                   </div>
                 </div>
                 {/* <FormDescription></FormDescription> */}
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -84,11 +104,10 @@ const LoginInForm = ({ onSubmit }: Props) => {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="w-full bg-white !text-left text-gray-700">
+                <FormLabel className="w-full !text-left text-gray-700">
                   網路交易密碼
                 </FormLabel>
                 <div className="flex items-center space-x-3">
-                  {/* <FormLabel className="shrink-0">密碼</FormLabel> */}
                   <div className="relative w-full">
                     <FormControl>
                       <Input
@@ -113,7 +132,7 @@ const LoginInForm = ({ onSubmit }: Props) => {
             name="captcha"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="w-full bg-white !text-left text-gray-700">
+                <FormLabel className="w-full !text-left text-gray-700">
                   圖形驗證碼
                 </FormLabel>
                 <div className="flex items-center justify-start space-x-3">
@@ -126,29 +145,30 @@ const LoginInForm = ({ onSubmit }: Props) => {
                     />
                   </FormControl>
 
-                  <Captcha captchaKey={captchaKey} />
+                  <Captcha />
                 </div>
                 <FormMessage />
               </FormItem>
             )}
           />
           <div className="pb-3 text-center">
+            {error && (
+              <div className="mb-4 rounded border border-red-200 bg-red-50 p-3 text-sm text-red-600">
+                {error}
+              </div>
+            )}
+
             <Button
               type="submit"
-              disabled={isSubmitting}
+              disabled={isLoading}
               className="hover:!bg-yt-blue-600/90 relative ml-2 px-12 py-6 text-2xl font-medium"
               size="default"
             >
-              登入
-              {isSubmitting && (
+              {isLoading ? '登入中...' : '登入'}
+              {isLoading && (
                 <LoaderCircle className="absolute right-3 top-[calc(50%-12px)] animate-spin" />
               )}
             </Button>
-            {form.formState.errors.root && (
-              <p className="mt-2 text-red-600">
-                {form.formState.errors.root.message}
-              </p>
-            )}
           </div>
           <p className="!mt-3 text-left text-sm md:!mt-8 md:text-base">
             非元大期貨客戶？立即

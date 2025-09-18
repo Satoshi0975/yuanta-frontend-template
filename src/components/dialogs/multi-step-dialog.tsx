@@ -10,19 +10,18 @@ import {
 } from '@/components/ui/dialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useDialogFlow } from '@/hooks/use-dialog-flow';
-import type { DialogStep } from '@/lib/types';
+import type { RegisterDialogStep } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowLeft } from 'lucide-react';
 import { useState } from 'react';
+import LoginForm from '../forms/login-form';
 import RegistrationForm from '../forms/registration-form';
-import AccountSelection from './account-selection';
-import LoginForm from './login-form';
 import ResultsDisplay from './results-display';
 
 interface MultiStepDialogProps {
   children?: React.ReactNode;
-  initialStep?: DialogStep;
+  initialStep?: RegisterDialogStep;
 }
 
 const MultiStepDialog = ({
@@ -36,9 +35,6 @@ const MultiStepDialog = ({
     isLoading,
     handleLogin,
     handleRegistration,
-    handleGetResults,
-    handleAccountRegistration,
-    handleAccountResults,
     resetDialog,
     goBack,
   } = useDialogFlow(initialStep);
@@ -56,14 +52,10 @@ const MultiStepDialog = ({
     switch (dialogState.step) {
       case 'login':
         return '帳號登入';
-      case 'account-selection':
-        return '選擇操作';
       case 'registration':
         return '活動報名';
-      case 'results':
-        return '我的打擊率';
       case 'success':
-        return '操作成功';
+        return '報名成功';
       case 'error':
         return '發生錯誤';
       default:
@@ -75,18 +67,12 @@ const MultiStepDialog = ({
   const renderContent = () => {
     switch (dialogState.step) {
       case 'login':
-        return <LoginForm onSubmit={handleLogin} />;
-
-      case 'account-selection':
-        if (!dialogState.data?.user || !dialogState.data?.accounts) {
-          return <div className="p-8 text-center">載入帳號資料中...</div>;
-        }
         return (
-          <AccountSelection
-            user={dialogState.data.user}
-            accounts={dialogState.data.accounts}
-            onRegistration={handleAccountRegistration}
-            onViewResults={handleAccountResults}
+          <LoginForm
+            onSubmit={handleLogin}
+            isLoading={isLoading}
+            error={dialogState.data?.errorMessage}
+            fieldErrors={dialogState.data?.fieldErrors}
           />
         );
 
@@ -94,22 +80,17 @@ const MultiStepDialog = ({
         return (
           <RegistrationForm
             onSubmit={handleRegistration}
-            defaultAccount={dialogState.data?.selectedAccountId || ''}
+            accountList={dialogState.data?.accounts || []}
           />
         );
 
-      case 'results':
+      case 'success':
         if (!dialogState.data?.resultsData) {
           return <div className="p-8 text-center">載入成績資料中...</div>;
         }
         return (
           <ResultsDisplay
             data={dialogState.data.resultsData}
-            onRefresh={() => {
-              if (dialogState.data?.accounts?.[0]?.accountId) {
-                handleGetResults(dialogState.data.accounts[0].accountId);
-              }
-            }}
             isLoading={isLoading}
           />
         );
@@ -157,20 +138,11 @@ const MultiStepDialog = ({
   };
 
   // 是否顯示返回按鈕
-  const showBackButton =
-    dialogState.step !== 'login' &&
-    dialogState.step !== 'success' &&
-    dialogState.step !== 'account-selection';
-
+  const showBackButton = dialogState.step === 'registration';
   return (
     <Dialog onOpenChange={handleOpenChange} open={isOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent
-        className={cn(
-          'mx-auto max-w-md rounded-lg bg-white',
-          dialogState.step === 'results' && 'md:max-w-2xl'
-        )}
-      >
+      <DialogContent className={cn('mx-auto max-w-md rounded-lg bg-white')}>
         <DialogHeader className="relative">
           {showBackButton && (
             <button

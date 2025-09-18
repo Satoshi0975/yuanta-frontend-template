@@ -5,6 +5,7 @@ export interface ApiResponse<T = unknown> {
   data?: T;
   errorCode?: string;
   timestamp?: string;
+  fieldErrors?: Record<string, string>;
 }
 
 // 登入相關
@@ -20,10 +21,7 @@ export interface UserInfo {
   userId: string;
 }
 
-export interface AccountInfo {
-  accountId: string;
-  accountName: string;
-}
+export type AccountInfo = string;
 
 export interface LoginResponse {
   user: UserInfo;
@@ -34,7 +32,6 @@ export interface LoginResponse {
 export interface RegistrationRequest {
   fullAccount: string;
   nickname: string;
-  captcha: string;
 }
 
 export interface RegistrationResponse {
@@ -87,10 +84,12 @@ export interface VersionResponse {
 }
 
 // 對話框狀態管理
-export type DialogStep = 'login' | 'account-selection' | 'registration' | 'results' | 'success' | 'error';
+export type RegisterDialogStep = 'login' | 'registration' | 'success' | 'error';
+
+export type RecordDialogStep = 'login' | 'record' | 'error';
 
 export interface DialogState {
-  step: DialogStep;
+  step: RegisterDialogStep | RecordDialogStep;
   data?: {
     user?: UserInfo;
     accounts?: AccountInfo[];
@@ -98,5 +97,6 @@ export interface DialogState {
     registrationData?: RegistrationResponse;
     resultsData?: RecordResponse;
     errorMessage?: string;
+    fieldErrors?: Record<string, string>;
   };
 }
