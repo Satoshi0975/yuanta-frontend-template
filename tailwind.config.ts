@@ -2,6 +2,7 @@ import type { Config } from 'tailwindcss';
 import tailwindcssAnimate from 'tailwindcss-animate';
 import tailwindcssAnimated from 'tailwindcss-animated';
 import tailwindcssAnimationDelay from 'tailwindcss-animation-delay';
+import plugin from 'tailwindcss/plugin';
 
 export default {
   darkMode: ['class'],
@@ -65,5 +66,39 @@ export default {
       },
     },
   },
-  plugins: [tailwindcssAnimated, tailwindcssAnimate, tailwindcssAnimationDelay],
+  plugins: [
+    tailwindcssAnimated,
+    tailwindcssAnimate,
+    tailwindcssAnimationDelay,
+    plugin(function ({ addUtilities, theme, e }) {
+      const colors = theme('colors') as Record<string, Record<string, string>>;
+      const newUtilities: Record<string, Record<string, string>> = {};
+
+      for (const [colorName, colorShades] of Object.entries(colors)) {
+        if (typeof colorShades === 'object' && colorShades !== null) {
+          for (const [shade, value] of Object.entries(colorShades)) {
+            if (typeof value === 'string') {
+              newUtilities[`.pixel-${e(colorName)}-${shade}::after`] = {
+                'background-color': value,
+              };
+              newUtilities[
+                `.pixel-${e(colorName)}-${shade} .pixel-corners::after`
+              ] = {
+                'background-color': value,
+              };
+            }
+          }
+        } else if (typeof colorShades === 'string') {
+          newUtilities[`.pixel-${e(colorName)}::after`] = {
+            'background-color': colorShades,
+          };
+          newUtilities[`.pixel-${e(colorName)} .pixel-corners::after`] = {
+            'background-color': colorShades,
+          };
+        }
+      }
+
+      addUtilities(newUtilities);
+    }),
+  ],
 } satisfies Config;
