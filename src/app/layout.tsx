@@ -2,18 +2,20 @@ import Footer from '@/components/ui/footer';
 import Navbar from '@/components/ui/navbar';
 import { GoogleTagManager } from '@next/third-parties/google';
 import type { Metadata, Viewport } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Noto_Sans_TC } from 'next/font/google';
+import localFont from 'next/font/local';
 import NextTopLoader from 'nextjs-toploader';
 import './globals.css';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const notoSans = Noto_Sans_TC({
+  variable: '--font-noto-sans-tc',
   subsets: ['latin'],
 });
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
+const cubic11 = localFont({
+  src: '../../public/fonts/Cubic_11.woff2',
+  variable: '--font-cubic-11',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -43,7 +45,7 @@ export default function RootLayout({
       <GoogleTagManager gtmId="GTM-KSVRB2H" />
 
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${notoSans.variable} ${cubic11.variable} antialiased`}
         monica-locale="zh_TW"
       >
         <NextTopLoader />

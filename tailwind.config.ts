@@ -59,6 +59,10 @@ export default {
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
       },
+      fontFamily: {
+        sans: ['var(--font-noto-sans-tc)', 'system-ui', 'sans-serif'],
+        cubic: ['var(--font-cubic-11)'],
+      },
     },
   },
   plugins: [tailwindcssAnimated, tailwindcssAnimate, tailwindcssAnimationDelay],
