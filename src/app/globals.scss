@@ -351,35 +351,48 @@
   }
 
   .nes-button {
-    @apply relative m-auto grid h-fit cursor-pointer grid-cols-[min-content_1fr_min-content] overflow-hidden border-none text-center text-5xl transition-transform duration-200 ease-in-out;
+    @apply relative m-auto grid h-fit cursor-pointer overflow-hidden border-none text-center text-5xl transition-transform duration-200 ease-in-out;
+    filter: brightness(1.01);
+    grid-template-columns: auto 1fr auto;
+
     &:hover {
       filter: brightness(1.1);
       transform: scale(1.01);
     }
 
     .section-left {
-      @apply aspect-[78/137] bg-contain;
-      background-image: url('/button/btn-left.svg');
+      @apply bg-contain bg-no-repeat;
+      background-image: url('/images/button/btn-left.png');
+      aspect-ratio: 78 / 137;
     }
 
     .section-middle {
-      @apply -mx-[1px] bg-cover bg-repeat-x pb-10 pt-6 font-cubic text-white;
-      background-image: url('/button/btn-center.svg');
+      @apply flex items-center justify-center bg-repeat-x pb-10 pt-6 font-cubic text-white;
+      background-image: url('/images/button/btn-center.png');
       background-size: auto 100%;
+      width: fit-content;
+      min-width: 200px;
+      margin-left: -1px;
+      margin-right: -1px;
     }
 
     .section-right {
-      @apply aspect-[78/137] bg-contain;
-      background-image: url('/button/btn-right.svg');
+      @apply bg-contain bg-no-repeat;
+      background-image: url('/images/button/btn-right.png');
+      aspect-ratio: 78 / 137;
     }
   }
 
   .nes-title {
-    @apply relative m-auto grid h-14 grid-cols-[min-content_1fr_min-content] overflow-hidden border-none text-center text-2xl transition-transform duration-200 ease-in-out md:h-[4.75rem] md:text-[2.125rem];
+    @apply relative m-auto grid h-14 overflow-hidden border-none text-center text-2xl transition-transform duration-200 ease-in-out md:h-[4.75rem] md:text-[2.125rem];
+    grid-template-columns: auto 1fr auto;
 
     .section-left {
-      @apply aspect-[24/101] bg-contain;
+      @apply bg-contain bg-no-repeat;
       background-image: url('/title-bar/bar-left.svg');
+      width: calc(24 / 101 * 3.5rem);
+      min-width: calc(24 / 101 * 3.5rem);
+      aspect-ratio: 24 / 101;
     }
 
     .section-middle {
@@ -389,8 +402,24 @@
     }
 
     .section-right {
-      @apply aspect-[24/101] bg-contain;
+      @apply bg-contain bg-no-repeat;
       background-image: url('/title-bar/bar-right.svg');
+      width: calc(24 / 101 * 3.5rem);
+      min-width: calc(24 / 101 * 3.5rem);
+      aspect-ratio: 24 / 101;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .nes-title {
+      .section-left {
+        width: calc(24 / 101 * 4.75rem);
+        min-width: calc(24 / 101 * 4.75rem);
+      }
+      .section-right {
+        width: calc(24 / 101 * 4.75rem);
+        min-width: calc(24 / 101 * 4.75rem);
+      }
     }
   }
 }

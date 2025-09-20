@@ -1,8 +1,8 @@
-import Logo from '@/assets/logo.png';
-import Image from '@/lib/image';
+// import Logo from '@/assets/logo.png';
+// import Image from '@/lib/image';
 import Link from 'next/link';
-import MediaLinks from './media-links';
-import Menu from './menu';
+// import MediaLinks from './media-links';
+// import Menu from './menu';
 
 const Navbar = () => {
   // const [active, setActive] = useState('');
@@ -39,12 +39,10 @@ const Navbar = () => {
         <nav className="container flex items-center justify-between">
           <h1 className="">
             <Link href="/" className="">
-              <Image
-                src={Logo}
+              <img
+                src="/assets/logo.png"
                 className="w-28 cursor-pointer md:w-44"
                 alt="Logo"
-                placeholder="empty"
-                priority
               />
             </Link>
           </h1>
@@ -58,7 +56,7 @@ const Navbar = () => {
             </li> */}
           </ul>
           <ul className="space-x-3 flex">
-            <MediaLinks />
+            {/* <MediaLinks /> */}
           </ul>
           {/* <Menu /> */}
         </nav>

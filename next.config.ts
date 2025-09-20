@@ -1,33 +1,20 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  experimental: {
-    turbo: {
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js',
-        },
-      },
-    },
-  },
   output: 'export',
   basePath: process.env.NEXT_PUBLIC_BASE_PATH,
-  // webpack: (config) => {
-  //   config.module.rules.push({
-  //     test: /\.svg$/i,
-  //     use: ['@svgr/webpack'],
-  //   });
-  //   return config;
-  // },
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.svg$/i,
+      use: ['@svgr/webpack'],
+    });
+    return config;
+  },
   async rewrites() {
     return [
       {
         source: '/api/:path*',
         destination: process.env.NEXT_PUBLIC_API_REWRITE || '',
-        // 'http://192.168.0.216:5000/api/:path*',
-        // 'http://10.211.55.3:5000/api/:path*'
-        // '',
       },
     ];
   },

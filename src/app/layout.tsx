@@ -45,12 +45,12 @@ export default function RootLayout({
       <GoogleTagManager gtmId="GTM-KSVRB2H" />
 
       <body
-        className={`${notoSans.variable} ${cubic11.variable} antialiased`}
+        className={`${notoSans.variable} ${cubic11.variable} font-sans antialiased`}
         monica-locale="zh_TW"
       >
         <NextTopLoader />
         <Navbar />
-        <main className="relative min-h-screen w-screen pt-[50px] md:pt-[64px]">
+        <main className="relative min-h-screen w-full max-w-full">
           {children}
         </main>
         <Footer />
