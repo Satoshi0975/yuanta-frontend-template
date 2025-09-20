@@ -12,8 +12,20 @@ export default {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    container: {
+      center: true,
+      screens: {
+        'sm': '640px',
+        'md': '768px',
+        'lg': '1024px',
+        'xl': '1280px',
+        '2xl': '1280px',
+      },
+    },
     extend: {
       colors: {
+        'yuanta-bg': '#CEEEFF',
+        linen: '#F7EDE6',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
@@ -78,21 +90,21 @@ export default {
         if (typeof colorShades === 'object' && colorShades !== null) {
           for (const [shade, value] of Object.entries(colorShades)) {
             if (typeof value === 'string') {
-              newUtilities[`.pixel-${e(colorName)}-${shade}::after`] = {
+              newUtilities[`.nes-${e(colorName)}-${shade}::after`] = {
                 'background-color': value,
               };
               newUtilities[
-                `.pixel-${e(colorName)}-${shade} .pixel-corners::after`
+                `.nes-${e(colorName)}-${shade} .nes-corners::after`
               ] = {
                 'background-color': value,
               };
             }
           }
         } else if (typeof colorShades === 'string') {
-          newUtilities[`.pixel-${e(colorName)}::after`] = {
+          newUtilities[`.nes-${e(colorName)}::after`] = {
             'background-color': colorShades,
           };
-          newUtilities[`.pixel-${e(colorName)} .pixel-corners::after`] = {
+          newUtilities[`.nes-${e(colorName)} .nes-corners::after`] = {
             'background-color': colorShades,
           };
         }

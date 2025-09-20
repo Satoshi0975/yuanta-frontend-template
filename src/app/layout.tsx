@@ -5,7 +5,7 @@ import type { Metadata, Viewport } from 'next';
 import { Noto_Sans_TC } from 'next/font/google';
 import localFont from 'next/font/local';
 import NextTopLoader from 'nextjs-toploader';
-import './globals.css';
+import './globals.scss';
 
 const notoSans = Noto_Sans_TC({
   variable: '--font-noto-sans-tc',
@@ -50,7 +50,9 @@ export default function RootLayout({
       >
         <NextTopLoader />
         <Navbar />
-        {children}
+        <main className="relative min-h-screen w-screen pt-[50px] md:pt-[64px]">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

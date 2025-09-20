@@ -21,15 +21,15 @@ const Titlebar = React.forwardRef<HTMLDivElement, TitlebarProps>(
   ({ className, variant, asChild = false, children, ...props }, ref) => {
     const Comp = asChild ? Slot : 'div';
     return (
-      <Comp
+      <div
         className={cn(titlebarVariants({ variant, className }))}
         ref={ref}
         {...props}
       >
         <div className="section-left"></div>
-        <div className="section-middle">{children}</div>
+        <Comp className="section-middle">{children}</Comp>
         <div className="section-right"></div>
-      </Comp>
+      </div>
     );
   }
 );
