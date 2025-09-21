@@ -12,10 +12,16 @@ const nextConfig: NextConfig = {
     return config;
   },
   async rewrites() {
+    if (!process.env.NEXT_PUBLIC_API_REWRITE) {
+      return [];
+    }
     return [
       {
-        source: '/api/:path*',
+        source: `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/api/:path*`,
         destination: process.env.NEXT_PUBLIC_API_REWRITE || '',
+        // 'http://192.168.0.216:5000/api/:path*',
+        // 'http://10.211.55.3:5000/api/:path*'
+        // '',
       },
     ];
   },
