@@ -41,7 +41,7 @@ export function HeroSection() {
                 <p>活動期間＝報名期間</p>
                 <p>萬元好禮等你拿！</p>
                 <p className="!mb-5">▼ 立即報名參賽 ▼</p>
-                <Button className="nes-button text-3xl lg:text-5xl [&>.section-middle]:!pb-7 [&>.section-middle]:!pt-4 md:[&>.section-middle]:!pb-10 md:[&>.section-middle]:!pt-6">
+                <Button className="nes-button pb-7 pt-4 text-3xl md:pb-10 md:pt-6 lg:text-5xl">
                   報名競賽
                 </Button>
                 <p className="text-sm md:text-base">

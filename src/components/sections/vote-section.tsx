@@ -27,7 +27,7 @@ export function VoteSection() {
 
           {/* 圖片層 - 在下層 */}
           <div className="z-10">
-            <Button className="nes-button-secondary relative z-10 -mb-14 text-3xl sm:text-5xl lg:scale-110 [&>.section-middle]:!pb-7 [&>.section-middle]:!pt-4 sm:[&>.section-middle]:!pb-10 sm:[&>.section-middle]:!pt-6">
+            <Button className="nes-button-secondary relative z-10 -mb-14 pb-7 pt-4 text-3xl sm:pb-10 sm:pt-6 sm:text-5xl lg:scale-110 lg:hover:scale-125">
               立即投票
             </Button>
             <Image

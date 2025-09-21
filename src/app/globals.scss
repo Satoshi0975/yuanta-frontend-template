@@ -523,7 +523,7 @@
 
   /* 按鈕 */
 
-  .nes-button {
+  /* .nes-button {
     @apply relative m-auto grid h-fit cursor-pointer overflow-hidden border-none text-center text-5xl transition-transform duration-200 ease-in-out;
     filter: brightness(1.01);
     grid-template-columns: auto min-content auto;
@@ -566,7 +566,7 @@
         background-image: url('/images/button-sec/btn-right.png');
       }
     }
-  }
+  } */
 
   .nes-title {
     @apply relative m-auto grid h-14 overflow-hidden border-none text-center text-2xl transition-transform duration-200 ease-in-out md:h-[4.75rem] md:text-[2.125rem];
@@ -604,6 +604,78 @@
       .section-right {
         width: calc(24 / 101 * 4.75rem);
         min-width: calc(24 / 101 * 4.75rem);
+      }
+    }
+  }
+  /* /////////////////////// */
+  .nes-button {
+    @apply relative m-auto flex cursor-pointer items-center justify-center overflow-visible border-none bg-repeat-x pb-10 pt-6 text-center font-cubic text-5xl text-white transition-transform duration-200 ease-in-out;
+    filter: brightness(1.01);
+
+    background-image: url('/images/button/btn-center.png');
+    background-size: auto 100%;
+    min-width: 100px;
+    white-space: nowrap;
+
+    &:hover {
+      filter: brightness(1.1);
+      transform: scale(1.01);
+    }
+
+    /* 左邊偽元素 */
+    &::before {
+      content: '';
+      position: absolute;
+      right: calc(100% - 1px);
+      top: 0;
+      bottom: 0;
+
+      /* 寬度根據高度計算 */
+      aspect-ratio: 78 / 137;
+
+      height: 100%;
+
+      background-image: url('/images/button/btn-left.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center left;
+
+      z-index: 2;
+    }
+
+    /* 右邊偽元素 */
+    &::after {
+      content: '';
+      position: absolute;
+      left: calc(100% - 1px);
+      top: 0;
+      bottom: 0;
+
+      /* 寬度根據高度計算 */
+      aspect-ratio: 78 / 137;
+
+      height: 100%;
+
+      background-image: url('/images/button/btn-right.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center right;
+
+      /* 重疊中間部分 */
+
+      z-index: 2;
+    }
+
+    /* 二級按鈕樣式 */
+    &.nes-button-secondary {
+      background-image: url('/images/button-sec/btn-center.png');
+
+      &::before {
+        background-image: url('/images/button-sec/btn-left.png');
+      }
+
+      &::after {
+        background-image: url('/images/button-sec/btn-right.png');
       }
     }
   }

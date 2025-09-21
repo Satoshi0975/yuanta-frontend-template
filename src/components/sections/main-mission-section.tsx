@@ -53,7 +53,7 @@ export function MainMissionSection() {
                 </div>
                 <Button
                   variant="secondary"
-                  className="mt-3 text-base [&>.section-middle]:pb-2 [&>.section-middle]:pt-1"
+                  className="mt-3 pb-2 pt-1 text-base"
                 >
                   其他名次獎項
                 </Button>

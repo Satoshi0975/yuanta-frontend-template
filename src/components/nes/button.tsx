@@ -35,9 +35,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         {...props}
       >
-        <div className="section-left"></div>
-        <div className="section-middle">{children}</div>
-        <div className="section-right"></div>
+        {/* <div className="section-left"></div> */}
+        {children}
+        {/* <div className="section-right"></div> */}
       </Comp>
     );
   }
