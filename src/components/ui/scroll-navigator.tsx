@@ -182,6 +182,8 @@ export function ScrollNavigator() {
     };
   }, [currentSection, isScrolling, isTouching, scrollToSection]);
 
+  return null;
+
   return (
     <AnimatePresence>
       {isScrolling && (

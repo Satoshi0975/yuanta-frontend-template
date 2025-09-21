@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -69,22 +70,17 @@ const RegistrationForm = ({
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(handleSubmit)}
-        className="space-y-6 text-left"
-      >
-        <div className="bg-y-card border-yt-blue-300 space-y-6 rounded-xl border-2 p-6">
+      <form onSubmit={form.handleSubmit(handleSubmit)}>
+        <div className="space-y-8 rounded-xl bg-white p-6 text-left nes-corners">
           <div className="mb-4 text-center">
-            <p className="mt-2 text-sm text-gray-600">
-              請填寫以下資料完成活動報名
-            </p>
+            <p className="mt-2 text-sm">請填寫以下資料完成活動報名</p>
           </div>
           <FormField
             control={form.control}
             name="fullAccount"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="w-full !text-left">完整帳號</FormLabel>
+                <FormLabel className="w-full !text-left">交易帳號</FormLabel>
                 <div className="flex items-center space-x-3">
                   <div className="relative w-full">
                     <FormControl>
@@ -119,20 +115,23 @@ const RegistrationForm = ({
             name="nickname"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="w-full !text-left">參賽暱稱</FormLabel>
+                <FormLabel className="w-full !text-left">報名暱稱</FormLabel>
                 <div className="flex items-center space-x-3">
                   <div className="relative w-full">
                     <FormControl>
                       <Input
                         className="peer w-full pl-10"
                         type="text"
-                        placeholder="請輸入參賽暱稱"
+                        placeholder="請輸入報名暱稱"
                         {...field}
                       />
                     </FormControl>
                     <Tag className="absolute left-2 top-2 peer-focus-visible:text-blue-600" />
                   </div>
                 </div>
+                <FormDescription>
+                  * 僅能用數字或英文，上限為40個字元
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -158,13 +157,13 @@ const RegistrationForm = ({
             )}
           </div>
 
-          <div className="text-center text-sm text-gray-600">
+          {/* <div className="text-center text-sm text-gray-600">
             <p>
               報名後將可參與活動競賽，
               <br />
               並有機會獲得豐富獎品！
             </p>
-          </div>
+          </div> */}
         </div>
       </form>
     </Form>

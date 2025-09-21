@@ -130,7 +130,7 @@ export default {
           },
           '61%, 80%': {
             opacity: '1',
-            filter: 'brightness(0.9)',
+            filter: 'brightness(0.95)',
           },
           '81%, 100%': {
             opacity: '1',
@@ -210,6 +210,12 @@ export default {
           '50%': { transform: 'translateY(-8px)' },
           '75%': { transform: 'translateY(-4px)' },
         },
+        'pixel-float-cloud': {
+          '0%, 100%': { transform: 'translateY(0px) scale(.75)' },
+          '25%': { transform: 'translateY(-4px) scale(.75)' },
+          '50%': { transform: 'translateY(-8px) scale(.75)' },
+          '75%': { transform: 'translateY(-4px) scale(.75)' },
+        },
         // 快速垂直像素浮動
         'pixel-float-fast': {
           '0%, 100%': { transform: 'translateY(0px)' },
@@ -237,6 +243,7 @@ export default {
         'pixel-fade-in': 'pixel-fade-in 1.5s ease-out forwards',
         'retro-wobble': 'retro-wobble 2s ease-in-out infinite',
         'pixel-float': 'pixel-float 4s steps(4) infinite',
+        'pixel-float-cloud': 'pixel-float-cloud 4s steps(4) infinite',
         'pixel-float-fast': 'pixel-float-fast 2s steps(2) infinite',
         'pixel-scale': 'pixel-scale 3s steps(2) infinite',
         'pixel-opacity': 'pixel-opacity 2.5s steps(2) infinite',

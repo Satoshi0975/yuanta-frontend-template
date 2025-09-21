@@ -4,6 +4,7 @@ import map from '@/assets/images/map.png';
 import { BounceLeftOnScroll } from '@/components/animation-container';
 import { Button } from '@/components/nes/button';
 import Image from '@/lib/image';
+import RegisterDialog from '../dialogs/register-dialog';
 import { SkyScroll } from './sky-scroll';
 
 export function HeroSection() {
@@ -39,13 +40,15 @@ export function HeroSection() {
               priority
             />
             <div className="absolute inset-0 z-20 -mt-16 mr-4 flex flex-col items-center justify-center gap-2 sm:-mt-0 sm:mr-0">
-              <div className="text-sts-orange-500 space-y-1 text-center font-cubic text-xl sm:space-y-2 sm:text-3xl">
+              <div className="space-y-1 text-center font-cubic text-xl text-sts-orange-500 sm:space-y-2 sm:text-3xl">
                 <p className="">活動期間＝報名期間</p>
                 <p className="">萬元好禮等你拿！</p>
                 <p className="!mb-5">▼ 立即報名參賽 ▼</p>
-                <Button className="nes-button animate-retro-blink pb-7 pt-4 text-3xl md:pb-10 md:pt-6 lg:text-5xl">
-                  <span className="animate-pixel-glitch">報名競賽</span>
-                </Button>
+                <RegisterDialog>
+                  <Button className="nes-button animate-retro-blink pb-7 pt-4 text-3xl md:pb-10 md:pt-6 lg:text-5xl">
+                    <span className="animate-pixel-glitch">報名競賽</span>
+                  </Button>
+                </RegisterDialog>
                 <p className="text-sm md:text-base">
                   <small className="text-sts-orange-500">
                     ★中途報名，也可回朔活動期間的成績

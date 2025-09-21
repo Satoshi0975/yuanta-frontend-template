@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import RegisterDialog from '../dialogs/register-dialog';
 
 export const LeftSideButtons: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -43,7 +44,7 @@ export const LeftSideButtons: React.FC = () => {
 
   return (
     <div
-      className={`fixed z-50 w-full bg-white/70 px-2 py-3 transition-all duration-300 hover:opacity-100 sm:-right-6 sm:top-1/2 sm:w-20 sm:-translate-y-1/2 sm:bg-transparent sm:px-0 sm:py-0 sm:opacity-70 ${
+      className={`fixed -right-6 top-1/2 z-50 w-20 -translate-y-1/2 bg-transparent px-0 py-0 opacity-70 transition-all duration-300 hover:opacity-100 ${
         isVisible
           ? isMobile
             ? 'shadow-yt bottom-0 translate-y-0'
@@ -53,7 +54,7 @@ export const LeftSideButtons: React.FC = () => {
             : 'translate-x-[200%]'
       }`}
     >
-      <div className="flex w-full space-y-1 font-cubic text-xl text-white shadow-xl [line-height:1.50rem] sm:flex-col sm:rounded-xl">
+      <div className="flex w-full flex-col space-y-1 rounded-xl font-cubic text-xl text-white shadow-xl [line-height:1.50rem]">
         <a
           href="https://ltm.yuantafutures.com.tw/member/openaccount"
           target="_blank"
@@ -63,8 +64,8 @@ export const LeftSideButtons: React.FC = () => {
             className="transition-all duration-300 hover:translate-x-[-15px] hover:shadow-xl"
             // onClick={button.onClick}
           >
-            <div className="nes-sm-corners bg-sts-red-100 cursor-pointer p-1">
-              <span className="bg-sts-red-200 block h-full w-full py-3 pl-1 pr-6">
+            <div className="nes-sm-corners cursor-pointer bg-sts-red-100 p-1">
+              <span className="block h-full w-full bg-sts-red-200 py-3 pl-1 pr-6">
                 期貨開戶
               </span>
             </div>
@@ -91,16 +92,18 @@ export const LeftSideButtons: React.FC = () => {
             </span>
           </div>
         </button>
-        <button
-          className="transition-all duration-300 hover:translate-x-[-15px] hover:shadow-xl"
-          // onClick={button.onClick}
-        >
-          <div className="nes-sm-corners cursor-pointer bg-sts-orange-300 p-1">
-            <span className="block h-full w-full bg-sts-orange-400 py-3 pl-1 pr-6">
-              競賽報名
-            </span>
-          </div>
-        </button>
+        <RegisterDialog>
+          <button
+            className="transition-all duration-300 hover:translate-x-[-15px] hover:shadow-xl"
+            // onClick={button.onClick}
+          >
+            <div className="nes-sm-corners cursor-pointer bg-sts-orange-300 p-1">
+              <span className="block h-full w-full bg-sts-orange-400 py-3 pl-1 pr-6">
+                競賽報名
+              </span>
+            </div>
+          </button>
+        </RegisterDialog>
       </div>
     </div>
   );

@@ -17,17 +17,16 @@ import { ArrowLeft } from 'lucide-react';
 import { useState } from 'react';
 import LoginForm from '../forms/login-form';
 import RegistrationForm from '../forms/registration-form';
-import ResultsDisplay from './results-display';
 
-interface MultiStepDialogProps {
+interface RegisterDialogProps {
   children?: React.ReactNode;
   initialStep?: RegisterDialogStep;
 }
 
-const MultiStepDialog = ({
+const RegisterDialog = ({
   children,
   initialStep = 'login',
-}: MultiStepDialogProps) => {
+}: RegisterDialogProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const {
@@ -55,7 +54,7 @@ const MultiStepDialog = ({
       case 'registration':
         return '活動報名';
       case 'success':
-        return '報名成功';
+        return '歡迎勇者';
       case 'error':
         return '發生錯誤';
       default:
@@ -84,35 +83,33 @@ const MultiStepDialog = ({
           />
         );
 
-      case 'success':
-        if (!dialogState.data?.resultsData) {
-          return <div className="p-8 text-center">載入成績資料中...</div>;
-        }
-        return (
-          <ResultsDisplay
-            data={dialogState.data.resultsData}
-            isLoading={isLoading}
-          />
-        );
+      // case 'success':
+      //   if (!dialogState.data?.resultsData) {
+      //     return <div className="p-8 text-center">載入成績資料中...</div>;
+      //   }
+      //   return (
+      //     <ResultsDisplay
+      //       data={dialogState.data.resultsData}
+      //       isLoading={isLoading}
+      //     />
+      //   );
 
       case 'success':
         return (
-          <div className="p-8 text-center">
-            <div className="mb-4 text-xl text-green-600">✓ 操作成功</div>
-            {dialogState.data?.registrationData && (
-              <div className="space-y-2">
-                <p>恭喜您成功報名！</p>
-                <p className="text-sm text-gray-600">
-                  暱稱：{dialogState.data.registrationData.nickname}
-                </p>
-                <p className="text-sm text-gray-600">
-                  報名時間：
-                  {new Date(
-                    dialogState.data.registrationData.registrationTime
-                  ).toLocaleString('zh-TW')}
-                </p>
-              </div>
-            )}
+          <div className="bg-white p-6 px-3 text-center nes-corners">
+            <div className="space-y-2 text-left text-base sm:text-xl">
+              <p>
+                感謝報名！您的編號：{dialogState.data?.registrationData?.id}
+              </p>
+              <p>
+                歡迎分享給好朋友們，到人氣王專區為您投票，
+                <br />
+                <span className="font-extrabold">
+                  天天投票人，也能抽價值40萬好禮！{' '}
+                </span>
+                一起為期貨戰士加油打氣~
+              </p>
+            </div>
           </div>
         );
 
@@ -142,7 +139,11 @@ const MultiStepDialog = ({
   return (
     <Dialog onOpenChange={handleOpenChange} open={isOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className={cn('mx-auto max-w-md rounded-lg bg-white')}>
+      <DialogContent
+        className={cn(
+          'mx-auto max-w-md rounded-lg border-none bg-sts-orange-200 ring-0'
+        )}
+      >
         <DialogHeader className="relative">
           {showBackButton && (
             <button
@@ -154,12 +155,15 @@ const MultiStepDialog = ({
             </button>
           )}
 
-          <DialogTitle className="mx-auto mb-5 w-fit text-center text-3xl">
+          <DialogTitle
+            className="mx-auto mb-3 w-fit text-center text-3xl"
+            asChild
+          >
             <h1 className="font-cubic text-3xl font-semibold">{getTitle()}</h1>
           </DialogTitle>
 
           <DialogDescription asChild>
-            <div className="text-yuan-blue-800 space-y-6 text-base">
+            <div className="space-y-6 text-base text-sts-text">
               <ScrollArea className="max-h-[calc(100vh-180px)] overflow-y-auto">
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -182,4 +186,4 @@ const MultiStepDialog = ({
   );
 };
 
-export default MultiStepDialog;
+export default RegisterDialog;

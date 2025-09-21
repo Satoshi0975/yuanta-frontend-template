@@ -38,16 +38,16 @@ export default function Home() {
           <div id="vote">
             <VoteSection />
           </div>
-          <div
-            className="container -mt-2 flex flex-col px-4 [scroll-margin-top:65px] lg:mt-10"
-            id="hot-to"
-          >
-            <SectionCard title="立即下單 賺積分">
-              <div className="mx-auto max-w-[840px] space-y-4">
-                <Step />
-              </div>
-            </SectionCard>
-          </div>
+        </div>
+        <div
+          className="container -mt-2 flex flex-col px-4 [scroll-margin-top:65px] lg:mt-10"
+          id="hot-to"
+        >
+          <SectionCard title="立即下單 賺積分">
+            <div className="mx-auto max-w-[840px] space-y-4">
+              <Step />
+            </div>
+          </SectionCard>
         </div>
       </div>
       <Information />
