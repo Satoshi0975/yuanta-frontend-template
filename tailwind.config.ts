@@ -27,6 +27,10 @@ export default {
         sts: {
           text: '#070707',
           gray: '#BDBBBB',
+          red: {
+            100: '#ED9494',
+            200: '#E43E3E',
+          },
           rank: {
             '1': '#D88600',
             '2': '#5B5B5B',
@@ -112,7 +116,8 @@ export default {
             filter: 'brightness(1.01)',
           },
           '50%': {
-            boxShadow: '0 0 25px rgba(255, 165, 0, 0.8), 0 0 35px rgba(255, 165, 0, 0.4)',
+            boxShadow:
+              '0 0 25px rgba(255, 165, 0, 0.8), 0 0 35px rgba(255, 165, 0, 0.4)',
             transform: 'scale(1.02)',
             filter: 'brightness(1.15)',
           },
@@ -133,7 +138,7 @@ export default {
           },
         },
         // 打字機效果
-        'typewriter': {
+        typewriter: {
           from: { width: '0' },
           to: { width: '100%' },
         },
@@ -225,7 +230,8 @@ export default {
         // 基本動畫
         'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
         'retro-blink': 'retro-blink 1.5s ease-in-out infinite',
-        'typewriter': 'typewriter 2s steps(10) forwards, blink-cursor 1s step-end infinite',
+        typewriter:
+          'typewriter 2s steps(10) forwards, blink-cursor 1s step-end infinite',
         'pixel-glitch': 'pixel-glitch 3s infinite',
         'retro-bounce': 'retro-bounce 2s ease-in-out infinite',
         'pixel-fade-in': 'pixel-fade-in 1.5s ease-out forwards',
@@ -235,7 +241,8 @@ export default {
         'pixel-scale': 'pixel-scale 3s steps(2) infinite',
         'pixel-opacity': 'pixel-opacity 2.5s steps(2) infinite',
         // 組合動畫
-        'retro-cloud': 'pixel-float 4s steps(4) infinite, pixel-scale 6s steps(3) infinite, pixel-opacity 3s steps(2) infinite',
+        'retro-cloud':
+          'pixel-float 4s steps(4) infinite, pixel-scale 6s steps(3) infinite, pixel-opacity 3s steps(2) infinite',
       },
     },
   },
@@ -273,7 +280,7 @@ export default {
 
       // 添加打字機動畫的特殊樣式
       newUtilities['.animate-typewriter'] = {
-        'overflow': 'hidden',
+        overflow: 'hidden',
         'white-space': 'nowrap',
         'border-right': '2px solid',
       };

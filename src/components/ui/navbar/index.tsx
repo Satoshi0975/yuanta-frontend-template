@@ -48,14 +48,26 @@ const Navbar = () => {
               />
             </Link>
           </h1>
-          <ul className="hidden w-full items-center justify-end pr-5 text-lg font-bold text-primary lg:flex">
-            
-            {/* <li className="border-gray-300 px-3 last:border-r-0 hover:text-blue-600">
-              <Link href="/future">外期財門</Link>
+          <ul className="hidden w-full items-center justify-end pr-5 text-lg font-bold text-primary lg:flex font-cubic">
+            <li className="border-gray-300 px-3 last:border-r-0 hover:animate-pixel-glitch">
+              
+              <Link 
+                href="https://www.yuantafutures.com.tw/openaccount"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                期貨開戶
+              </Link>
             </li>
-            <li className="border-gray-300 px-3 last:border-r-0 hover:text-blue-600">
-              <Link href="/leverage">槓桿財門</Link>
-            </li> */}
+            <li className="border-gray-300 px-3 last:border-r-0 hover:animate-pixel-glitch">
+              <Link href="#registration">競賽報名</Link>
+            </li>
+            <li className="border-gray-300 px-3 last:border-r-0 hover:animate-pixel-glitch">
+              <Link href="">成績查詢</Link>
+            </li>
+            <li className="border-gray-300 px-3 last:border-r-0 hover:animate-pixel-glitch">
+              <Link href="#vote">人氣投票</Link>
+            </li>
           </ul>
           <ul className="space-x-3 flex">
             {/* <MediaLinks /> */}

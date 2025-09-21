@@ -1,3 +1,4 @@
+import { LeftSideButtons } from '@/components/sections/left-side-buttons';
 import { SkyScroll } from '@/components/sections/sky-scroll';
 import { CloudElements } from '@/components/ui/cloud-elements';
 import Footer from '@/components/ui/footer';
@@ -65,6 +66,7 @@ export default function RootLayout({
           </div>
           {children}
         </main>
+        <LeftSideButtons />
         <Footer />
       </body>
     </html>
