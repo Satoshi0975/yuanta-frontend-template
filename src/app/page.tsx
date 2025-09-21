@@ -2,6 +2,7 @@ import { SectionCard } from '@/components/section-card';
 import { DailyMissionSection } from '@/components/sections/daily-mission-section';
 import { FixedBg } from '@/components/sections/fixed-bg';
 import { HeroSection } from '@/components/sections/hero-section';
+import Information from '@/components/sections/Information';
 import { MainMissionSection } from '@/components/sections/main-mission-section';
 import { NewbieVillageSection } from '@/components/sections/newbie-village-section';
 import { PopularityRankingSection } from '@/components/sections/popularity-ranking-section';
@@ -51,7 +52,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <footer className="row-start-3 flex flex-wrap items-center justify-center gap-6"></footer>
+      <Information />
     </div>
   );
 }
