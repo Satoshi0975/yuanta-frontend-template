@@ -1,6 +1,7 @@
 // import Cloud from '@/assets/cloud.svg';
 import mapSM from '@/assets/images/map-sm.png';
 import map from '@/assets/images/map.png';
+import { BounceLeftOnScroll } from '@/components/animation-container';
 import { Button } from '@/components/nes/button';
 import Image from '@/lib/image';
 import { SkyScroll } from './sky-scroll';
@@ -15,11 +16,12 @@ export function HeroSection() {
           baseSpeed={0.1}
           changeOpacity={false}
           size={120}
+          tickInterval={150}
         />
       </div>
 
       {/* 主要內容層 */}
-      <div className="container relative z-10">
+      <BounceLeftOnScroll className="container relative z-10" delay={0.4}>
         <div className="px-4 pr-0 sm:pr-4">
           <div className="relative mx-auto aspect-[0.8964] max-w-md sm:aspect-[1.8541] sm:max-w-full">
             <Image
@@ -38,11 +40,11 @@ export function HeroSection() {
             />
             <div className="absolute inset-0 z-20 -mt-16 mr-4 flex flex-col items-center justify-center gap-2 sm:-mt-0 sm:mr-0">
               <div className="text-sts-orange-500 space-y-1 text-center font-cubic text-xl sm:space-y-2 sm:text-3xl">
-                <p>活動期間＝報名期間</p>
-                <p>萬元好禮等你拿！</p>
+                <p className="">活動期間＝報名期間</p>
+                <p className="">萬元好禮等你拿！</p>
                 <p className="!mb-5">▼ 立即報名參賽 ▼</p>
-                <Button className="nes-button pb-7 pt-4 text-3xl md:pb-10 md:pt-6 lg:text-5xl">
-                  報名競賽
+                <Button className="nes-button animate-retro-blink pb-7 pt-4 text-3xl md:pb-10 md:pt-6 lg:text-5xl">
+                  <span className="animate-pixel-glitch">報名競賽</span>
                 </Button>
                 <p className="text-sm md:text-base">
                   <small className="text-sts-orange-500">
@@ -53,7 +55,7 @@ export function HeroSection() {
             </div>
           </div>
         </div>
-      </div>
+      </BounceLeftOnScroll>
     </div>
   );
 }

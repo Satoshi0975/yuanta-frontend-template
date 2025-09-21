@@ -13,17 +13,29 @@ interface CloudProps {
   opacity: number;
 }
 
-const CloudComponent = ({ cloud }: { cloud: CloudProps }) => {
+const PIXEL_GRID = 4; // 像素網格大小
+const TICK_INTERVAL = 50; // 每個 tick 間隔 (毫秒) - 可調整這個值
+
+const CloudComponent = ({
+  cloud,
+  tickInterval = TICK_INTERVAL,
+}: {
+  cloud: CloudProps;
+  tickInterval?: number;
+}) => {
   const { scrollYProgress } = useScroll();
   const baseX = useMotionValue(cloud.initialX);
 
-  // 基礎自動滾動
+  // 8bit 風格移動 - 使用固定間隔
   useEffect(() => {
-    let animationFrame: number;
+    // let interval: NodeJS.Timeout;
 
     const moveCloud = () => {
       const currentX = baseX.get();
-      const newX = currentX - cloud.baseSpeed * 0.5;
+      // 8bit 風格：每次移動固定距離 (像素化)
+      const moveDistance = cloud.baseSpeed * 2; // 增加移動距離
+      const pixelMove = (moveDistance / PIXEL_GRID) * PIXEL_GRID; // 8px 網格對齊
+      const newX = currentX - pixelMove; // 確保至少移動 8px
 
       // 如果雲朵完全移出左側螢幕，重新定位到右側
       if (newX < -cloud.size - 100) {
@@ -31,32 +43,35 @@ const CloudComponent = ({ cloud }: { cloud: CloudProps }) => {
       } else {
         baseX.set(newX);
       }
-
-      animationFrame = requestAnimationFrame(moveCloud);
     };
 
-    animationFrame = requestAnimationFrame(moveCloud);
+    // 使用 setInterval 而非 requestAnimationFrame，創造固定的 tick 間隔
+    const interval = setInterval(moveCloud, tickInterval);
 
     return () => {
-      if (animationFrame) {
-        cancelAnimationFrame(animationFrame);
+      if (interval) {
+        clearInterval(interval);
       }
     };
-  }, [baseX, cloud.baseSpeed, cloud.size]);
+  }, [baseX, cloud.baseSpeed, cloud.size, tickInterval]);
 
-  // 滾動加速效果
+  // 像素化滾動加速效果
   const scrollBoost = useTransform(
     scrollYProgress,
     [0, 1],
     [0, -500 * cloud.baseSpeed]
   );
 
-  // 合併基礎移動和滾動加速
-  const finalX = useTransform(() => baseX.get() + scrollBoost.get());
+  // 合併基礎移動和滾動加速，並像素化結果
+  const finalX = useTransform(() => {
+    const combined = baseX.get() + scrollBoost.get();
+    // 確保最終位置也是像素化的
+    return Math.round(combined / PIXEL_GRID) * PIXEL_GRID;
+  });
 
   return (
     <motion.div
-      className="absolute"
+      className={`absolute`}
       style={{
         x: finalX,
         left: '0%',
@@ -74,11 +89,13 @@ export const SkyScroll = ({
   baseSpeed = 0.3,
   changeOpacity = true,
   size = 80,
+  tickInterval = TICK_INTERVAL,
 }: {
   numberOfClouds?: number;
   baseSpeed?: number;
   changeOpacity?: boolean;
   size?: number;
+  tickInterval?: number;
 }) => {
   const isClient = useIsClient();
 
@@ -114,7 +131,11 @@ export const SkyScroll = ({
   return (
     <div ref={ref} className="absolute inset-0 h-full w-full overflow-hidden">
       {clouds.map((cloud) => (
-        <CloudComponent key={cloud.id} cloud={cloud} />
+        <CloudComponent
+          key={cloud.id}
+          cloud={cloud}
+          tickInterval={tickInterval}
+        />
       ))}
     </div>
   );

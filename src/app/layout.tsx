@@ -1,4 +1,8 @@
+import { SkyScroll } from '@/components/sections/sky-scroll';
+import { CloudElements } from '@/components/ui/cloud-elements';
 import Footer from '@/components/ui/footer';
+import { GroundElements } from '@/components/ui/ground-elements';
+import { HeroBackground } from '@/components/ui/hero-background';
 import Navbar from '@/components/ui/navbar';
 import { GoogleTagManager } from '@next/third-parties/google';
 import type { Metadata, Viewport } from 'next';
@@ -51,6 +55,14 @@ export default function RootLayout({
         <NextTopLoader />
         <Navbar />
         <main className="relative min-h-screen w-full max-w-full">
+          {/* 固定背景層 - 最底層 */}
+          <div className="fixed inset-0 z-0 h-screen w-screen bg-contain bg-repeat-x [background-image:url('/bg/sky.png')]">
+            <HeroBackground />
+            <SkyScroll size={160} baseSpeed={0.1} numberOfClouds={8} />
+            <CloudElements />
+            <GroundElements />
+            {/* <div className="absolute bottom-0 left-0 h-[10vw] w-full bg-[url('/images/bg/runway.png')] bg-repeat-x [background-size:auto_100%]" /> */}
+          </div>
           {children}
         </main>
         <Footer />
