@@ -58,7 +58,7 @@ export default function RootLayout({
           {/* 固定背景層 - 最底層 */}
           <div className="fixed inset-0 z-0 h-screen w-screen bg-contain bg-repeat-x [background-image:url('/bg/sky.png')]">
             <HeroBackground />
-            <SkyScroll size={160} baseSpeed={0.1} numberOfClouds={8} />
+            <SkyScroll size={160} baseSpeed={0.1} numberOfClouds={6} />
             <CloudElements />
             <GroundElements />
             {/* <div className="absolute bottom-0 left-0 h-[10vw] w-full bg-[url('/images/bg/runway.png')] bg-repeat-x [background-size:auto_100%]" /> */}
