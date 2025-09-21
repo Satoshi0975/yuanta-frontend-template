@@ -113,11 +113,12 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-sts-text bg-background text-foreground;
   }
 }
 
 @layer components {
+  /* 一般編框 */
   .nes-corners,
   .nes-corners--wrapper {
     clip-path: polygon(
@@ -246,6 +247,7 @@
     margin: -4px;
   }
 
+  /* 小編框 */
   .nes-sm-corners,
   .nes-sm-corners--wrapper {
     clip-path: polygon(
@@ -349,6 +351,177 @@
   .nes-sm-corners::after {
     margin: -4px;
   }
+
+  /* 圓邊筐 */
+  .nes-full-corners,
+  .nes-full-corners--wrapper {
+    clip-path: polygon(
+      0px calc(100% - 20px),
+      4px calc(100% - 20px),
+      4px calc(100% - 12px),
+      8px calc(100% - 12px),
+      8px calc(100% - 8px),
+      12px calc(100% - 8px),
+      12px calc(100% - 4px),
+      20px calc(100% - 4px),
+      20px 100%,
+      calc(100% - 20px) 100%,
+      calc(100% - 20px) calc(100% - 4px),
+      calc(100% - 12px) calc(100% - 4px),
+      calc(100% - 12px) calc(100% - 8px),
+      calc(100% - 8px) calc(100% - 8px),
+      calc(100% - 8px) calc(100% - 12px),
+      calc(100% - 4px) calc(100% - 12px),
+      calc(100% - 4px) calc(100% - 20px),
+      100% calc(100% - 20px),
+      100% 20px,
+      calc(100% - 4px) 20px,
+      calc(100% - 4px) 12px,
+      calc(100% - 8px) 12px,
+      calc(100% - 8px) 8px,
+      calc(100% - 12px) 8px,
+      calc(100% - 12px) 4px,
+      calc(100% - 20px) 4px,
+      calc(100% - 20px) 0px,
+      20px 0px,
+      20px 4px,
+      12px 4px,
+      12px 8px,
+      8px 8px,
+      8px 12px,
+      4px 12px,
+      4px 20px,
+      0px 20px
+    );
+    position: relative;
+  }
+  .nes-full-corners {
+    border: 4px solid transparent;
+  }
+  .nes-full-corners--wrapper {
+    width: fit-content;
+    height: fit-content;
+  }
+  .nes-full-corners--wrapper .nes-full-corners {
+    display: block;
+    clip-path: polygon(
+      4px 20px,
+      8px 20px,
+      8px 12px,
+      12px 12px,
+      12px 8px,
+      20px 8px,
+      20px 4px,
+      calc(100% - 20px) 4px,
+      calc(100% - 20px) 8px,
+      calc(100% - 12px) 8px,
+      calc(100% - 12px) 12px,
+      calc(100% - 8px) 12px,
+      calc(100% - 8px) 20px,
+      calc(100% - 4px) 20px,
+      calc(100% - 4px) calc(100% - 20px),
+      calc(100% - 8px) calc(100% - 20px),
+      calc(100% - 8px) calc(100% - 12px),
+      calc(100% - 12px) calc(100% - 12px),
+      calc(100% - 12px) calc(100% - 8px),
+      calc(100% - 20px) calc(100% - 8px),
+      calc(100% - 20px) calc(100% - 4px),
+      20px calc(100% - 4px),
+      20px calc(100% - 8px),
+      12px calc(100% - 8px),
+      12px calc(100% - 12px),
+      8px calc(100% - 12px),
+      8px calc(100% - 20px),
+      4px calc(100% - 20px)
+    );
+  }
+  .nes-full-corners::after,
+  .nes-full-corners--wrapper::after {
+    content: '';
+    position: absolute;
+    clip-path: polygon(
+      0px calc(100% - 20px),
+      4px calc(100% - 20px),
+      4px calc(100% - 12px),
+      8px calc(100% - 12px),
+      8px calc(100% - 8px),
+      12px calc(100% - 8px),
+      12px calc(100% - 4px),
+      20px calc(100% - 4px),
+      20px 100%,
+      calc(100% - 20px) 100%,
+      calc(100% - 20px) calc(100% - 4px),
+      calc(100% - 12px) calc(100% - 4px),
+      calc(100% - 12px) calc(100% - 8px),
+      calc(100% - 8px) calc(100% - 8px),
+      calc(100% - 8px) calc(100% - 12px),
+      calc(100% - 4px) calc(100% - 12px),
+      calc(100% - 4px) calc(100% - 20px),
+      100% calc(100% - 20px),
+      100% 20px,
+      calc(100% - 4px) 20px,
+      calc(100% - 4px) 12px,
+      calc(100% - 8px) 12px,
+      calc(100% - 8px) 8px,
+      calc(100% - 12px) 8px,
+      calc(100% - 12px) 4px,
+      calc(100% - 20px) 4px,
+      calc(100% - 20px) 0px,
+      20px 0px,
+      20px 4px,
+      12px 4px,
+      12px 8px,
+      8px 8px,
+      8px 12px,
+      4px 12px,
+      4px 20px,
+      0px 20px,
+      0px 50%,
+      4px 50%,
+      4px 20px,
+      8px 20px,
+      8px 12px,
+      12px 12px,
+      12px 8px,
+      20px 8px,
+      20px 4px,
+      calc(100% - 20px) 4px,
+      calc(100% - 20px) 8px,
+      calc(100% - 12px) 8px,
+      calc(100% - 12px) 12px,
+      calc(100% - 8px) 12px,
+      calc(100% - 8px) 20px,
+      calc(100% - 4px) 20px,
+      calc(100% - 4px) calc(100% - 20px),
+      calc(100% - 8px) calc(100% - 20px),
+      calc(100% - 8px) calc(100% - 12px),
+      calc(100% - 12px) calc(100% - 12px),
+      calc(100% - 12px) calc(100% - 8px),
+      calc(100% - 20px) calc(100% - 8px),
+      calc(100% - 20px) calc(100% - 4px),
+      20px calc(100% - 4px),
+      20px calc(100% - 8px),
+      12px calc(100% - 8px),
+      12px calc(100% - 12px),
+      8px calc(100% - 12px),
+      8px calc(100% - 20px),
+      4px calc(100% - 20px),
+      4px 50%,
+      0px 50%
+    );
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #000;
+    display: block;
+    pointer-events: none;
+  }
+  .nes-full-corners::after {
+    margin: -4px;
+  }
+
+  /* 按鈕 */
 
   .nes-button {
     @apply relative m-auto grid h-fit cursor-pointer overflow-hidden border-none text-center text-5xl transition-transform duration-200 ease-in-out;

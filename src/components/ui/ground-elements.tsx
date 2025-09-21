@@ -25,11 +25,11 @@ export function GroundElements() {
             <Gold className="w-8" />
             <Gold className="w-8" />
           </div>
-          <Dinosaur className="absolute bottom-32 right-10 w-20" />
-          <Wolf className="absolute bottom-10 left-5 w-[4.5rem]" />
-          <Princess className="absolute bottom-10 right-20 w-20" />
-          <Hunter className="absolute bottom-10 right-5 w-16" />
-          <div className="absolute bottom-20 left-0 h-10 w-[35vw] bg-[url('/images/element/ground.png')] bg-right bg-repeat-x [background-size:auto_100%]"></div>
+          <Dinosaur className="absolute bottom-[232px] left-10 w-20 md:w-24" />
+          <Wolf className="absolute bottom-10 left-5 w-[4.5rem] md:w-20" />
+          <Princess className="absolute bottom-10 right-20 w-20 md:w-24 md:right-28" />
+          <Hunter className="absolute bottom-10 right-5 w-16 md:w-20" />
+          <div className="absolute bottom-48 left-0 h-10 w-[35vw] bg-[url('/images/element/ground.png')] bg-right bg-repeat-x [background-size:auto_100%]"></div>
         </div>
       </div>
 

@@ -6,10 +6,10 @@ export function NewbieVillageSection() {
     <div className="flex flex-col pt-2">
       <DecorationIcons variant="newbie" />
       <SectionCard title="新手村">
-        <h2 className="whitespace-pre-wrap text-center text-xl sm:text-2xl">
-          <span className="text-primary">新戶/靜止戶</span>交易
+        <h2 className="whitespace-pre-wrap text-center text-xl font-bold sm:text-2xl">
+          <span className="text-sts-blue-500">新戶/靜止戶</span>交易
           <br />送
-          <span className="ml-2 text-primary">100元超商電子禮券</span>
+          <span className="text-sts-blue-500 ml-2">100元超商電子禮券</span>
         </h2>
         <div className="mx-auto mt-4 max-w-[420px] rounded-xl bg-white/70 px-4 py-2 text-sm lg:text-base 2xl:max-w-[520px]">
           <ol className="ml-4 list-disc space-y-2 marker:text-orange-500">

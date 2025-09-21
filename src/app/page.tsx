@@ -11,6 +11,7 @@ import { WayScroll } from '@/components/sections/way-scroll';
 import { CloudElements } from '@/components/ui/cloud-elements';
 import { GroundElements } from '@/components/ui/ground-elements';
 import { HeroBackground } from '@/components/ui/hero-background';
+import Step from './block/step/step';
 
 export default function Home() {
   return (
@@ -18,20 +19,21 @@ export default function Home() {
       {/* 固定背景層 - 最底層 */}
       <div className="fixed inset-0 z-0 h-screen w-screen bg-contain bg-repeat-x [background-image:url('/bg/sky.png')]">
         <HeroBackground />
+        <SkyScroll size={160} baseSpeed={0.1} numberOfClouds={8} />
         <CloudElements />
         <GroundElements />
         {/* <div className="absolute bottom-0 left-0 h-[10vw] w-full bg-[url('/images/bg/runway.png')] bg-repeat-x [background-size:auto_100%]" /> */}
       </div>
 
       {/* 內容層 */}
-      <div className="relative z-10 pt-[120vh]">
+      <div className="relative z-10 pt-[100vh]">
         <FixedBg>
           <SkyScroll />
         </FixedBg>
         <div className="relative z-20">
-          <WayScroll />
           <HeroSection />
-          <div className="container mx-auto mt-10 space-y-10 px-4">
+          <WayScroll />
+          <div className="container mx-auto mb-10 mt-10 space-y-10 px-4">
             <div className="grid grid-cols-1 items-stretch gap-4 md:grid-cols-2">
               <NewbieVillageSection />
               <DailyMissionSection />
@@ -40,9 +42,11 @@ export default function Home() {
             <PopularityRankingSection />
           </div>
           <VoteSection />
-          <div className="-mt-1 flex flex-col pt-0">
+          <div className="container -mt-2 flex flex-col px-4">
             <SectionCard title="立即下單 賺積分">
-              <div className="mx-auto max-w-[840px] space-y-4"></div>
+              <div className="mx-auto max-w-[840px] space-y-4">
+                <Step />
+              </div>
             </SectionCard>
           </div>
         </div>

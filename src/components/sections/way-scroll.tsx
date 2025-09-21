@@ -9,7 +9,7 @@ export const WayScroll = () => {
   const runwayX = useTransform(scrollYProgress, [0, 1], [200, -1000]);
 
   return (
-    <div className="pointer-events-none sticky top-0 z-0 -mb-[110vh] h-screen w-screen overflow-hidden">
+    <div className="pointer-events-none sticky top-0 z-0 -mb-[100vh] h-screen w-screen overflow-hidden">
       {/* 底部漸層背景 */}
       <div className="absolute bottom-0 left-0 h-32 w-full bg-gradient-to-t from-white/50 via-white/10 to-transparent md:h-48" />
 

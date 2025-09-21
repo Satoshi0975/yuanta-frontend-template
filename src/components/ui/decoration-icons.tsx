@@ -6,6 +6,7 @@ import start from '@/assets/images/element/start.png';
 import ticket from '@/assets/images/element/ticket.png';
 import towHard from '@/assets/images/element/tow-hard.png';
 import Image from '@/lib/image';
+import Wolf from '@/assets/character/wolf.svg';
 
 interface DecorationIconsProps {
   variant: 'newbie' | 'daily' | 'main' | 'popularity';
@@ -72,11 +73,7 @@ export function DecorationIcons({ variant, className = '' }: DecorationIconsProp
             <Image src={gold} alt="gold" className="hidden h-8 w-auto sm:block" />
           </div>
           <div className="relative ml-6 mr-6 flex h-12 w-24">
-            <Image
-              src={dinosaur}
-              alt="dinosaur"
-              className="absolute -bottom-4 right-0 h-20 w-auto items-baseline"
-            />
+            <Wolf className="absolute -bottom-4 right-0 h-20 w-auto items-baseline" />
           </div>
           <div className="flex gap-3">
             <Image src={gold} alt="gold" className="hidden h-8 w-auto sm:block" />

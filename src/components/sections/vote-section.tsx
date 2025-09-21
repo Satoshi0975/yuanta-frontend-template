@@ -10,20 +10,12 @@ import Wolf from '@/assets/character/wolf.svg';
 import treasure from '@/assets/images/treasure.png';
 import { Button } from '@/components/nes/button';
 import Image from '@/lib/image';
-import { SkyScroll } from './sky-scroll';
 
 export function VoteSection() {
   return (
     <div className="relative flex h-screen w-full items-center bg-contain bg-repeat-x [background-image:url('/bg/sky2.png')]">
       {/* 雲朵背景層 */}
-      <div className="absolute inset-0 z-0 lg:hidden">
-        <SkyScroll
-          numberOfClouds={8}
-          baseSpeed={0.1}
-          changeOpacity={false}
-          size={120}
-        />
-      </div>
+      <div className="absolute inset-0 z-0 lg:hidden"></div>
       <div className="container">
         <div className="relative m-auto -mt-36 flex flex-col items-center justify-center gap-8 sm:-mt-0">
           {/* 文字內容層 - 在上層 */}
@@ -49,18 +41,20 @@ export function VoteSection() {
         </div>
       </div>
       <div className="absolute bottom-0 left-0 hidden h-full w-1/2 lg:block">
-        <WolfCloud className="absolute left-0 top-[7%]" />
-        <PrincessCloud className="absolute right-[30%] top-[45%]" />
+        <WolfCloud className="absolute left-0 top-[7%] scale-75 xl:scale-100" />
+        <PrincessCloud className="absolute right-[30%] top-[45%] scale-75 xl:scale-100" />
       </div>
       <div className="absolute bottom-0 right-0 hidden h-full w-1/2 lg:block">
-        <DinosaurCloud className="absolute right-0 top-[60%]" />
-        <HunterCloud className="absolute right-[10%] top-[25%]" />
+        <DinosaurCloud className="absolute right-0 top-[60%] scale-75 xl:scale-100" />
+        <HunterCloud className="absolute right-[10%] top-[25%] scale-75 xl:scale-100" />
       </div>
-      <div className="absolute bottom-0 left-0 z-20 grid h-36 w-full grid-cols-[5fr_6fr_6fr_5fr] items-end justify-around gap-5 px-8 lg:hidden">
-        <Wolf className="mx-auto w-full max-w-[120px]" />
-        <Dinosaur className="mx-auto w-full max-w-[148px]" />
-        <Princess className="mx-auto w-full max-w-[148px]" />
-        <Hunter className="mx-auto w-full max-w-[120px]" />
+      <div className="absolute bottom-0 left-0 z-20 flex h-36 w-full items-end px-8 lg:hidden">
+        <div className="container mx-auto grid grid-cols-[5fr_6fr_6fr_5fr] items-end justify-around gap-5">
+          <Wolf className="mx-auto w-full max-w-[100px]" />
+          <Dinosaur className="mx-auto w-full max-w-[120px]" />
+          <Princess className="mx-auto w-full max-w-[120px]" />
+          <Hunter className="mx-auto w-full max-w-[100px]" />
+        </div>
       </div>
     </div>
   );

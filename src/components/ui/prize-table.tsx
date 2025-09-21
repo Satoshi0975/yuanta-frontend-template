@@ -28,18 +28,18 @@ export function PrizeTable({
     switch (titleColor) {
       case 'green':
         return {
-          header: 'bg-green-600',
-          subHeader: 'bg-green-400'
+          header: 'bg-sts-green-200',
+          subHeader: 'bg-sts-green-100'
         };
       case 'orange':
         return {
-          header: 'bg-orange-600',
-          subHeader: 'bg-orange-400'
+          header: 'bg-sts-orange-400',
+          subHeader: 'bg-sts-orange-300'
         };
       default:
         return {
-          header: 'bg-blue-600',
-          subHeader: 'bg-blue-400'
+          header: 'bg-sts-blue-500',
+          subHeader: 'bg-sts-blue-300'
         };
     }
   };
@@ -50,14 +50,14 @@ export function PrizeTable({
   return (
     <div className={`rounded-lg bg-black text-center text-xl shadow-lg nes-corners ${className}`}>
       <div className={`grid gap-1 ${gridCols}`}>
-        <div className={`${colors.header} p-3 font-semibold text-white`}>
+        <div className={`${colors.header} p-3 font-bold text-white`}>
           {title}
         </div>
-        <div className={`${colors.subHeader} p-3 font-semibold text-white`}>
+        <div className={`${colors.subHeader} p-3 font-bold text-white`}>
           獎金
         </div>
         {showThirdColumn && thirdColumnTitle && (
-          <div className={`hidden ${colors.header} p-3 font-semibold text-white md:block`}>
+          <div className={`hidden ${colors.header} p-3 font-bold text-white md:block`}>
             {thirdColumnTitle}
           </div>
         )}
@@ -65,7 +65,7 @@ export function PrizeTable({
         {data.map((item, index) => (
           <React.Fragment key={index}>
             <div className="bg-white p-3">{item.rank}</div>
-            <div className="bg-white p-3">
+            <div className="bg-white p-3 font-bold text-sts-blue-500">
               {typeof item.prize === 'number' ? item.prize.toLocaleString() : item.prize}
             </div>
           </React.Fragment>

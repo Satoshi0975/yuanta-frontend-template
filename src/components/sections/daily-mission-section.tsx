@@ -6,12 +6,10 @@ export function DailyMissionSection() {
     <div className="flex flex-col pt-2">
       <DecorationIcons variant="daily" />
       <SectionCard title="每日任務">
-        <h2 className="whitespace-pre-wrap text-center text-xl sm:text-2xl">
+        <h2 className="whitespace-pre-wrap text-center text-xl font-bold sm:text-2xl">
           日日交易日日獲抽獎機會
           <br />
-          <span className="ml-2 text-primary">
-            月月抽元大期貨金幣3枚
-          </span>
+          <span className="text-sts-blue-500 ml-2">月月抽元大期貨金幣3枚</span>
         </h2>
         <p className="text-center">
           <small>

@@ -15,16 +15,43 @@ export default {
     container: {
       center: true,
       screens: {
-        'sm': '640px',
-        'md': '768px',
-        'lg': '1024px',
-        'xl': '1280px',
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1280px',
         '2xl': '1280px',
       },
     },
     extend: {
       colors: {
-        'yuanta-bg': '#CEEEFF',
+        sts: {
+          text: '#070707',
+          gray: '#BDBBBB',
+          rank: {
+            '1': '#D88600',
+            '2': '#5B5B5B',
+            '3': '#917C5A',
+          },
+          blue: {
+            600: '#2356B5',
+            500: '#206ED5',
+            400: '#187CFF',
+            300: '#5A9DF5',
+            200: '#79C2FF',
+            100: '#CEEEFF',
+          },
+          orange: {
+            500: '#783E01',
+            400: '#FF953E',
+            300: '#FFB374',
+            200: '#F7EDE6',
+            100: '#FEFAF7',
+          },
+          green: {
+            100: '#95C321',
+            200: '#63AE3A',
+          },
+        },
         linen: '#F7EDE6',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
@@ -86,30 +113,29 @@ export default {
       const colors = theme('colors') as Record<string, Record<string, string>>;
       const newUtilities: Record<string, Record<string, string>> = {};
 
-      for (const [colorName, colorShades] of Object.entries(colors)) {
-        if (typeof colorShades === 'object' && colorShades !== null) {
-          for (const [shade, value] of Object.entries(colorShades)) {
-            if (typeof value === 'string') {
-              newUtilities[`.nes-${e(colorName)}-${shade}::after`] = {
-                'background-color': value,
-              };
-              newUtilities[
-                `.nes-${e(colorName)}-${shade} .nes-corners::after`
-              ] = {
-                'background-color': value,
-              };
-            }
+      function generateColorUtilities(
+        colorObj: Record<string, Record<string, string> | string>,
+        prefix: string = ''
+      ) {
+        for (const [key, value] of Object.entries(colorObj)) {
+          const className = prefix ? `${prefix}-${key}` : key;
+
+          if (typeof value === 'string') {
+            // 這是最終的顏色值
+            newUtilities[`.nes-${e(className)}::after`] = {
+              'background-color': value,
+            };
+            newUtilities[`.nes-${e(className)} .nes-corners::after`] = {
+              'background-color': value,
+            };
+          } else if (typeof value === 'object' && value !== null) {
+            // 這是嵌套的顏色物件，遞迴處理
+            generateColorUtilities(value, className);
           }
-        } else if (typeof colorShades === 'string') {
-          newUtilities[`.nes-${e(colorName)}::after`] = {
-            'background-color': colorShades,
-          };
-          newUtilities[`.nes-${e(colorName)} .nes-corners::after`] = {
-            'background-color': colorShades,
-          };
         }
       }
 
+      generateColorUtilities(colors);
       addUtilities(newUtilities);
     }),
   ],

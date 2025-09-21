@@ -8,6 +8,7 @@ const buttonVariants = cva('nes-button', {
   variants: {
     variant: {
       default: '',
+      secondary: 'nes-button-secondary',
     },
     size: {
       default: '',
