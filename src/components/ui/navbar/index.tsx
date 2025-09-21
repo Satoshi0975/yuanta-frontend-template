@@ -1,5 +1,5 @@
-// import Logo from '@/assets/logo.png';
-// import Image from '@/lib/image';
+import Logo from '@/assets/logo.png';
+import Image from '@/lib/image';
 import Link from 'next/link';
 // import MediaLinks from './media-links';
 // import Menu from './menu';
@@ -39,10 +39,12 @@ const Navbar = () => {
         <nav className="container flex items-center justify-between">
           <h1 className="">
             <Link href="/" className="">
-              <img
-                src="/assets/logo.png"
+              <Image
+                src={Logo}
                 className="w-28 cursor-pointer md:w-44"
                 alt="Logo"
+                placeholder="empty"
+                priority
               />
             </Link>
           </h1>

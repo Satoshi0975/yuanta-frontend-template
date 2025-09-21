@@ -14,7 +14,7 @@ const Information = () => {
         open ? '' : 'relative max-h-96 overflow-hidden'
       )}
     >
-      <div className="container mx-auto space-y-5 text-base [&_h1]:font-cubic [&_h1]:text-3xl [&_h1]:font-semibold [&_h2]:mb-3 [&_h2]:font-cubic [&_h2]:text-2xl [&_h2]:font-semibold [&_h3]:mb-3 [&_h3]:font-cubic [&_h3]:text-xl [&_h3]:font-semibold">
+      <div className="container mx-auto space-y-5 px-2 text-base [&_h1]:font-cubic [&_h1]:text-3xl [&_h1]:font-semibold [&_h2]:mb-3 [&_h2]:font-cubic [&_h2]:text-2xl [&_h2]:font-semibold [&_h3]:mb-3 [&_h3]:font-cubic [&_h3]:text-xl [&_h3]:font-semibold">
         <h1 className="text-center font-cubic">注意事項</h1>
         {/* <h2>外期規則</h2> */}
         <hr />

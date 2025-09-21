@@ -12,6 +12,7 @@ import { WayScroll } from '@/components/sections/way-scroll';
 import { CloudElements } from '@/components/ui/cloud-elements';
 import { GroundElements } from '@/components/ui/ground-elements';
 import { HeroBackground } from '@/components/ui/hero-background';
+import { ScrollNavigator } from '@/components/ui/scroll-navigator';
 import Step from './block/step/step';
 
 export default function Home() {
@@ -35,7 +36,7 @@ export default function Home() {
           <HeroSection />
           <WayScroll />
           <div
-            className="container mx-auto mb-10 mt-10 space-y-10 px-4"
+            className="container mx-auto mb-10 space-y-10 px-4 pt-10 [scroll-margin-top:50px]"
             id="competition"
           >
             <div className="grid grid-cols-1 items-stretch gap-4 md:grid-cols-2">
@@ -49,7 +50,7 @@ export default function Home() {
             <VoteSection />
           </div>
           <div
-            className="container -mt-2 flex flex-col px-4 lg:mt-10"
+            className="container -mt-2 flex flex-col px-4 [scroll-margin-top:65px] lg:mt-10"
             id="hot-to"
           >
             <SectionCard title="立即下單 賺積分">
@@ -61,6 +62,7 @@ export default function Home() {
         </div>
       </div>
       <Information />
+      <ScrollNavigator />
     </div>
   );
 }
