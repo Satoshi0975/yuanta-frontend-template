@@ -5,6 +5,7 @@ import { RankingCard } from '@/components/ui/ranking-card';
 import { RankingPrizeTable } from '@/components/ui/ranking-prize-table';
 import { RankingTable } from '@/components/ui/ranking-table';
 import Image from '@/lib/image';
+import { BounceOnScroll } from '../animation-container';
 
 export function PopularityRankingSection() {
   const rankingTableData = [
@@ -15,7 +16,7 @@ export function PopularityRankingSection() {
   ];
 
   return (
-    <div className="flex flex-col pt-2">
+    <BounceOnScroll delay={0.2} repeat className="flex flex-col pt-2">
       <DecorationIcons variant="popularity" />
       <SectionCard title="期貨人氣王">
         <h2 className="nes-sm-corners mx-auto flex w-fit space-x-2 bg-blue-500 px-4 py-2 text-center font-cubic text-xl text-white">
@@ -35,6 +36,6 @@ export function PopularityRankingSection() {
           <RankingTable data={rankingTableData} />
         </div>
       </SectionCard>
-    </div>
+    </BounceOnScroll>
   );
 }

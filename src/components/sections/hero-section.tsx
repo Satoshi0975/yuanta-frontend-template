@@ -21,7 +21,7 @@ export function HeroSection() {
       </div>
 
       {/* 主要內容層 */}
-      <BounceLeftOnScroll className="container relative z-10" delay={0.4}>
+      <BounceLeftOnScroll className="container relative z-10" delay={0.5}>
         <div className="px-4 pr-0 sm:pr-4">
           <div className="relative mx-auto aspect-[0.8964] max-w-md sm:aspect-[1.8541] sm:max-w-full">
             <Image

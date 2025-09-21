@@ -27,8 +27,8 @@ export function VoteSection() {
 
           {/* 圖片層 - 在下層 */}
           <div className="z-10">
-            <Button className="nes-button-secondary relative z-10 -mb-14 pb-7 pt-4 text-3xl sm:pb-10 sm:pt-6 sm:text-5xl lg:scale-110 lg:hover:scale-125">
-              立即投票
+            <Button className="nes-button-secondary animate-retro-blink relative z-10 -mb-14 pb-7 pt-4 text-3xl sm:pb-10 sm:pt-6 sm:text-5xl lg:scale-110 lg:hover:scale-125">
+              <span className="animate-pixel-glitch">立即投票</span>
             </Button>
             <Image
               src={treasure}
@@ -41,12 +41,12 @@ export function VoteSection() {
         </div>
       </div>
       <div className="absolute bottom-0 left-0 hidden h-full w-1/2 lg:block">
-        <WolfCloud className="absolute left-0 top-[7%] scale-75 xl:scale-100" />
-        <PrincessCloud className="absolute right-[30%] top-[45%] scale-75 xl:scale-100" />
+        <WolfCloud className="animate-pixel-float absolute left-0 top-[7%] scale-75 xl:scale-100" />
+        <PrincessCloud className="animate-pixel-float absolute right-[30%] top-[45%] scale-75 delay-1000 xl:scale-100" />
       </div>
       <div className="absolute bottom-0 right-0 hidden h-full w-1/2 lg:block">
-        <DinosaurCloud className="absolute right-0 top-[60%] scale-75 xl:scale-100" />
-        <HunterCloud className="absolute right-[10%] top-[25%] scale-75 xl:scale-100" />
+        <DinosaurCloud className="animate-pixel-float absolute right-0 top-[60%] scale-75 [animation-delay:2000ms] xl:scale-100" />
+        <HunterCloud className="animate-pixel-float absolute right-[10%] top-[25%] scale-75 [animation-delay:3000ms] xl:scale-100" />
       </div>
       <div className="absolute bottom-0 left-0 z-20 flex h-36 w-full items-end px-8 lg:hidden">
         <div className="container mx-auto grid grid-cols-[5fr_6fr_6fr_5fr] items-end justify-around gap-5">

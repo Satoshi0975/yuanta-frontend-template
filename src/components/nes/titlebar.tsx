@@ -27,7 +27,7 @@ const Titlebar = React.forwardRef<HTMLDivElement, TitlebarProps>(
         {...props}
       >
         <div className="section-left"></div>
-        <Comp className="section-middle">{children}</Comp>
+        <Comp className="section-middle animate-pixel-glitch">{children}</Comp>
         <div className="section-right"></div>
       </div>
     );

@@ -12,6 +12,7 @@ export interface BaseAnimationProps {
   everyTime?: boolean;
   disabled?: boolean;
   margin?: MarginType;
+  asChild?: boolean;
 }
 
 export interface BounceInAnimationProps extends BaseAnimationProps {

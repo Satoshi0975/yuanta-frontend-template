@@ -19,8 +19,8 @@ export function DecorationIcons({ variant, className = '' }: DecorationIconsProp
       return (
         <div className={`mx-3 mb-4 flex h-12 flex-row-reverse items-center gap-3 md:flex-row ${className}`}>
           <Image src={ticket} alt="ticket" className="h-12 w-auto" />
-          <Image src={gold} alt="gold" className="h-8 w-auto" />
-          <Image src={gold} alt="gold" className="h-8 w-auto" />
+          <Image src={gold} alt="gold" className="h-8 w-auto gold-rotate-3d" />
+          <Image src={gold} alt="gold" className="h-8 w-auto gold-rotate-3d" />
           <div className="relative mr-auto flex h-12 w-24 md:hidden">
             <Image
               src={dinosaur}
@@ -41,9 +41,9 @@ export function DecorationIcons({ variant, className = '' }: DecorationIconsProp
               className="absolute -bottom-4 right-0 h-20 w-auto items-baseline"
             />
           </div>
-          <Image src={gold} alt="gold" className="h-8 w-auto" />
-          <Image src={gold} alt="gold" className="h-8 w-auto" />
-          <Image src={gold} alt="gold" className="h-8 w-auto" />
+          <Image src={gold} alt="gold" className="h-8 w-auto gold-rotate-3d" />
+          <Image src={gold} alt="gold" className="h-8 w-auto gold-rotate-3d" />
+          <Image src={gold} alt="gold" className="h-8 w-auto gold-rotate-3d" />
         </div>
       );
 
@@ -56,9 +56,9 @@ export function DecorationIcons({ variant, className = '' }: DecorationIconsProp
             <Image src={hard} alt="hard" className="hidden h-8 w-auto sm:block" />
           </div>
           <div className="flex gap-3">
-            <Image src={gold} alt="gold" className="hidden h-8 w-auto sm:block" />
-            <Image src={gold} alt="gold" className="h-8 w-auto" />
-            <Image src={gold} alt="gold" className="h-8 w-auto" />
+            <Image src={gold} alt="gold" className="hidden h-8 w-auto sm:block gold-rotate-3d" />
+            <Image src={gold} alt="gold" className="h-8 w-auto gold-rotate-3d" />
+            <Image src={gold} alt="gold" className="h-8 w-auto gold-rotate-3d" />
           </div>
         </div>
       );
@@ -67,18 +67,18 @@ export function DecorationIcons({ variant, className = '' }: DecorationIconsProp
       return (
         <div className={`mx-3 mb-4 flex h-12 items-center justify-between gap-3 ${className}`}>
           <div className="flex gap-3">
-            <Image src={fire} alt="fire" className="h-8 w-auto" />
-            <Image src={gold} alt="gold" className="hidden h-8 w-auto sm:block" />
-            <Image src={gold} alt="gold" className="hidden h-8 w-auto sm:block" />
-            <Image src={gold} alt="gold" className="hidden h-8 w-auto sm:block" />
+            <Image src={fire} alt="fire" className="h-8 w-auto " />
+            <Image src={gold} alt="gold" className="hidden h-8 w-auto sm:block gold-rotate-3d" />
+            <Image src={gold} alt="gold" className="hidden h-8 w-auto sm:block gold-rotate-3d" />
+            <Image src={gold} alt="gold" className="hidden h-8 w-auto sm:block gold-rotate-3d" />
           </div>
           <div className="relative ml-6 mr-6 flex h-12 w-24">
             <Wolf className="absolute -bottom-4 right-0 h-20 w-auto items-baseline" />
           </div>
           <div className="flex gap-3">
-            <Image src={gold} alt="gold" className="hidden h-8 w-auto sm:block" />
-            <Image src={gold} alt="gold" className="hidden h-8 w-auto sm:block" />
-            <Image src={gold} alt="gold" className="hidden h-8 w-auto sm:block" />
+            <Image src={gold} alt="gold" className="hidden h-8 w-auto sm:block gold-rotate-3d" />
+            <Image src={gold} alt="gold" className="hidden h-8 w-auto sm:block gold-rotate-3d" />
+            <Image src={gold} alt="gold" className="hidden h-8 w-auto sm:block gold-rotate-3d" />
             <Image src={towHard} alt="towHard" className="h-8 w-auto" />
           </div>
         </div>

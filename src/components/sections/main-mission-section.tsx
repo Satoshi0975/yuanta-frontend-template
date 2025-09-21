@@ -1,4 +1,5 @@
 import switchImage from '@/assets/images/switch.png';
+import { BounceOnScroll } from '@/components/animation-container';
 import { Button } from '@/components/nes/button';
 import { SectionCard } from '@/components/section-card';
 import { DecorationIcons } from '@/components/ui/decoration-icons';
@@ -27,7 +28,7 @@ export function MainMissionSection() {
   ];
 
   return (
-    <div className="flex flex-col pt-2">
+    <BounceOnScroll delay={0.2} repeat className="flex flex-col pt-2">
       <DecorationIcons variant="main" />
       <SectionCard title="主要任務">
         <div className="mx-auto max-w-[840px] space-y-4">
@@ -109,6 +110,6 @@ export function MainMissionSection() {
           </div>
         </div>
       </SectionCard>
-    </div>
+    </BounceOnScroll>
   );
 }

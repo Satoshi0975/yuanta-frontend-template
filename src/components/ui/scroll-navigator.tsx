@@ -6,9 +6,9 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 const SECTIONS = [
   { id: 'registration', name: '報名', order: 1 },
-  { id: 'competition', name: '競賽', order: 2 },
-  { id: 'vote', name: '投票', order: 3 },
-  { id: 'hot-to', name: '下單賺積分', order: 4 }
+  // { id: 'competition', name: '競賽', order: 2 },
+  { id: 'vote', name: '投票', order: 2 },
+  // { id: 'hot-to', name: '下單賺積分', order: 4 }
 ] as const;
 
 type SectionId = typeof SECTIONS[number]['id'];
@@ -19,7 +19,7 @@ export function ScrollNavigator() {
   const [isTouching, setIsTouching] = useState(false);
   const lastScrollY = useRef(0);
   const hasUserScrolledUp = useRef(false);
-  const touchTimeout = useRef<NodeJS.Timeout>();
+  const touchTimeout = useRef<NodeJS.Timeout>(null);
 
   const scrollToSection = useCallback((sectionId: SectionId) => {
     const element = document.getElementById(sectionId);

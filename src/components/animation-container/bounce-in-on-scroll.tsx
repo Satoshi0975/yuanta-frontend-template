@@ -2,41 +2,41 @@
 
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import {
-  ANIMATION_TRANSITIONS,
-  DEFAULT_DELAY,
-  DEFAULT_VIEWPORT_CONFIG,
-} from './constants';
-import { BounceInAnimationProps } from './types';
+
+type BounceInOnScrollProps = {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+  asChild?: boolean;
+  initialSize?: number;
+  repeat?: boolean;
+};
 
 const BounceInOnScroll = ({
   children,
   className,
-  delay = DEFAULT_DELAY,
-  everyTime = false,
-  disabled = false,
-  margin = DEFAULT_VIEWPORT_CONFIG.margin,
-  initialSize = 2,
-}: BounceInAnimationProps) => {
+  delay,
+  initialSize,
+  repeat = false,
+}: BounceInOnScrollProps) => {
   const ref = useRef(null);
   const isInView = useInView(ref, {
-    once: !everyTime,
-    margin,
+    once: !repeat,
+    margin: '0px 0px -50px 0px', // 當元素距離底部 50px 時觸發
   });
-
-  if (disabled) {
-    return <div className={className}>{children}</div>;
-  }
 
   const animationProps = {
     ref,
-    initial: { opacity: 0, scale: initialSize },
+    initial: { opacity: 0, scale: initialSize || 2 },
     animate: isInView
       ? { opacity: 1, scale: 1 }
-      : { opacity: 0, scale: initialSize },
+      : { opacity: 0, scale: initialSize || 2 },
     transition: {
-      delay,
-      ...ANIMATION_TRANSITIONS.spring,
+      delay: delay || 0.2,
+      type: 'spring',
+      stiffness: 100,
+      damping: 10,
+      mass: 1,
       duration: 1,
     },
     className,

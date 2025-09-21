@@ -9,8 +9,84 @@
 
   /* 8-bit 風格 3D 旋轉動畫 */
   .gold-rotate-3d {
-    animation: pixelRotate3D 5s steps(1) infinite;
+    animation: pixelRotate3D 3s steps(1) infinite;
     transform-style: preserve-3d;
+  }
+
+  /* 8-bit 風格左滑入動畫 */
+  .pixel-slide-in-left {
+    animation: pixelSlideInLeft 1s steps(16) forwards;
+  }
+
+  @keyframes pixelSlideInLeft {
+    0% {
+      opacity: 0;
+      transform: translateX(-70px);
+    }
+    6.25% {
+      opacity: 0.1;
+      transform: translateX(-65px);
+    }
+    12.5% {
+      opacity: 0.2;
+      transform: translateX(-58px);
+    }
+    18.75% {
+      opacity: 0.35;
+      transform: translateX(-50px);
+    }
+    25% {
+      opacity: 0.5;
+      transform: translateX(-42px);
+    }
+    31.25% {
+      opacity: 0.65;
+      transform: translateX(-34px);
+    }
+    37.5% {
+      opacity: 0.75;
+      transform: translateX(-26px);
+    }
+    43.75% {
+      opacity: 0.82;
+      transform: translateX(-19px);
+    }
+    50% {
+      opacity: 0.88;
+      transform: translateX(-13px);
+    }
+    56.25% {
+      opacity: 0.92;
+      transform: translateX(-8px);
+    }
+    62.5% {
+      opacity: 0.95;
+      transform: translateX(-4px);
+    }
+    68.75% {
+      opacity: 0.97;
+      transform: translateX(-2px);
+    }
+    75% {
+      opacity: 0.98;
+      transform: translateX(-1px);
+    }
+    81.25% {
+      opacity: 0.99;
+      transform: translateX(-0.5px);
+    }
+    87.5% {
+      opacity: 1;
+      transform: translateX(0px);
+    }
+    93.75% {
+      opacity: 1;
+      transform: translateX(0px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0px);
+    }
   }
 
   @keyframes pixelRotate3D {
