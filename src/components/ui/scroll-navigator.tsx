@@ -16,8 +16,10 @@ type SectionId = typeof SECTIONS[number]['id'];
 export function ScrollNavigator() {
   const [currentSection, setCurrentSection] = useState<SectionId>();
   const [isScrolling, setIsScrolling] = useState(false);
+  const [isTouching, setIsTouching] = useState(false);
   const lastScrollY = useRef(0);
   const hasUserScrolledUp = useRef(false);
+  const touchTimeout = useRef<NodeJS.Timeout>();
 
   const scrollToSection = useCallback((sectionId: SectionId) => {
     const element = document.getElementById(sectionId);
@@ -42,8 +44,8 @@ export function ScrollNavigator() {
   }, []);
 
   const handleScroll = useCallback(() => {
-    // 如果正在自動滾動中，忽略滾動事件
-    if (isScrolling) return;
+    // 如果正在自動滾動中或正在觸控中，忽略滾動事件
+    if (isScrolling || isTouching) return;
 
     const currentScrollY = window.scrollY;
     const scrollDirection = currentScrollY > lastScrollY.current ? 'down' : 'up';
@@ -55,16 +57,37 @@ export function ScrollNavigator() {
     }
 
     lastScrollY.current = currentScrollY;
-  }, [isScrolling]);
+  }, [isScrolling, isTouching]);
+
+  // 處理觸控開始
+  const handleTouchStart = useCallback(() => {
+    setIsTouching(true);
+    // 清除之前的超時
+    if (touchTimeout.current) {
+      clearTimeout(touchTimeout.current);
+    }
+  }, []);
+
+  // 處理觸控結束
+  const handleTouchEnd = useCallback(() => {
+    // 延遲清除觸控狀態，給慣性滾動時間
+    touchTimeout.current = setTimeout(() => {
+      setIsTouching(false);
+    }, 500);
+  }, []);
 
   // 監聽滾動事件
   useEventListener('scroll', handleScroll);
+
+  // 監聽觸控事件
+  useEventListener('touchstart', handleTouchStart);
+  useEventListener('touchend', handleTouchEnd);
 
   // 檢測當前可見區塊並觸發滾動
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        if (isScrolling) return; // 如果正在滾動中，忽略所有觸發
+        if (isScrolling || isTouching) return; // 如果正在滾動中或觸控中，忽略所有觸發
 
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
@@ -152,8 +175,12 @@ export function ScrollNavigator() {
 
     return () => {
       observer.disconnect();
+      // 清理觸控超時
+      if (touchTimeout.current) {
+        clearTimeout(touchTimeout.current);
+      }
     };
-  }, [currentSection, isScrolling, scrollToSection]);
+  }, [currentSection, isScrolling, isTouching, scrollToSection]);
 
   return (
     <AnimatePresence>

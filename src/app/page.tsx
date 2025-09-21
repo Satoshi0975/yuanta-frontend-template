@@ -9,24 +9,13 @@ import { PopularityRankingSection } from '@/components/sections/popularity-ranki
 import { SkyScroll } from '@/components/sections/sky-scroll';
 import { VoteSection } from '@/components/sections/vote-section';
 import { WayScroll } from '@/components/sections/way-scroll';
-import { CloudElements } from '@/components/ui/cloud-elements';
-import { GroundElements } from '@/components/ui/ground-elements';
-import { HeroBackground } from '@/components/ui/hero-background';
+
 import { ScrollNavigator } from '@/components/ui/scroll-navigator';
 import Step from './block/step/step';
 
 export default function Home() {
   return (
     <div className="">
-      {/* 固定背景層 - 最底層 */}
-      <div className="fixed inset-0 z-0 h-screen w-screen bg-contain bg-repeat-x [background-image:url('/bg/sky.png')]">
-        <HeroBackground />
-        <SkyScroll size={160} baseSpeed={0.1} numberOfClouds={8} />
-        <CloudElements />
-        <GroundElements />
-        {/* <div className="absolute bottom-0 left-0 h-[10vw] w-full bg-[url('/images/bg/runway.png')] bg-repeat-x [background-size:auto_100%]" /> */}
-      </div>
-
       {/* 內容層 */}
       <div className="relative z-10 pt-[100vh]">
         <FixedBg>
