@@ -8,7 +8,8 @@ import { SkyScroll } from './sky-scroll';
 export function HeroSection() {
   return (
     <div className="relative flex h-screen w-full items-center bg-contain bg-repeat-x [background-image:url('/bg/sky2.png')]">
-      <div className="">
+      {/* 雲朵背景層 */}
+      <div className="absolute inset-0 z-0">
         <SkyScroll
           numberOfClouds={8}
           baseSpeed={0.1}
@@ -16,7 +17,9 @@ export function HeroSection() {
           size={120}
         />
       </div>
-      <div className="container">
+
+      {/* 主要內容層 */}
+      <div className="container relative z-10">
         <div className="px-4 pr-0 sm:pr-4">
           <div className="relative aspect-[0.8964] sm:aspect-[1.8541]">
             <Image
@@ -33,12 +36,12 @@ export function HeroSection() {
               className="hidden object-cover sm:block"
               priority
             />
-            <div className="absolute inset-0 z-10 mr-4 flex flex-col items-center justify-center gap-2 sm:mr-0">
+            <div className="absolute inset-0 z-20 mr-4 flex flex-col items-center justify-center gap-2 sm:mr-0">
               <div className="space-y-2 text-center font-cubic text-xl sm:text-3xl">
                 <p>活動期間＝報名期間</p>
                 <p>萬元好禮等你拿！</p>
                 <p className="!mb-6">▼ 立即報名參賽 ▼</p>
-                <Button className="text-3xl lg:text-5xl [&>.section-middle]:!pb-7 [&>.section-middle]:!pt-4 lg:[&>.section-middle]:!pb-10 lg:[&>.section-middle]:!pt-6">
+                <Button className="nes-button-secondary text-3xl lg:text-5xl [&>.section-middle]:!pb-7 [&>.section-middle]:!pt-4 md:[&>.section-middle]:!pb-10 md:[&>.section-middle]:!pt-6">
                   報名競賽
                 </Button>
               </div>

@@ -3,7 +3,7 @@
 import Cloud from '@/assets/cloud.svg';
 import { motion, useMotionValue, useScroll, useTransform } from 'framer-motion';
 import { useEffect, useMemo, useRef } from 'react';
-
+import { useIsClient } from 'usehooks-ts';
 interface CloudProps {
   id: number;
   initialX: number;
@@ -80,6 +80,8 @@ export const SkyScroll = ({
   changeOpacity?: boolean;
   size?: number;
 }) => {
+  const isClient = useIsClient();
+
   const ref = useRef<HTMLDivElement>(null);
 
   // 隨機生成雲朵配置
@@ -106,6 +108,8 @@ export const SkyScroll = ({
 
     return cloudConfigs;
   }, [numberOfClouds, baseSpeed, changeOpacity, size]);
+
+  if (!isClient) return null;
 
   return (
     <div ref={ref} className="absolute inset-0 h-full w-full overflow-hidden">
