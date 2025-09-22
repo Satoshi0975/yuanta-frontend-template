@@ -1,12 +1,12 @@
-import { useState, useCallback } from 'react';
 import { apiClient } from '@/lib/api';
 import { API_ENDPOINTS } from '@/lib/constants';
 import type {
-  VoteRequest,
+  ApiResponse,
   Participant,
   RankingItem,
-  ApiResponse
+  VoteRequest,
 } from '@/lib/types';
+import { useCallback, useState } from 'react';
 
 interface UseVotingResult {
   isLoading: boolean;
@@ -42,12 +42,13 @@ export function useVoting(): UseVotingResult {
 
       return response;
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : '搜尋參賽者失敗';
+      const errorMessage =
+        err instanceof Error ? err.message : '搜尋參賽者失敗';
       setError(errorMessage);
       return {
         success: false,
         message: errorMessage,
-        errorCode: 'SEARCH_ERROR'
+        errorCode: 'SEARCH_ERROR',
       };
     } finally {
       setIsLoading(false);
@@ -59,10 +60,7 @@ export function useVoting(): UseVotingResult {
     setError(null);
 
     try {
-      const response = await apiClient.post<null>(
-        API_ENDPOINTS.VOTE,
-        data
-      );
+      const response = await apiClient.post<null>(API_ENDPOINTS.VOTE, data);
 
       if (!response.success) {
         setError(response.message);
@@ -75,7 +73,7 @@ export function useVoting(): UseVotingResult {
       return {
         success: false,
         message: errorMessage,
-        errorCode: 'VOTE_ERROR'
+        errorCode: 'VOTE_ERROR',
       };
     } finally {
       setIsLoading(false);
@@ -97,12 +95,13 @@ export function useVoting(): UseVotingResult {
 
       return response;
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : '取得排行榜失敗';
+      const errorMessage =
+        err instanceof Error ? err.message : '取得排行榜失敗';
       setError(errorMessage);
       return {
         success: false,
         message: errorMessage,
-        errorCode: 'RANKING_ERROR'
+        errorCode: 'RANKING_ERROR',
       };
     } finally {
       setIsLoading(false);

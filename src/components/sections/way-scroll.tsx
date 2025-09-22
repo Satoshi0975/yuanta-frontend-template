@@ -36,7 +36,7 @@ export const WayScroll = () => {
       </div>
 
       <ButtonSideButtons />
-      <div className="absolute top-full z-0 -mt-[1px] h-10 w-full bg-white" />
+      <div className="absolute top-full z-0 -mt-[1px] h-32 w-full bg-white" />
     </div>
   );
 };

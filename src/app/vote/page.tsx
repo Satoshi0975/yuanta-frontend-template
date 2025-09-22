@@ -13,7 +13,7 @@ const VotePage = () => {
         <SkyScroll />
       </FixedBg>
 
-      <div className="container relative z-10 -mt-[100vh] px-3 pb-10 pt-10">
+      <div className="container relative z-10 -mt-[100dvh] px-3 pb-10 pt-10">
         <div className="mb-5 flex items-end justify-center gap-3">
           <div className="w-7/12 bg-sts-blue-600 p-3 text-center font-cubic text-base text-white nes-corners md:w-1/3">
             <p>投下你最喜歡的參賽者</p>
@@ -32,7 +32,7 @@ const VotePage = () => {
             className="max-h-32 w-auto"
           />
         </div>
-        <div className="relative pt-[1px]">
+        <div className="relative mx-auto max-w-3xl pt-[1px]">
           <div
             className="absolute left-4 top-0 z-10 mt-[1px] h-8 w-[calc(100%-32px)] bg-[length:auto_40px] bg-repeat-x md:h-14 md:bg-[length:auto_64px]"
             style={{

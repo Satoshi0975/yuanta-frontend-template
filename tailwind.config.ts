@@ -24,7 +24,7 @@ export default {
     },
     extend: {
       height: {
-        screen: '100svh',
+        screen: '100dvh',
       },
       colors: {
         sts: {
