@@ -101,9 +101,9 @@ const Menu = () => {
         >
           <SkyScroll numberOfClouds={10} />
           <aside className="space-y-5 px-5 py-7 pt-12 ">
-            <ul className="w-full text-xl font-bold required z-10">
+            <ul className="w-full text-xl font-bold required z-10 font-cubic">
               <li
-                className="border-b-2 border-sts-blue-600 p-2 text-gray-900 font-cubic"
+                className="border-b-2 border-sts-blue-600 p-2 text-gray-900 "
                 onClick={() => setOpen((o) => !o)}
               >
                 <Link 
