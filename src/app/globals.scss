@@ -800,6 +800,11 @@
       }
     }
   }
+
+  .my-drop-shadow {
+    filter: drop-shadow(0px 2px 4px rgba(14, 30, 37, 0.12))
+      drop-shadow(0px 2px 16px rgba(43, 44, 45, 0.32));
+  }
 }
 
 .background-blur {
