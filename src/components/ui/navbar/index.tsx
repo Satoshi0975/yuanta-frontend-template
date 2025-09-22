@@ -1,8 +1,8 @@
 import Logo from '@/assets/logo.png';
 import Image from '@/lib/image';
 import Link from 'next/link';
-// import MediaLinks from './media-links';
-// import Menu from './menu';
+import MediaLinks from './media-links';
+import Menu from './menu';
 
 const Navbar = () => {
   // const [active, setActive] = useState('');
@@ -69,10 +69,10 @@ const Navbar = () => {
               <Link href="#vote">人氣投票</Link>
             </li>
           </ul>
-          <ul className="space-x-3 flex">
-            {/* <MediaLinks /> */}
+          <ul className="space-x-3 hidden lg:flex">
+            <MediaLinks />
           </ul>
-          {/* <Menu /> */}
+          <Menu />
         </nav>
       </div>
     </>
