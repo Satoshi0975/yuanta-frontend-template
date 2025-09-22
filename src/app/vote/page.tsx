@@ -1,5 +1,6 @@
 import voteDinosaur from '@/assets/images/vote-dinosaur.png';
 import vote from '@/assets/images/vote.png';
+import VoteDialog from '@/components/dialogs/vote-dialog';
 import { VoteForm } from '@/components/forms/VoteForm';
 import { FixedBg } from '@/components/sections/fixed-bg';
 import { SkyScroll } from '@/components/sections/sky-scroll';
@@ -8,7 +9,7 @@ import Image from '@/lib/image';
 
 const VotePage = () => {
   return (
-    <div className="w-screen">
+    <div className="w-screen [scroll-margin-top:60px]" id="form">
       <FixedBg>
         <SkyScroll />
       </FixedBg>
@@ -46,6 +47,8 @@ const VotePage = () => {
         </div>
       </div>
       <WayScroll />
+
+      <VoteDialog defaultOpen={true} />
     </div>
   );
 };
