@@ -6,16 +6,19 @@ export const WayScroll = () => {
   const { scrollYProgress } = useScroll();
 
   // 讓跑道背景隨滾動向左移動，創造飛行的感覺
-  const runwayX = useTransform(scrollYProgress, [0, 1], [200, -1000]);
+  const runwayX = useTransform(scrollYProgress, [0, 1], [0, -1000]);
 
   return (
-    <div className="pointer-events-none sticky top-0 z-0 -mb-[100vh] h-screen w-screen overflow-hidden">
+    <div className="pointer-events-none sticky bottom-0 z-50 w-screen overflow-hidden pt-10">
+      <motion.div
+        className="absolute bottom-0 mx-auto h-16 w-[3000px] bg-[url('/images/bg/runway.png')] bg-right bg-repeat-x [background-size:auto_100%] [filter:blur(10px)] md:h-20"
+        style={{ x: runwayX }}
+      />
       {/* 底部漸層背景 */}
-      <div className="absolute bottom-0 left-0 h-32 w-full bg-gradient-to-t from-white/80 via-white/20 to-transparent md:h-48" />
-
+      {/* <div className="background-blur absolute bottom-0 left-0 h-28 w-full bg-blue-200/50 md:h-32" /> */}
       {/* 跑道背景 */}
       <motion.div
-        className="absolute bottom-0 left-0 h-20 w-[3000px] bg-[url('/images/bg/runway.png')] bg-right bg-repeat-x [background-size:auto_100%] md:h-20"
+        className="mx-auto h-16 w-[3000px] bg-[url('/images/bg/runway.png')] bg-right bg-repeat-x [background-size:auto_100%] md:h-20"
         style={{ x: runwayX }}
       />
     </div>

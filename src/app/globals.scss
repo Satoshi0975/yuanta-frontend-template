@@ -234,7 +234,7 @@
     @apply border-border;
   }
   body {
-    @apply text-sts-text bg-background text-foreground;
+    @apply bg-background text-foreground text-sts-text;
   }
 }
 
@@ -800,4 +800,14 @@
       }
     }
   }
+}
+
+.background-blur {
+  backdrop-filter: blur(10px);
+  mask: linear-gradient(
+    to top,
+    /* rgba(255, 255, 255, 0.8) 50%, */ rgba(255, 255, 255, 0.8) 50%,
+    transparent 80%,
+    transparent 100%
+  );
 }

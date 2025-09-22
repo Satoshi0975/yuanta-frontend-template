@@ -9,7 +9,7 @@ import { SkyScroll } from './sky-scroll';
 
 export function HeroSection() {
   return (
-    <div className="relative flex h-screen w-full items-center bg-contain bg-repeat-x [background-image:url('/bg/sky2.png')]">
+    <div className="relative -mt-[100vh] flex h-screen w-full items-center bg-contain bg-repeat-x [background-image:url('/bg/sky2.png')]">
       {/* 雲朵背景層 */}
       <div className="absolute inset-0 z-0">
         <SkyScroll

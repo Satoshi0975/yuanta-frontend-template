@@ -1,17 +1,17 @@
 import { SectionCard } from '@/components/section-card';
 import { DecorationIcons } from '@/components/ui/decoration-icons';
-import { BounceRightOnScroll, FadeInOnScroll } from '../animation-container';
+import { BounceLeftOnScroll, FadeInOnScroll } from '../animation-container';
 
 export function DailyMissionSection() {
   return (
-    <BounceRightOnScroll delay={0.6} className="flex flex-col pt-2" repeat>
+    <BounceLeftOnScroll delay={0.6} className="flex flex-col pt-2" repeat>
       <DecorationIcons variant="daily" />
       <SectionCard title="每日任務">
         <FadeInOnScroll delay={0.8} repeat>
           <h2 className="whitespace-pre-wrap text-center text-xl font-bold sm:text-2xl">
             日日交易日日獲抽獎機會
             <br />
-            <span className="text-sts-blue-500 ml-2">
+            <span className="ml-2 text-sts-blue-500">
               月月抽元大期貨金幣3枚
             </span>
           </h2>
@@ -29,6 +29,6 @@ export function DailyMissionSection() {
           </div>
         </FadeInOnScroll>
       </SectionCard>
-    </BounceRightOnScroll>
+    </BounceLeftOnScroll>
   );
 }

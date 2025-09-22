@@ -44,17 +44,11 @@ export const LeftSideButtons: React.FC = () => {
 
   return (
     <div
-      className={`fixed -right-6 top-1/2 z-50 w-20 -translate-y-1/2 bg-transparent px-0 py-0 opacity-70 transition-all duration-300 hover:opacity-100 ${
-        isVisible
-          ? isMobile
-            ? 'shadow-yt bottom-0 translate-y-0'
-            : 'translate-x-0'
-          : isMobile
-            ? 'bottom-0 translate-y-full'
-            : 'translate-x-[200%]'
+      className={`right-0 top-1/2 z-50 hidden w-20 -translate-y-1/2 overflow-hidden bg-transparent px-0 py-0 opacity-70 transition-all duration-300 hover:opacity-100 md:fixed ${
+        isVisible ? 'translate-x-0' : 'translate-x-[200%]'
       }`}
     >
-      <div className="flex w-full flex-col space-y-1 rounded-xl font-cubic text-xl text-white shadow-xl [line-height:1.50rem]">
+      <div className="flex w-full translate-x-6 flex-col space-y-1 rounded-xl font-cubic text-xl text-white shadow-xl [line-height:1.50rem]">
         <a
           href="https://ltm.yuantafutures.com.tw/member/openaccount"
           target="_blank"

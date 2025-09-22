@@ -1,5 +1,5 @@
 export const FixedBg = ({ children }: { children: React.ReactNode }) => (
-  <div className="bg-sts-blue-100 sticky top-0 -mb-[100vh] h-screen w-screen overflow-hidden">
+  <div className="sticky top-0 z-0 h-screen w-screen overflow-hidden bg-sts-blue-100">
     {children}
   </div>
 );

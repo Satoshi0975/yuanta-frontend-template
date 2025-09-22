@@ -57,14 +57,18 @@ export default function RootLayout({
         <Navbar />
         <main className="relative min-h-screen w-full max-w-full">
           {/* 固定背景層 - 最底層 */}
-          <div className="fixed inset-0 z-0 h-screen w-screen bg-contain bg-repeat-x [background-image:url('/bg/sky.png')]">
+          <div className="sticky inset-0 top-0 z-0 h-screen w-screen bg-contain bg-repeat-x [background-image:url('/bg/sky.png')]">
             <HeroBackground />
             <SkyScroll size={160} baseSpeed={0.1} numberOfClouds={6} />
             <CloudElements />
             <GroundElements />
             {/* <div className="absolute bottom-0 left-0 h-[10vw] w-full bg-[url('/images/bg/runway.png')] bg-repeat-x [background-size:auto_100%]" /> */}
           </div>
-          {children}
+          <div className="">
+            {/* <div className="h-[2000px]"></div> */}
+            {children}
+          </div>
+          <div className="fixed top-full z-[999] h-screen w-full bg-black" />
         </main>
         <LeftSideButtons />
         <Footer />

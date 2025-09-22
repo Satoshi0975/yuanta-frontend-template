@@ -35,7 +35,7 @@ const Navbar = () => {
   // }, []);
   return (
     <>
-      <div className="fixed z-50 w-screen bg-white px-5 py-3 shadow-md md:px-7 md:py-4">
+      <div className="fixed left-0 right-0 top-0 z-[1000] w-full bg-white px-5 py-3 shadow-md md:px-7 md:py-4">
         <nav className="container flex items-center justify-between">
           <h1 className="">
             <Link href="/" className="">

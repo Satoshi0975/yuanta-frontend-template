@@ -7,7 +7,6 @@ type BounceLeftOnScrollProps = {
   children: React.ReactNode;
   className?: string;
   delay?: number;
-  asChild?: boolean;
   repeat?: boolean;
 };
 

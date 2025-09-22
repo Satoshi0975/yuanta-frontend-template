@@ -10,7 +10,7 @@ const Information = () => {
   return (
     <div
       className={cn(
-        'relative z-20 mt-10 w-full bg-white pt-10 text-gray-600',
+        'relative z-20 w-full bg-white pt-10 text-gray-600',
         open ? '' : 'relative max-h-96 overflow-hidden'
       )}
     >
