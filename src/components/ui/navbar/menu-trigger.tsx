@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils';
 
 const CLASS_NAME =
-  'opacity-1 duration-500 block h-[3px] w-full rotate-0 origin-right-center transform rounded-full bg-blue-800 transition ease-in-out';
+  'opacity-1 duration-500 block h-[3px] w-full rotate-0 origin-right-center transform rounded-full bg-black transition ease-in-out';
 
 type Props = {
   onClick: () => void;

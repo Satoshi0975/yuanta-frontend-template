@@ -129,7 +129,10 @@ export const SkyScroll = ({
   if (!isClient) return null;
 
   return (
-    <div ref={ref} className="absolute inset-0 h-full w-full overflow-hidden">
+    <div
+      ref={ref}
+      className="pointer-events-none absolute inset-0 h-full w-full overflow-hidden"
+    >
       {clouds.map((cloud) => (
         <CloudComponent
           key={cloud.id}

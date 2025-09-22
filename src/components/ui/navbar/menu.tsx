@@ -41,7 +41,7 @@ const RunwayBackground = () => {
 
   return (
     <motion.div
-      className="absolute bottom-0 mx-auto h-20 w-[3000px] bg-[url('/images/bg/runway.png')] bg-right bg-repeat-x [background-size:auto_100%] md:h-20"
+      className="pointer-events-none absolute bottom-0 mx-auto h-20 w-[2000px] bg-[url('/images/bg/runway.png')] bg-right bg-repeat-x [background-size:auto_100%] md:h-20"
       style={{ x: baseX }}
     />
   );
@@ -99,9 +99,9 @@ const Menu = () => {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5, delay: open ? 0.5 : 0 }}
         >
-          <SkyScroll />
-          <aside className="space-y-5 px-5 py-7 pt-12">
-            <ul className="w-full text-xl font-bold">
+          <SkyScroll numberOfClouds={10} />
+          <aside className="space-y-5 px-5 py-7 pt-12 ">
+            <ul className="w-full text-xl font-bold required z-10">
               <li
                 className="border-b-2 border-sts-blue-600 p-2 text-gray-900 font-cubic"
                 onClick={() => setOpen((o) => !o)}
@@ -133,7 +133,7 @@ const Menu = () => {
                 <Link href="#vote">人氣投票</Link>
               </li>
             </ul>
-            <ul className="flex justify-center space-x-6 text-sts-blue-600">
+            <ul className="relative z-10 flex justify-center space-x-6 text-sts-blue-600">
               <MediaLinks />
             </ul>
             <RunwayBackground />
