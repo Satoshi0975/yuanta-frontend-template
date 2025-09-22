@@ -28,7 +28,7 @@ export const WayScroll = () => {
         />
       </div>
       {/* 按鈕背景（手機版） */}
-      <div className="w-full overflow-hidden">
+      <div className="-mb-[1px] w-full overflow-hidden">
         <motion.div
           className="mx-auto h-[48px] w-[3000px] bg-[url('/images/bg/runway.png')] bg-left-bottom bg-repeat-x [background-size:116%_700%] md:hidden"
           style={{ x: runwayX }}
@@ -36,7 +36,7 @@ export const WayScroll = () => {
       </div>
 
       <ButtonSideButtons />
-      <div className="absolute top-full -mt-[1px] h-10 w-full bg-white" />
+      <div className="absolute top-full z-0 -mt-[1px] h-10 w-full bg-white" />
     </div>
   );
 };

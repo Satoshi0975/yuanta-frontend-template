@@ -41,18 +41,15 @@ export const voteSchema = z.object({
   voterName: z
     .string()
     .min(1, '請輸入投票者姓名')
-    .max(50, '姓名長度不可超過 50 字元'),
+    .max(10, '姓名長度不可超過 10 字元'),
   voterPhone: z
     .string()
     .min(1, '請輸入手機號碼')
-    .regex(/^09\d{8}$/, '手機號碼格式錯誤，正確格式：09xxxxxxxx'),
+    .regex(/^09\d{8}$/, '手機號碼格式錯誤'),
   hasFuturesAccount: z.boolean(),
-  potentialCustomerType: z.enum(POTENTIAL_CUSTOMER_TYPES).optional(),
+  potentialCustomerType: z.array(z.enum(POTENTIAL_CUSTOMER_TYPES)).optional(),
   participantId: z.number().int().positive('請選擇參賽者'),
-  captchaCode: z
-    .string()
-    .min(1, '請輸入驗證碼')
-    .max(10, '驗證碼長度不可超過 10 字元'),
+  captchaCode: z.string().min(1, '請輸入驗證碼'),
 });
 
 // 成績查詢驗證

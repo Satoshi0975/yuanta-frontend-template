@@ -13,7 +13,7 @@ const MenuTrigger = ({ onClick, open }: Props) => {
     <button onClick={onClick}>
       <div
         className={cn(
-          'relative z-40 flex h-8 w-7 cursor-pointer flex-col justify-around transition duration-75 ease-in-out'
+          'relative z-[9999] flex h-8 w-7 cursor-pointer flex-col justify-around transition duration-75 ease-in-out'
         )}
       >
         <span className={cn(CLASS_NAME, open && '-rotate-45')}></span>

@@ -19,8 +19,8 @@ export const ButtonSideButtons: React.FC = () => {
           className="w-full transition-all duration-300 hover:shadow-xl"
           // onClick={button.onClick}
         >
-          <div className="nes-sm-corners cursor-pointer bg-sts-blue-500 p-1">
-            <span className="block h-full w-full bg-sts-blue-600">
+          <div className="nes-sm-corners cursor-pointer bg-sts-red-100 p-1">
+            <span className="block h-full w-full bg-sts-red-200">
               人氣王投票
             </span>
           </div>

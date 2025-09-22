@@ -82,18 +82,18 @@ const Menu = () => {
     <motion.div
       initial={false}
       animate={open ? 'open' : 'closed'}
-      className="z-[100 relative block lg:hidden"
+      className="relative z-[999] block lg:hidden"
     >
       <motion.div
-        className="fixed inset-0 overflow-hidden bg-white"
+        className="fixed inset-0 overflow-hidden bg-white z-[99]"
         variants={sidebar}
       />
-      <div className="z-[100] flex justify-center">
+      <div className="relative z-[100] flex justify-center">
         <MenuTrigger open={open} onClick={() => setOpen((o) => !o)} />
       </div>
       {open && (
         <motion.div
-          className="fixed inset-0 h-screen w-screen bg-sts-blue-200 overflow-hidden"
+          className="fixed inset-0 h-screen w-screen bg-sts-blue-200 overflow-hidden z-[99]"
           initial={{ opacity: 0 }}
           animate={{ opacity: open ? 1 : 0 }}
           exit={{ opacity: 0 }}
@@ -130,7 +130,7 @@ const Menu = () => {
                 className="border-b-2 border-sts-blue-600 p-2 text-gray-900"
                 onClick={() => setOpen((o) => !o)}
               >
-                <Link href="#vote">人氣投票</Link>
+                <Link href="/vote">人氣投票</Link>
               </li>
             </ul>
             <ul className="relative z-50 flex justify-center space-x-6 text-sts-blue-600">

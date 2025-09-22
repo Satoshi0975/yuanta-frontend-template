@@ -1,15 +1,17 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { RefreshCw, Search } from 'lucide-react';
+import { Search } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 
+import { Button as NesButton } from '@/components/nes/button';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -17,27 +19,25 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 
+import gold from '@/assets/images/element/gold.png';
 import { useVoting } from '@/hooks/useVoting';
-import { useCaptcha } from '@/hooks/useCaptcha';
-import { voteSchema, type VoteFormData } from '@/lib/validations';
-import { POTENTIAL_CUSTOMER_TYPES } from '@/lib/constants';
+import {
+  POTENTIAL_CUSTOMER_TYPES,
+  POTENTIAL_CUSTOMER_TYPES_MAP,
+} from '@/lib/constants';
+import Image from '@/lib/image';
 import type { Participant } from '@/lib/types';
+import { voteSchema, type VoteFormData } from '@/lib/validations';
+import Captcha from '../captcha';
 
 interface VoteFormProps {
   onSuccess?: () => void;
 }
 
 export function VoteForm({ onSuccess }: VoteFormProps) {
-  const { isLoading, error, searchParticipants, vote, clearError } = useVoting();
-  const { captchaUrl, refreshCaptcha } = useCaptcha();
+  const { isLoading, error, searchParticipants, vote, clearError } =
+    useVoting();
   const [participants, setParticipants] = useState<Participant[]>([]);
   const [searchKeyword, setSearchKeyword] = useState('');
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -47,9 +47,9 @@ export function VoteForm({ onSuccess }: VoteFormProps) {
     defaultValues: {
       voterName: '',
       voterPhone: '',
-      hasFuturesAccount: false,
-      potentialCustomerType: undefined,
-      participantId: 0,
+      hasFuturesAccount: undefined,
+      potentialCustomerType: [],
+      participantId: undefined,
       captchaCode: '',
     },
   });
@@ -85,45 +85,49 @@ export function VoteForm({ onSuccess }: VoteFormProps) {
     setSubmitError(null);
 
     try {
-      const response = await vote(values);
+      // 轉換 potentialCustomerType 陣列為字串
+      const submitData = {
+        ...values,
+        potentialCustomerType: values.potentialCustomerType?.length
+          ? values.potentialCustomerType.join(',')
+          : undefined,
+      };
+
+      const response = await vote(submitData);
 
       if (response.success) {
         onSuccess?.();
         form.reset();
-        refreshCaptcha();
       } else {
         setSubmitError(response.message);
-        refreshCaptcha();
         form.setValue('captchaCode', '');
       }
     } catch (err) {
       setSubmitError(err instanceof Error ? err.message : '投票失敗');
-      refreshCaptcha();
       form.setValue('captchaCode', '');
     }
   };
 
-  const handleCaptchaRefresh = () => {
-    refreshCaptcha();
-    form.setValue('captchaCode', '');
-  };
-
   return (
-    <div className="w-full max-w-2xl mx-auto space-y-6">
-      <div className="text-center">
-        <h2 className="text-2xl font-bold">參賽者投票</h2>
-      </div>
-
+    <div className="mx-auto w-full max-w-2xl space-y-6 py-5">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
           <FormField
             control={form.control}
             name="voterName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>投票者姓名</FormLabel>
+                <FormLabel className="-ml-1 flex items-center gap-2 font-cubic text-xl font-bold">
+                  <Image
+                    src={gold}
+                    alt="gold"
+                    className="gold-rotate-3d h-6 w-auto"
+                  />
+                  姓名（真實姓名）
+                </FormLabel>
                 <FormControl>
                   <Input
+                    className="w-full max-w-52 rounded-none border-2 border-black bg-white"
                     placeholder="請輸入您的姓名"
                     {...field}
                     disabled={isLoading}
@@ -139,14 +143,25 @@ export function VoteForm({ onSuccess }: VoteFormProps) {
             name="voterPhone"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>手機號碼</FormLabel>
+                <FormLabel className="-ml-1 flex items-center gap-2 font-cubic text-xl font-bold">
+                  <Image
+                    src={gold}
+                    alt="gold"
+                    className="gold-rotate-3d h-6 w-auto"
+                  />
+                  手機號碼
+                </FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="09xxxxxxxx"
+                    className="w-full max-w-52 rounded-none border-2 border-black bg-white"
+                    placeholder="0900000000"
                     {...field}
                     disabled={isLoading}
                   />
                 </FormControl>
+                <FormDescription>
+                  若中獎，屆時會以此手機號碼聯繫得獎者。
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -156,17 +171,51 @@ export function VoteForm({ onSuccess }: VoteFormProps) {
             control={form.control}
             name="hasFuturesAccount"
             render={({ field }) => (
-              <FormItem className="flex flex-row items-start space-x-3 space-y-0">
-                <FormControl>
-                  <Checkbox
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                    disabled={isLoading}
+              <FormItem>
+                <FormLabel className="-ml-1 flex items-center gap-2 font-cubic text-xl font-bold">
+                  <Image
+                    src={gold}
+                    alt="gold"
+                    className="gold-rotate-3d h-6 w-auto"
                   />
+                  是否為期貨戶
+                </FormLabel>
+                <FormControl>
+                  <RadioGroup
+                    onValueChange={(value) => field.onChange(value === 'true')}
+                    value={field.value?.toString()}
+                    className="flex flex-row space-x-6"
+                    disabled={isLoading}
+                  >
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem
+                        value="true"
+                        id="futures-yes"
+                        className="rounded-none border-2 border-black data-[state=checked]:bg-black"
+                      />
+                      <label
+                        htmlFor="futures-yes"
+                        className="cursor-pointer select-none text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      >
+                        是
+                      </label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem
+                        value="false"
+                        id="futures-no"
+                        className="rounded-none border-2 border-black data-[state=checked]:bg-black"
+                      />
+                      <label
+                        htmlFor="futures-no"
+                        className="cursor-pointer select-none text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      >
+                        否
+                      </label>
+                    </div>
+                  </RadioGroup>
                 </FormControl>
-                <div className="space-y-1 leading-none">
-                  <FormLabel>我有期貨帳戶</FormLabel>
-                </div>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -176,21 +225,50 @@ export function VoteForm({ onSuccess }: VoteFormProps) {
             name="potentialCustomerType"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>潛在客戶類型（選填）</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <FormControl>
-                    <SelectTrigger disabled={isLoading}>
-                      <SelectValue placeholder="請選擇類型" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {POTENTIAL_CUSTOMER_TYPES.map((type) => (
-                      <SelectItem key={type} value={type}>
-                        {type}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                <FormLabel className="-ml-1 flex items-center gap-2 font-cubic text-xl font-bold">
+                  <Image
+                    src={gold}
+                    alt="gold"
+                    className="gold-rotate-3d h-6 w-auto"
+                  />
+                  想了解更多期貨內容，請問居住地區？
+                </FormLabel>
+                <div className="grid grid-cols-5 gap-3 [&>*:nth-child(n+6)]:col-span-5">
+                  {Object.keys(POTENTIAL_CUSTOMER_TYPES_MAP).map((type) => (
+                    <div key={type} className="flex items-center space-x-2">
+                      <Checkbox
+                        id={`customer-type-${type}`}
+                        checked={
+                          field.value?.includes(
+                            type as (typeof POTENTIAL_CUSTOMER_TYPES)[number]
+                          ) || false
+                        }
+                        onCheckedChange={(checked) => {
+                          const currentValue = field.value || [];
+                          if (checked) {
+                            field.onChange([...currentValue, type]);
+                          } else {
+                            field.onChange(
+                              currentValue.filter((item) => item !== type)
+                            );
+                          }
+                        }}
+                        disabled={isLoading}
+                        className="rounded-none border-2 border-black data-[state=checked]:border-black data-[state=checked]:bg-black"
+                      />
+                      <label
+                        htmlFor={`customer-type-${type}`}
+                        className="cursor-pointer select-none text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      >
+                        {
+                          POTENTIAL_CUSTOMER_TYPES_MAP[
+                            type as keyof typeof POTENTIAL_CUSTOMER_TYPES_MAP
+                          ]
+                        }
+                      </label>
+                    </div>
+                  ))}
+                </div>
                 <FormMessage />
               </FormItem>
             )}
@@ -198,7 +276,14 @@ export function VoteForm({ onSuccess }: VoteFormProps) {
 
           {/* 參賽者搜尋和選擇 */}
           <div className="space-y-3">
-            <FormLabel>選擇參賽者</FormLabel>
+            <FormLabel className="-ml-1 flex items-center gap-2 font-cubic text-xl font-bold">
+              <Image
+                src={gold}
+                alt="gold"
+                className="gold-rotate-3d h-6 w-auto"
+              />
+              我要為參賽者人氣投票
+            </FormLabel>
             <div className="flex gap-2">
               <Input
                 placeholder="搜尋參賽者姓名或ID"
@@ -227,18 +312,22 @@ export function VoteForm({ onSuccess }: VoteFormProps) {
                     <RadioGroup
                       onValueChange={(value) => field.onChange(parseInt(value))}
                       value={field.value?.toString()}
-                      className="grid grid-cols-2 gap-2 max-h-60 overflow-y-auto"
+                      className="grid max-h-60 grid-cols-2 gap-2 overflow-y-auto"
                       disabled={isLoading}
                     >
                       {participants.map((participant) => (
-                        <div key={participant.id} className="flex items-center space-x-2">
+                        <div
+                          key={participant.id}
+                          className="flex items-center space-x-2 rounded-none border-2 border-black bg-white p-2 hover:bg-yellow-100 data-[state=checked]:bg-green-200"
+                        >
                           <RadioGroupItem
                             value={participant.id.toString()}
                             id={`participant-${participant.id}`}
+                            className="rounded-none border-2 border-black data-[state=checked]:bg-black"
                           />
                           <label
                             htmlFor={`participant-${participant.id}`}
-                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                            className="cursor-pointer select-none text-sm font-bold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                           >
                             {participant.nickname}
                           </label>
@@ -257,34 +346,25 @@ export function VoteForm({ onSuccess }: VoteFormProps) {
             name="captchaCode"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>驗證碼</FormLabel>
-                <div className="flex gap-2">
+                <FormLabel className="-ml-1 flex items-center gap-2 font-cubic text-xl font-bold">
+                  <Image
+                    src={gold}
+                    alt="gold"
+                    className="gold-rotate-3d h-6 w-auto"
+                  />
+                  圖形驗證碼
+                </FormLabel>
+                <div className="flex items-center justify-start space-x-3">
                   <FormControl>
                     <Input
+                      className="w-full max-w-52 rounded-none border-2 border-black bg-white"
                       placeholder="請輸入驗證碼"
                       {...field}
-                      disabled={isLoading}
-                      className="flex-1"
+                      type="captcha"
                     />
                   </FormControl>
-                  <div className="flex items-center gap-2">
-                    <img
-                      src={captchaUrl}
-                      alt="驗證碼"
-                      className="h-10 border rounded"
-                      onClick={handleCaptchaRefresh}
-                      style={{ cursor: 'pointer' }}
-                    />
-                    <Button
-                      type="button"
-                      variant="outline"
-                      size="icon"
-                      onClick={handleCaptchaRefresh}
-                      disabled={isLoading}
-                    >
-                      <RefreshCw className="h-4 w-4" />
-                    </Button>
-                  </div>
+
+                  <Captcha />
                 </div>
                 <FormMessage />
               </FormItem>
@@ -292,14 +372,19 @@ export function VoteForm({ onSuccess }: VoteFormProps) {
           />
 
           {(error || submitError) && (
-            <div className="p-3 text-sm text-red-600 bg-red-50 border border-red-200 rounded">
+            <div className="rounded border border-red-200 bg-red-50 p-3 text-sm text-red-600">
               {error || submitError}
             </div>
           )}
 
-          <Button type="submit" className="w-full" disabled={isLoading}>
+          <NesButton
+            variant="secondary"
+            type="submit"
+            className="mt-3 pb-4 pt-3 text-base"
+            disabled={isLoading}
+          >
             {isLoading ? '投票中...' : '確認投票'}
-          </Button>
+          </NesButton>
         </form>
       </Form>
     </div>
