@@ -23,6 +23,9 @@ export default {
       },
     },
     extend: {
+      height: {
+        screen: '100svh',
+      },
       colors: {
         sts: {
           text: '#070707',

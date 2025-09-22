@@ -93,17 +93,17 @@ const Menu = () => {
       </div>
       {open && (
         <motion.div
-          className="fixed inset-0 h-screen w-screen bg-sts-blue-200"
+          className="fixed inset-0 h-screen w-screen bg-sts-blue-200 overflow-hidden"
           initial={{ opacity: 0 }}
           animate={{ opacity: open ? 1 : 0 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5, delay: open ? 0.5 : 0 }}
         >
           <SkyScroll numberOfClouds={10} />
-          <aside className="space-y-5 px-5 py-7 pt-12 ">
-            <ul className="w-full text-xl font-bold required z-10 font-cubic">
+          <aside className="space-y-5 px-5 py-7 pt-12">
+            <ul className="w-full text-2xl font-bold relative z-50 font-cubic text-center">
               <li
-                className="border-b-2 border-sts-blue-600 p-2 text-gray-900 "
+                className="border-b-2 border-sts-blue-600 p-2 text-gray-900"
                 onClick={() => setOpen((o) => !o)}
               >
                 <Link 
@@ -133,7 +133,7 @@ const Menu = () => {
                 <Link href="#vote">人氣投票</Link>
               </li>
             </ul>
-            <ul className="relative z-10 flex justify-center space-x-6 text-sts-blue-600">
+            <ul className="relative z-50 flex justify-center space-x-6 text-sts-blue-600">
               <MediaLinks />
             </ul>
             <RunwayBackground />
