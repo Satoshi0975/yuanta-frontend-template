@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 import RegisterDialog from '../dialogs/register-dialog';
 
@@ -15,16 +16,16 @@ export const ButtonSideButtons: React.FC = () => {
             </span>
           </div>
         </button>
-        <button
-          className="w-full transition-all duration-300 hover:shadow-xl"
-          // onClick={button.onClick}
+        <Link
+          href="#vote"
+          className="block w-full text-center transition-all duration-300 hover:shadow-xl"
         >
           <div className="nes-sm-corners cursor-pointer bg-sts-red-100 p-1">
             <span className="block h-full w-full bg-sts-red-200">
               人氣王投票
             </span>
           </div>
-        </button>
+        </Link>
         <RegisterDialog>
           <button
             className="w-full transition-all duration-300 hover:shadow-xl"

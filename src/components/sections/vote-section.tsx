@@ -10,6 +10,7 @@ import Wolf from '@/assets/character/wolf.svg';
 import treasure from '@/assets/images/treasure.png';
 import { Button } from '@/components/nes/button';
 import Image from '@/lib/image';
+import Link from 'next/link';
 
 export function VoteSection() {
   return (
@@ -27,9 +28,11 @@ export function VoteSection() {
 
           {/* 圖片層 - 在下層 */}
           <div className="z-10">
-            <Button className="nes-button-secondary relative z-10 -mb-14 animate-retro-blink pb-7 pt-4 text-3xl sm:pb-10 sm:pt-6 sm:text-5xl lg:scale-110 lg:hover:scale-125">
-              <span className="animate-pixel-glitch">立即投票</span>
-            </Button>
+            <Link href="/vote">
+              <Button className="nes-button-secondary relative z-10 -mb-14 animate-retro-blink pb-7 pt-4 text-3xl sm:pb-10 sm:pt-6 sm:text-5xl lg:scale-110 lg:hover:scale-125">
+                <span className="animate-pixel-glitch">立即投票</span>
+              </Button>
+            </Link>
             <Image
               src={treasure}
               alt=""
@@ -41,12 +44,12 @@ export function VoteSection() {
         </div>
       </div>
       <div className="absolute bottom-0 left-0 hidden h-full w-1/2 lg:block">
-        <WolfCloud className="animate-pixel-float-cloud absolute left-0 top-[7%] xl:animate-pixel-float" />
-        <PrincessCloud className="animate-pixel-float-cloud absolute right-[30%] top-[45%] delay-1000 xl:scale-100 xl:animate-pixel-float" />
+        <WolfCloud className="absolute left-0 top-[7%] animate-pixel-float-cloud xl:animate-pixel-float" />
+        <PrincessCloud className="absolute right-[30%] top-[45%] animate-pixel-float-cloud delay-1000 xl:scale-100 xl:animate-pixel-float" />
       </div>
       <div className="absolute bottom-0 right-0 hidden h-full w-1/2 lg:block">
-        <DinosaurCloud className="animate-pixel-float-cloud absolute right-0 top-[60%] [animation-delay:2000ms] xl:scale-100 xl:animate-pixel-float" />
-        <HunterCloud className="animate-pixel-float-cloud absolute right-[10%] top-[25%] [animation-delay:3000ms] xl:scale-100 xl:animate-pixel-float" />
+        <DinosaurCloud className="absolute right-0 top-[60%] animate-pixel-float-cloud [animation-delay:2000ms] xl:scale-100 xl:animate-pixel-float" />
+        <HunterCloud className="absolute right-[10%] top-[25%] animate-pixel-float-cloud [animation-delay:3000ms] xl:scale-100 xl:animate-pixel-float" />
       </div>
       <div className="absolute bottom-0 left-0 z-20 flex h-36 w-full items-end px-8 lg:hidden">
         <div className="container mx-auto grid grid-cols-[5fr_6fr_6fr_5fr] items-end justify-around gap-5">
