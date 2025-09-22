@@ -38,6 +38,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
+  viewportFit: 'contain',
 };
 
 export default function RootLayout({
@@ -50,7 +51,7 @@ export default function RootLayout({
       <GoogleTagManager gtmId="GTM-KSVRB2H" />
 
       <body
-        className={`${notoSans.variable} ${cubic11.variable} font-sans antialiased`}
+        className={`${notoSans.variable} ${cubic11.variable} overflow-x-hidden font-sans antialiased`}
         monica-locale="zh_TW"
       >
         <NextTopLoader />

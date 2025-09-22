@@ -10,7 +10,7 @@ export const WayScroll = () => {
   const runwayX = useTransform(scrollYProgress, [0, 1], [0, -1000]);
 
   return (
-    <div className="pointer-events-none sticky bottom-0 z-50 w-screen overflow-hidden pt-10">
+    <div className="safari-sticky pointer-events-none sticky bottom-0 z-50 w-screen pt-10">
       <div className="relative">
         <motion.div
           className="my-drop-shadow absolute bottom-0 mx-auto mt-10 h-32 w-[3000px] bg-[url('/images/bg/runway.png')] bg-left-bottom bg-repeat-x [background-size:auto_50%] md:h-40"
@@ -38,6 +38,7 @@ export const WayScroll = () => {
       />
 
       <ButtonSideButtons />
+      <div className="absolute top-full -mt-[1px] h-10 w-full bg-white" />
     </div>
   );
 };

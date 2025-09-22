@@ -35,7 +35,7 @@ export default function Home() {
             </div>
             <WayScroll />
           </div>
-          <div id="vote">
+          <div id="vote" className="relative z-50">
             <VoteSection />
           </div>
         </div>

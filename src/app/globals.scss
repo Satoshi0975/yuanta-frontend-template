@@ -1,6 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.h-screen {
+  height: 100svh;
+}
+@layer utilities {
+}
 
 @layer base {
   .origin-right-center {
@@ -236,9 +241,18 @@
   body {
     @apply bg-background text-foreground text-sts-text;
   }
+  html {
+    padding-bottom: env(safe-area-inset-bottom);
+    background-color: #555;
+  }
 }
 
 @layer components {
+  .safari-sticky {
+    position: -webkit-sticky; /* Safari 需要前綴 */
+    position: sticky;
+    bottom: calc(0px - env(safe-area-inset-bottom));
+  }
   /* 一般編框 */
   .nes-corners,
   .nes-corners--wrapper {
