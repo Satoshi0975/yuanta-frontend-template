@@ -18,7 +18,7 @@ export const WayScroll = () => {
           style={{ x: runwayX }}
         />
         <motion.div
-          className="absolute bottom-0 mx-auto mt-10 h-32 w-[3000px] bg-[url('/images/bg/runway.png')] bg-left-bottom bg-repeat-x [background-size:auto_50%] [filter:blur(5px)] md:h-40"
+          className="absolute bottom-0 mx-auto mt-10 h-32 w-[3000px] bg-[url('/images/bg/runway.png')] bg-left-bottom bg-repeat-x [background-size:auto_50%] [filter:blur(3px)] md:h-40"
           style={{ x: runwayX }}
         />
         {/* 跑道背景 */}

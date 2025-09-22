@@ -141,7 +141,7 @@ const RegisterDialog = ({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent
         className={cn(
-          'mx-auto max-w-md rounded-lg border-none bg-sts-orange-200 ring-0'
+          'z-[9999] mx-auto max-w-md rounded-lg border-none bg-sts-orange-200 ring-0'
         )}
       >
         <DialogHeader className="relative">
@@ -163,8 +163,8 @@ const RegisterDialog = ({
           </DialogTitle>
 
           <DialogDescription asChild>
-            <div className="space-y-6 text-base text-sts-text">
-              <ScrollArea className="max-h-[calc(100vh-180px)] overflow-y-auto">
+            <div className="space-y-6 text-base text-sts-text nes-corners">
+              <ScrollArea className="max-h-[calc(100vh-180px)] overflow-y-auto bg-white">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={dialogState.step}

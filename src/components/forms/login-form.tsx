@@ -69,7 +69,7 @@ const LoginInForm = ({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)}>
-        <div className="space-y-8 rounded-xl bg-white p-6 text-left nes-corners">
+        <div className="space-y-8 rounded-xl p-6 text-left">
           <FormField
             control={form.control}
             name="username"
