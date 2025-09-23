@@ -50,7 +50,7 @@ const ScoreExplanationDialog = ({ children }: ScoreExplanationDialogProps) => {
                         積分
                       </h2>
                       <div className="ml-4 space-y-2">
-                        <div className="text-lg">
+                        <div className="text-base md:text-lg">
                           ▶ 報酬率0.1%=1分{' '}
                           <span className="text-base text-gray-600">
                             (*每日報酬率累加，正負都計算)
@@ -128,7 +128,7 @@ const ScoreExplanationDialog = ({ children }: ScoreExplanationDialogProps) => {
                         積分
                       </h2>
                       <div className="ml-4 space-y-2">
-                        <div className="text-lg">
+                        <div className="text-base md:text-lg">
                           ▶ 每獲利2,000元=1分{' '}
                           <span className="text-base text-gray-600">
                             (*盈虧皆計算)
@@ -147,10 +147,12 @@ const ScoreExplanationDialog = ({ children }: ScoreExplanationDialogProps) => {
                         積分
                       </h2>
                       <div className="ml-4 space-y-2">
-                        <div className="text-lg">
+                        <div className="text-base md:text-lg">
                           ▶ 選擇權、大、中、小型合約=兩分
                         </div>
-                        <div className="text-lg">▶ 微型合約=1分</div>
+                        <div className="text-base md:text-lg">
+                          ▶ 微型合約=1分
+                        </div>
                       </div>
                     </div>
                   </div>
