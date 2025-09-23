@@ -36,8 +36,7 @@ interface VoteFormProps {
 }
 
 export function VoteForm({ onSuccess }: VoteFormProps) {
-  const { isLoading, error, searchParticipants, vote, clearError } =
-    useVoting();
+  const { isLoading, searchParticipants, vote, clearError } = useVoting();
   const [participants, setParticipants] = useState<Participant[]>([]);
   const [searchKeyword, setSearchKeyword] = useState('');
   const [submitError, setSubmitError] = useState<string | null>(null);

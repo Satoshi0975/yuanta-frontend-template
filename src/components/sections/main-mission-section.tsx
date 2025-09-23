@@ -5,6 +5,7 @@ import { SectionCard } from '@/components/section-card';
 import { DecorationIcons } from '@/components/ui/decoration-icons';
 import { PrizeTable } from '@/components/ui/prize-table';
 import Image from '@/lib/image';
+import ScoreExplanationDialog from '../dialogs/score-explanation-dialog';
 
 export function MainMissionSection() {
   const mainPrizeData = [
@@ -33,7 +34,7 @@ export function MainMissionSection() {
       <SectionCard title="主要任務">
         <div className="mx-auto max-w-[840px] space-y-4">
           <div>
-            <h2 className="text-sts-blue-500 whitespace-pre-wrap text-center text-xl font-bold sm:text-2xl">
+            <h2 className="whitespace-pre-wrap text-center text-xl font-bold text-sts-blue-500 sm:text-2xl">
               競賽至少需累積200口以上，始符合排行獎獲獎資格
             </h2>
             <p className="mt-1 text-center tracking-tight">
@@ -41,7 +42,14 @@ export function MainMissionSection() {
               T盤交易時間截止。
             </p>
           </div>
-
+          <ScoreExplanationDialog>
+            <Button
+              variant="secondary"
+              className="ml-auto mt-3 pb-2 pt-1 text-base"
+            >
+              活動積分計算方式
+            </Button>
+          </ScoreExplanationDialog>
           <PrizeTable
             title="TOP 10"
             data={mainPrizeData}
@@ -61,7 +69,6 @@ export function MainMissionSection() {
               </div>
             }
           />
-
           {/* <div className="rounded-lg bg-black text-center text-xl shadow-lg nes-corners">
             <div className="grid grid-cols-2 gap-1 md:grid-cols-[minmax(0,3fr)_minmax(0,3fr)_minmax(0,5fr)]">
               <div className="bg-blue-600 p-3 font-semibold text-white">
@@ -99,7 +106,6 @@ export function MainMissionSection() {
               </div>
             </div>
           </div> */}
-
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <PrizeTable title="TOP 3" titleColor="green" data={leftTableData} />
             <PrizeTable

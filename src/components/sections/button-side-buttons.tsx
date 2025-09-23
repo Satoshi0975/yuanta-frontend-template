@@ -11,7 +11,7 @@ export const ButtonSideButtons: React.FC = () => {
           // onClick={button.onClick}
         >
           <div className="nes-sm-corners cursor-pointer bg-sts-blue-300 p-1">
-            <span className="block h-full w-full bg-sts-blue-400">
+            <span className="block h-full w-full text-nowrap bg-sts-blue-400">
               成績查詢
             </span>
           </div>
@@ -21,7 +21,7 @@ export const ButtonSideButtons: React.FC = () => {
           className="block w-full text-center transition-all duration-300 hover:shadow-xl"
         >
           <div className="nes-sm-corners cursor-pointer bg-sts-red-100 p-1">
-            <span className="block h-full w-full bg-sts-red-200">
+            <span className="block h-full w-full text-nowrap bg-sts-red-200">
               人氣王投票
             </span>
           </div>
@@ -32,7 +32,7 @@ export const ButtonSideButtons: React.FC = () => {
             // onClick={button.onClick}
           >
             <div className="nes-sm-corners cursor-pointer bg-sts-orange-300 p-1">
-              <span className="block h-full w-full bg-sts-orange-400">
+              <span className="block h-full w-full text-nowrap bg-sts-orange-400">
                 競賽報名
               </span>
             </div>
