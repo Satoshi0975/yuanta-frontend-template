@@ -3,14 +3,14 @@ import second from '@/assets/images/element/second.png';
 import third from '@/assets/images/element/third.png';
 import Image from '@/lib/image';
 import { cn } from '@/lib/utils';
+import { RankingItem } from '@/lib/types';
 
 interface RankingCardProps {
   rank: 1 | 2 | 3;
-  nickname: string;
-  votes: string | number;
+  data?: RankingItem;
 }
 
-export function RankingCard({ rank, nickname, votes }: RankingCardProps) {
+export function RankingCard({ rank, data }: RankingCardProps) {
   const getRankImage = () => {
     switch (rank) {
       case 1:
@@ -60,7 +60,7 @@ export function RankingCard({ rank, nickname, votes }: RankingCardProps) {
     <div className="space-y-3 ">
       <div className={cn("nes-sm-corners bg-white px-3 text-center", border)}>
         <h3 className="truncate py-5 text-xl font-bold text-center">
-          #{rank}&nbsp;&nbsp;{nickname}
+          {data ? '#' + data.participantNumber + "  " + data.participantNickname : '-'}
         </h3>
         <Image
           src={getRankImage()}
@@ -73,7 +73,7 @@ export function RankingCard({ rank, nickname, votes }: RankingCardProps) {
           票數
         </div>
         <div className={cn("flex h-full w-full items-center justify-center bg-white font-sans font-bold", text)}>
-          {votes.toLocaleString()}
+          {data ? data.voteCount.toLocaleString() : '-'}
         </div>
       </div>
     </div>

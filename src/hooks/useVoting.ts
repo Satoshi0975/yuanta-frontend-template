@@ -15,7 +15,7 @@ interface UseVotingResult {
     keyword?: string
   ) => Promise<ApiResponse<{ data: Participant[] }>>;
   vote: (data: VoteRequest) => Promise<ApiResponse<null>>;
-  getRanking: () => Promise<ApiResponse<RankingItem[]>>;
+  getRanking: () => Promise<ApiResponse<{ data: RankingItem[] }>>;
   clearError: () => void;
 }
 
@@ -87,7 +87,7 @@ export function useVoting(): UseVotingResult {
     setError(null);
 
     try {
-      const response = await apiClient.get<RankingItem[]>(
+      const response = await apiClient.get<{ data: RankingItem[] }>(
         API_ENDPOINTS.RANKING
       );
 

@@ -63,9 +63,10 @@ export interface Participant {
 }
 
 export interface RankingItem {
-  participantId: number;
-  nickname: string;
+  participantNumber: string;
+  participantNickname: string;
   voteCount: number;
+  ranking: number;
 }
 
 // 成績查詢相關
