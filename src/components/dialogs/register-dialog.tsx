@@ -26,7 +26,7 @@ interface RegisterDialogProps {
 
 const RegisterDialog = ({
   children,
-  initialStep = 'error',
+  initialStep = 'login',
 }: RegisterDialogProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
