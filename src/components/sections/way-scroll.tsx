@@ -10,14 +10,20 @@ export const WayScroll = () => {
   const runwayX = useTransform(scrollYProgress, [0, 1], [0, -1000]);
 
   return (
-    <div className="safari-sticky sticky bottom-0 z-10 w-screen">
-      {/* 改進的陰影效果 */}
+    <div className="safari-sticky sticky bottom-0 z-50 w-screen">
+      {/* 陰影效果 */}
       <div className="pointer-events-none relative w-full overflow-hidden pt-10">
-        {/* 主要跑道 */}
-
-        {/* 簡化的光暈效果 */}
         <motion.div
-          className="relative mx-auto h-16 w-[3000px] bg-[url('/images/bg/runway.png')] bg-left bg-repeat-x [background-size:auto_100%] [filter:drop-shadow(0_-3px_8px_rgba(255,255,255,0.7))] md:h-20"
+          className="my-drop-shadow absolute bottom-0 mx-auto mt-10 h-32 w-[3000px] bg-[url('/images/bg/runway.png')] bg-left-bottom bg-repeat-x [background-size:auto_50%] md:h-40"
+          style={{ x: runwayX }}
+        />
+        <motion.div
+          className="absolute bottom-0 mx-auto mt-10 h-32 w-[3000px] bg-[url('/images/bg/runway.png')] bg-left-bottom bg-repeat-x [background-size:auto_50%] [filter:blur(3px)] md:h-40"
+          style={{ x: runwayX }}
+        />
+        {/* 跑道背景 */}
+        <motion.div
+          className="mx-auto h-16 w-[3000px] bg-[url('/images/bg/runway.png')] bg-left bg-repeat-x [background-size:auto_100%] md:h-20"
           style={{ x: runwayX }}
         />
       </div>
