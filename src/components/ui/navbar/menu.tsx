@@ -107,7 +107,7 @@ const Menu = () => {
                 onClick={() => setOpen((o) => !o)}
               >
                 <Link 
-                href="https://www.yuantafutures.com.tw/openaccount"
+                href="https://www.yuantafutures.com.tw/openaccount_01"
                 target="_blank"
                 rel="noreferrer noopener"
               >
@@ -118,7 +118,7 @@ const Menu = () => {
                 className="border-b-2 border-sts-blue-600 p-2 text-gray-900"
                 onClick={() => setOpen((o) => !o)}
               >
-                <Link href="#registration">競賽報名</Link>
+                <Link href="/#registration">競賽報名</Link>
               </li>
               <li
                 className="border-b-2 border-sts-blue-600 p-2 text-gray-900"

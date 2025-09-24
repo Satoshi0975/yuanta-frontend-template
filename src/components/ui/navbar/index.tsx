@@ -52,7 +52,7 @@ const Navbar = () => {
             <li className="border-gray-300 px-3 last:border-r-0 hover:animate-pixel-glitch">
               
               <Link 
-                href="https://www.yuantafutures.com.tw/openaccount"
+                href="https://www.yuantafutures.com.tw/openaccount_01"
                 target="_blank"
                 rel="noreferrer noopener"
               >
