@@ -6,6 +6,7 @@ import { DecorationIcons } from '@/components/ui/decoration-icons';
 import { PrizeTable } from '@/components/ui/prize-table';
 import Image from '@/lib/image';
 import ScoreExplanationDialog from '../dialogs/score-explanation-dialog';
+import OtherRanksDialog from '../dialogs/other-ranks-dialog';
 
 export function MainMissionSection() {
   const mainPrizeData = [
@@ -60,12 +61,14 @@ export function MainMissionSection() {
                 <div className="relative mx-auto w-3/5">
                   <Image src={switchImage} alt="switch" className="w-full" />
                 </div>
-                <Button
-                  variant="secondary"
-                  className="mt-3 pb-2 pt-1 text-base"
-                >
-                  其他名次獎項
-                </Button>
+                <OtherRanksDialog>
+                  <Button
+                    variant="secondary"
+                    className="mt-3 pb-2 pt-1 text-base"
+                  >
+                    其他名次獎項
+                  </Button>
+                </OtherRanksDialog>
               </div>
             }
           />
