@@ -192,7 +192,7 @@ const Info = ({ currentStep }: { currentStep: number }) => {
                     看跌→
                     <span className="text-[#D11C1C]">買進賣權(buy Put)</span>
                     <br />
-                    擁有避險部位
+                    最大獲利為履約價減權利金，最大風險為損失權利金，可用於避險或放空操作
                   </p>,
                 ]}
               />

@@ -12,20 +12,20 @@ export function MainMissionSection() {
     { rank: '第一名', prize: 100000 },
     { rank: '第二名', prize: 90000 },
     { rank: '第三名', prize: 80000 },
-    { rank: '第四名', prize: 70000 },
-    { rank: '第五名', prize: 60000 },
+    { rank: '第四名', prize: 75000 },
+    { rank: '第五名', prize: 70000 },
   ];
 
   const leftTableData = [
-    { rank: '第一名', prize: 100000 },
-    { rank: '第二名', prize: 90000 },
-    { rank: '第三名', prize: 80000 },
+    { rank: '第一名', prize: 25_000 },
+    { rank: '第二名', prize: 20_000 },
+    { rank: '第三名', prize: 15_000 },
   ];
 
   const rightTableData = [
-    { rank: '第一名', prize: 100000 },
-    { rank: '第二名', prize: 90000 },
-    { rank: '第三名', prize: 80000 },
+    { rank: '第一名', prize: 25_000 },
+    { rank: '第二名', prize: 20_000 },
+    { rank: '第三名', prize: 15_000 },
   ];
 
   return (
@@ -38,7 +38,7 @@ export function MainMissionSection() {
               競賽至少需累積200口以上，始符合排行獎獲獎資格
             </h2>
             <p className="mt-1 text-center tracking-tight">
-              亦可每日於戰績查詢專區登入查個人即時名次，活動結束最後結算時間為12/31
+              亦可每日於戰績查詢專區登入查個人即時名次（以活動結束為憑，查詢僅供參考），活動結束最後結算時間為12/31
               T盤交易時間截止。
             </p>
           </div>
@@ -107,9 +107,13 @@ export function MainMissionSection() {
             </div>
           </div> */}
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <PrizeTable title="TOP 3" titleColor="green" data={leftTableData} />
             <PrizeTable
-              title="TOP 3"
+              title="報酬率王"
+              titleColor="green"
+              data={leftTableData}
+            />
+            <PrizeTable
+              title="口數王"
               titleColor="orange"
               data={rightTableData}
             />

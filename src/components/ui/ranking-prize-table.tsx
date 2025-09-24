@@ -13,21 +13,21 @@ const RankingPrizeTable = () => {
           第一名
         </div>
         <div className="flex items-center justify-center bg-white p-3 text-sts-blue-400 font-bold">
-          100,000
+          25,000
         </div>
 
         <div className="flex items-center justify-center bg-white p-3">
           第二名
         </div>
         <div className="flex items-center justify-center bg-white p-3 text-sts-blue-400 font-bold">
-          90,000
+          20,000
         </div>
 
         <div className="flex items-center justify-center bg-white p-3">
           第三名
         </div>
         <div className="flex items-center justify-center bg-white p-3 text-sts-blue-400 font-bold">
-          80,000
+          15,000
         </div>
       </div>
     </div>

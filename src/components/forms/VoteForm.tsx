@@ -29,7 +29,6 @@ import {
 import Image from '@/lib/image';
 import type { Participant } from '@/lib/types';
 import { voteSchema, type VoteFormData } from '@/lib/validations';
-import Captcha from '../captcha';
 
 interface VoteFormProps {
   onSuccess?: () => void;
@@ -58,7 +57,7 @@ export function VoteForm({ onSuccess }: VoteFormProps) {
     const loadParticipants = async () => {
       const response = await searchParticipants();
       if (response.success && response.data) {
-        setParticipants(response.data);
+        setParticipants(response.data.data);
       }
     };
     loadParticipants();
@@ -68,13 +67,13 @@ export function VoteForm({ onSuccess }: VoteFormProps) {
     if (searchKeyword.trim()) {
       const response = await searchParticipants(searchKeyword.trim());
       if (response.success && response.data) {
-        setParticipants(response.data);
+        setParticipants(response.data.data);
       }
     } else {
       // 空搜尋則載入預設列表
       const response = await searchParticipants();
       if (response.success && response.data) {
-        setParticipants(response.data);
+        setParticipants(response.data.data);
       }
     }
   };
@@ -171,13 +170,18 @@ export function VoteForm({ onSuccess }: VoteFormProps) {
             name="hasFuturesAccount"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="-ml-1 flex items-center gap-2 font-cubic text-xl font-bold">
+                <FormLabel className="items-base -ml-1 flex gap-2 font-cubic text-xl font-bold">
                   <Image
                     src={gold}
                     alt="gold"
                     className="gold-rotate-3d h-6 w-auto"
                   />
-                  是否為期貨戶
+                  <span>
+                    是否為期貨戶{' '}
+                    <span className="text-sm font-normal text-gray-400">
+                      必填
+                    </span>
+                  </span>
                 </FormLabel>
                 <FormControl>
                   <RadioGroup
@@ -190,7 +194,7 @@ export function VoteForm({ onSuccess }: VoteFormProps) {
                       <RadioGroupItem
                         value="true"
                         id="futures-yes"
-                        className="rounded-none border-2 border-black data-[state=checked]:bg-black"
+                        className="rounded-none border-2 border-black bg-white data-[state=checked]:bg-black"
                       />
                       <label
                         htmlFor="futures-yes"
@@ -203,7 +207,7 @@ export function VoteForm({ onSuccess }: VoteFormProps) {
                       <RadioGroupItem
                         value="false"
                         id="futures-no"
-                        className="rounded-none border-2 border-black data-[state=checked]:bg-black"
+                        className="rounded-none border-2 border-black bg-white data-[state=checked]:bg-black"
                       />
                       <label
                         htmlFor="futures-no"
@@ -253,7 +257,7 @@ export function VoteForm({ onSuccess }: VoteFormProps) {
                           }
                         }}
                         disabled={isLoading}
-                        className="rounded-none border-2 border-black data-[state=checked]:border-black data-[state=checked]:bg-black"
+                        className="rounded-none border-2 border-black bg-white data-[state=checked]:border-black data-[state=checked]:bg-black"
                       />
                       <label
                         htmlFor={`customer-type-${type}`}
@@ -281,7 +285,10 @@ export function VoteForm({ onSuccess }: VoteFormProps) {
                 alt="gold"
                 className="gold-rotate-3d h-6 w-auto"
               />
-              我要為參賽者人氣投票
+              <span>
+                我要為參賽者人氣投票{' '}
+                <span className="text-sm font-normal text-gray-400">必填</span>
+              </span>
             </FormLabel>
             <div className="flex gap-2">
               <Input
@@ -314,7 +321,7 @@ export function VoteForm({ onSuccess }: VoteFormProps) {
                       className="grid max-h-60 grid-cols-2 gap-2 overflow-y-auto"
                       disabled={isLoading}
                     >
-                      {participants.map((participant) => (
+                      {participants?.map((participant) => (
                         <div
                           key={participant.id}
                           className="flex items-center space-x-2 rounded-none border-2 border-black bg-white p-2 hover:bg-yellow-100 data-[state=checked]:bg-green-200"
@@ -339,36 +346,6 @@ export function VoteForm({ onSuccess }: VoteFormProps) {
               )}
             />
           </div>
-
-          <FormField
-            control={form.control}
-            name="captchaCode"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="-ml-1 flex items-center gap-2 font-cubic text-xl font-bold">
-                  <Image
-                    src={gold}
-                    alt="gold"
-                    className="gold-rotate-3d h-6 w-auto"
-                  />
-                  圖形驗證碼
-                </FormLabel>
-                <div className="flex items-center justify-start space-x-3">
-                  <FormControl>
-                    <Input
-                      className="w-full max-w-52 rounded-none border-2 border-black bg-white"
-                      placeholder="請輸入驗證碼"
-                      {...field}
-                      type="captcha"
-                    />
-                  </FormControl>
-
-                  <Captcha />
-                </div>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
 
           {submitError && (
             <div className="rounded border border-red-200 bg-red-50 p-3 text-sm text-red-600">

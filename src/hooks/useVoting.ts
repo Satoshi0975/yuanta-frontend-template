@@ -11,7 +11,9 @@ import { useCallback, useState } from 'react';
 interface UseVotingResult {
   isLoading: boolean;
   error: string | null;
-  searchParticipants: (keyword?: string) => Promise<ApiResponse<Participant[]>>;
+  searchParticipants: (
+    keyword?: string
+  ) => Promise<ApiResponse<{ data: Participant[] }>>;
   vote: (data: VoteRequest) => Promise<ApiResponse<null>>;
   getRanking: () => Promise<ApiResponse<RankingItem[]>>;
   clearError: () => void;
@@ -34,7 +36,7 @@ export function useVoting(): UseVotingResult {
         ? `${API_ENDPOINTS.SEARCH_PARTICIPANTS}?keyword=${encodeURIComponent(keyword)}`
         : API_ENDPOINTS.SEARCH_PARTICIPANTS;
 
-      const response = await apiClient.get<Participant[]>(url);
+      const response = await apiClient.get<{ data: Participant[] }>(url);
 
       if (!response.success) {
         setError(response.message);

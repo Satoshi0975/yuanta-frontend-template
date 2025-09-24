@@ -17,15 +17,19 @@ export function DailyMissionSection() {
           </h2>
           <p className="text-center">
             <small>
-              ※當月交易<span className="text-primary">15天</span>
+              ※當月交易
+              <span className="text-primary underline">15天(含)以上</span>
               ，抽獎次數<span className="text-primary">x2</span>
             </small>
           </p>
-          <div className="mx-auto mt-4 max-w-[420px] rounded-xl bg-white/70 px-4 py-4 text-center text-base lg:text-lg 2xl:max-w-[520px]">
+          <div className="mx-auto mt-4 max-w-[420px] rounded-xl bg-white/70 px-4 py-2 text-center text-base 2xl:max-w-[520px]">
             <p>交易1天 = 1次抽獎機會</p>
             <p>交易2天 = 2次抽獎機會</p>
             <p>...</p>
-            <p>以此類推</p>
+            <p>(以此類推)</p>
+            <p>交易15天 = 30次抽獎機會</p>
+            <p>交易16天 = 32次抽獎機會</p>
+            <p>...</p>
           </div>
         </FadeInOnScroll>
       </SectionCard>
