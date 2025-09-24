@@ -1,7 +1,7 @@
 'use client';
 
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-import RegisterDialog from '../dialogs/register-dialog';
 
 export const LeftSideButtons: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -56,7 +56,7 @@ export const LeftSideButtons: React.FC = () => {
     >
       <div className="flex w-full flex-col space-y-1 rounded-xl font-cubic text-xl text-white shadow-xl [line-height:1.50rem]">
         <a
-          href="https://ltm.yuantafutures.com.tw/member/openaccount"
+          href="https://www.yuantafutures.com.tw/openaccount_01"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -87,23 +87,26 @@ export const LeftSideButtons: React.FC = () => {
           // onClick={button.onClick}
         >
           <div className="nes-sm-corners cursor-pointer bg-sts-blue-500 p-1">
-            <span className="block h-full w-full bg-sts-blue-600 py-1 pl-1 pr-6">
-              人氣王投票
-            </span>
+            <Link href="/vote">
+              <span className="block h-full w-full bg-sts-blue-600 py-1 pl-1 pr-6">
+                人氣王投票
+              </span>
+            </Link>
           </div>
         </button>
-        <RegisterDialog>
-          <button
-            className="transition-all duration-300 hover:translate-x-[-15px] hover:shadow-xl"
-            // onClick={button.onClick}
-          >
-            <div className="nes-sm-corners cursor-pointer bg-sts-orange-300 p-1">
+
+        <button
+          className="transition-all duration-300 hover:translate-x-[-15px] hover:shadow-xl"
+          // onClick={button.onClick}
+        >
+          <div className="nes-sm-corners cursor-pointer bg-sts-orange-300 p-1">
+            <Link href="/#registration">
               <span className="block h-full w-full bg-sts-orange-400 py-3 pl-1 pr-6">
                 競賽報名
               </span>
-            </div>
-          </button>
-        </RegisterDialog>
+            </Link>
+          </div>
+        </button>
       </div>
     </div>
   );
