@@ -130,7 +130,7 @@ export function PopularityRankingSection() {
         </div>
 
         <p className="mt-3 text-center text-sm text-gray-500">
-          * 排名僅供參考，請以最終活動公告為準
+          * 以活動結束為憑，排名僅供參考。
         </p>
       </SectionCard>
     </BounceOnScroll>

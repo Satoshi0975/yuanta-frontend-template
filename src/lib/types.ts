@@ -52,9 +52,9 @@ export interface VoteRequest {
   voterName: string;
   voterPhone: string;
   hasFuturesAccount: boolean;
-  potentialCustomerType?: string;
+  location?: string;
+  hasSecuritiesAccount?: boolean;
   participantId: number;
-  captchaCode: string;
 }
 
 export interface Participant {

@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { POTENTIAL_CUSTOMER_TYPES } from './constants';
 
 // 登入表單驗證
 export const loginSchema = z.object({
@@ -46,10 +45,17 @@ export const voteSchema = z.object({
     .string()
     .min(1, '請輸入手機號碼')
     .regex(/^09\d{8}$/, '手機號碼格式錯誤'),
-  hasFuturesAccount: z.boolean(),
-  potentialCustomerType: z.array(z.enum(POTENTIAL_CUSTOMER_TYPES)).optional(),
-  participantId: z.number().int().positive('請選擇參賽者'),
-  captchaCode: z.string().min(1, '請輸入驗證碼'),
+  hasFuturesAccount: z.boolean({
+    error: '請選擇是否為期貨戶',
+  }),
+  location: z.string().optional(),
+  hasSecuritiesAccount: z.boolean().optional(),
+  participantId: z
+    .number({
+      error: '請選擇參賽者',
+    })
+    .int()
+    .positive('請選擇參賽者'),
 });
 
 // 成績查詢驗證
