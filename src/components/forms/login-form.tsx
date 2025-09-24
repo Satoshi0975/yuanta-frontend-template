@@ -75,9 +75,7 @@ const LoginInForm = ({
             name="username"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="w-full !text-left text-gray-700">
-                  身分證字號
-                </FormLabel>
+                <FormLabel className="w-full !text-left">身分證字號</FormLabel>
                 <div className="flex items-center space-x-3">
                   <div className="relative w-full">
                     <FormControl>
@@ -88,7 +86,7 @@ const LoginInForm = ({
                         {...field}
                       />
                     </FormControl>
-                    <UserCircle2 className="absolute left-2 top-2 peer-focus-visible:text-blue-600" />
+                    <UserCircle2 className="absolute left-2 top-1/2 -translate-y-1/2" />
                   </div>
                 </div>
                 {/* <FormDescription></FormDescription> */}
@@ -101,7 +99,7 @@ const LoginInForm = ({
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="w-full !text-left text-gray-700">
+                <FormLabel className="w-full !text-left">
                   網路交易密碼
                 </FormLabel>
                 <div className="flex items-center space-x-3">
@@ -114,7 +112,7 @@ const LoginInForm = ({
                         type="password"
                       />
                     </FormControl>
-                    <Lock className="absolute left-2 top-2 peer-focus-visible:text-blue-600" />
+                    <Lock className="absolute left-2 top-2" />
                   </div>
                 </div>
                 {/* <FormDescription>
@@ -129,9 +127,7 @@ const LoginInForm = ({
             name="captcha"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="w-full !text-left text-gray-700">
-                  圖形驗證碼
-                </FormLabel>
+                <FormLabel className="w-full !text-left">圖形驗證碼</FormLabel>
                 <div className="flex items-center justify-start space-x-3">
                   <FormControl>
                     <Input
@@ -167,7 +163,7 @@ const LoginInForm = ({
               )}
             </Button>
           </div>
-          <p className="!mt-3 text-left text-sm md:!mt-8 md:text-base">
+          <p className="!mt-3 text-left text-sm text-sts-blue-600 md:!mt-8 md:text-base">
             非元大期貨客戶？立即
             <a
               className="text-yt-blue-400 underline"

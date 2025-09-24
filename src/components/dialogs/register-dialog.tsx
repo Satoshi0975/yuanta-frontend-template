@@ -13,10 +13,11 @@ import { useDialogFlow } from '@/hooks/use-dialog-flow';
 import type { RegisterDialogStep } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, X } from 'lucide-react';
 import { useState } from 'react';
 import LoginForm from '../forms/login-form';
 import RegistrationForm from '../forms/registration-form';
+import { Button } from '../ui/button';
 
 interface RegisterDialogProps {
   children?: React.ReactNode;
@@ -25,7 +26,7 @@ interface RegisterDialogProps {
 
 const RegisterDialog = ({
   children,
-  initialStep = 'login',
+  initialStep = 'error',
 }: RegisterDialogProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -43,6 +44,7 @@ const RegisterDialog = ({
     if (!open) {
       resetDialog();
     }
+    console.log('handleOpenChange', open);
     setIsOpen(open);
   };
 
@@ -96,10 +98,13 @@ const RegisterDialog = ({
 
       case 'success':
         return (
-          <div className="bg-white p-6 px-3 text-center nes-corners">
+          <div className="bg-white p-6 px-5 text-center">
             <div className="space-y-2 text-left text-base sm:text-xl">
-              <p>
-                感謝報名！您的編號：{dialogState.data?.registrationData?.id}
+              <p className="text-2xl font-bold">
+                感謝報名！您的編號：
+                <span className="rounded-md bg-sts-blue-100 px-2 text-sts-blue-500">
+                  #{dialogState.data?.registrationData?.id}
+                </span>
               </p>
               <p>
                 歡迎分享給好朋友們，到人氣王專區為您投票，
@@ -116,16 +121,17 @@ const RegisterDialog = ({
       case 'error':
         return (
           <div className="p-8 text-center">
-            <div className="mb-4 text-xl text-red-600">✗ 發生錯誤</div>
-            <p className="mb-4 text-red-600">
-              {dialogState.data?.errorMessage || '發生未知錯誤'}
+            <p className="mb-5 text-xl text-red-600">
+              {dialogState.data?.errorMessage ||
+                '發生未知錯誤，請重新再試一次！'}
             </p>
-            <button
+            <Button
               onClick={goBack}
-              className="text-blue-600 underline hover:text-blue-800"
+              className="hover:!bg-yt-blue-600/90 relative px-12 py-6 text-xl font-medium"
+              size="default"
             >
-              返回重試
-            </button>
+              返回
+            </Button>
           </div>
         );
 
@@ -141,14 +147,14 @@ const RegisterDialog = ({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent
         className={cn(
-          'z-[9999] mx-auto max-w-md rounded-lg border-none bg-sts-orange-200 ring-0'
+          'z-[9999] mx-auto max-w-md rounded-lg border-none bg-sts-orange-200 ring-0 [&>button]:hidden'
         )}
       >
         <DialogHeader className="relative">
           {showBackButton && (
             <button
               onClick={goBack}
-              className="absolute left-0 top-0 rounded-full p-2 transition-colors hover:bg-gray-100"
+              className="absolute left-0 top-0 rounded-full p-2 transition-colors hover:scale-110"
               disabled={isLoading}
             >
               <ArrowLeft className="h-5 w-5" />
@@ -161,6 +167,14 @@ const RegisterDialog = ({
           >
             <h1 className="font-cubic text-3xl font-semibold">{getTitle()}</h1>
           </DialogTitle>
+
+          <button
+            onClick={() => handleOpenChange(false)}
+            className="absolute right-0 top-0 !mt-0 rounded-full p-2 transition-colors hover:scale-110"
+            disabled={isLoading}
+          >
+            <X className="h-5 w-5" />
+          </button>
 
           <DialogDescription asChild>
             <div className="space-y-6 text-base text-sts-text nes-corners">

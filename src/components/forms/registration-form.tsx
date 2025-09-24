@@ -71,7 +71,7 @@ const RegistrationForm = ({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)}>
-        <div className="space-y-8 rounded-xl bg-white p-6 text-left nes-corners">
+        <div className="space-y-8 rounded-xl bg-white p-6 text-left">
           <div className="mb-4 text-center">
             <p className="mt-2 text-sm">請填寫以下資料完成活動報名</p>
           </div>
@@ -102,7 +102,7 @@ const RegistrationForm = ({
                         </SelectContent>
                       </Select>
                     </FormControl>
-                    <UserCircle2 className="absolute left-2 top-2 text-gray-400" />
+                    <UserCircle2 className="absolute left-2 top-1/2 -translate-y-1/2" />
                   </div>
                 </div>
                 <FormMessage />
@@ -120,13 +120,13 @@ const RegistrationForm = ({
                   <div className="relative w-full">
                     <FormControl>
                       <Input
-                        className="peer w-full pl-10"
+                        className="peer w-full rounded-none border-2 pl-10"
                         type="text"
                         placeholder="請輸入報名暱稱"
                         {...field}
                       />
                     </FormControl>
-                    <Tag className="absolute left-2 top-2 peer-focus-visible:text-blue-600" />
+                    <Tag className="absolute left-2 top-1/2 -translate-y-1/2" />
                   </div>
                 </div>
                 <FormDescription>
