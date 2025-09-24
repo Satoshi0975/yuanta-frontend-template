@@ -1,12 +1,14 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
 export const LeftSideButtons: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     // 檢查是否為手機版
@@ -87,9 +89,9 @@ export const LeftSideButtons: React.FC = () => {
           // onClick={button.onClick}
         >
           <div className="nes-sm-corners cursor-pointer bg-sts-blue-500 p-1">
-            <Link href="/vote">
+            <Link href={pathname === '/vote' ? '/' : '/#vote'}>
               <span className="block h-full w-full bg-sts-blue-600 py-1 pl-1 pr-6">
-                人氣王投票
+                {pathname === '/vote' ? '回活動首頁' : '人氣王投票'}
               </span>
             </Link>
           </div>
