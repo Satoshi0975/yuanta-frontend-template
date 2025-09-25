@@ -10,7 +10,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import { useRecordDialog } from '@/hooks/use-record-dialog';
 import type { RecordDialogStep } from '@/lib/types';
 import { cn } from '@/lib/utils';
@@ -175,7 +175,6 @@ const RecordDialog = ({
                     {renderContent()}
                   </motion.div>
                 </AnimatePresence>
-                <ScrollBar hidden />
               </ScrollArea>
             </div>
           </DialogDescription>

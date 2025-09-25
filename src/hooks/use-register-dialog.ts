@@ -18,6 +18,15 @@ const getMockLoginData = (): LoginResponse => ({
   accounts: ['F021000-1234567', 'F021000-1234568', 'F021000-1234569'],
 });
 
+const getShareContext = (id: number, nickname: string): string => {
+  const baseUrl = window.location.origin;
+  const path = process.env.NEXT_PUBLIC_PATH;
+  return `我參加元大期貨人氣王競賽🔥
+我是 #${id} ${nickname} 快來幫我投票！
+🗳️ ${baseUrl}/${path}/vote?share=${id} 
+🎁 每日投票還能抽獎唷～`;
+};
+
 const getMockRegistrationData = (): ApiResponse<RegistrationResponse> => ({
   success: true,
   message: '報名成功',
@@ -36,6 +45,7 @@ interface RegisterDialogState {
     accounts?: LoginResponse['accounts'];
     selectedAccountId?: string;
     registrationData?: RegistrationResponse;
+    shareContext?: string;
     errorMessage?: string;
     fieldErrors?: Record<string, string>;
   };
@@ -124,7 +134,9 @@ export const useRegisterDialog = (
   };
 
   // 處理報名
-  const handleRegistration = async (values: RegistrationRequest) => {
+  const handleRegistration = async (
+    values: RegistrationRequest
+  ): Promise<ApiResponse<RegistrationResponse>> => {
     setIsLoading(true);
     try {
       // 測試模式使用模擬資料
@@ -133,13 +145,19 @@ export const useRegisterDialog = (
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         const mockData = getMockRegistrationData();
+
         setDialogState((prev) => ({
           step: 'success',
           data: {
             ...prev.data,
             registrationData: mockData.data,
+            shareContext: getShareContext(
+              mockData.data?.id || 0,
+              mockData.data?.nickname || ''
+            ),
           },
         }));
+        return mockData;
       } else {
         const response = await apiClient.post<RegistrationResponse>(
           '/api/registration',
@@ -152,8 +170,13 @@ export const useRegisterDialog = (
             data: {
               ...prev.data,
               registrationData: response.data,
+              shareContext: getShareContext(
+                response.data?.id || 0,
+                response.data?.nickname || ''
+              ),
             },
           }));
+          return response;
         } else {
           // 如果有欄位錯誤，拋出包含 fieldErrors 的錯誤
           if (response.fieldErrors) {
@@ -169,10 +192,7 @@ export const useRegisterDialog = (
       }
     } catch (error) {
       // 如果錯誤包含 fieldErrors，直接拋出讓表單處理
-      if (
-        (error as unknown as { fieldErrors: Record<string, string> })
-          .fieldErrors
-      ) {
+      if (error && typeof error === 'object' && 'fieldErrors' in error) {
         throw error;
       }
       setError(
@@ -181,6 +201,9 @@ export const useRegisterDialog = (
     } finally {
       setIsLoading(false);
     }
+
+    // 這裡永遠不會到達，但為了滿足型別要求
+    throw new Error('Unexpected error');
   };
 
   // 返回上一步

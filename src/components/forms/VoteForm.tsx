@@ -33,12 +33,13 @@ import { voteSchema, type VoteFormData } from '@/lib/validations';
 
 interface VoteFormProps {
   onSuccess?: () => void;
+  initialSearchId?: string;
 }
 
-export function VoteForm({ onSuccess }: VoteFormProps) {
+export function VoteForm({ onSuccess, initialSearchId }: VoteFormProps) {
   const { isLoading, searchParticipants, vote, clearError } = useVoting();
   const [participants, setParticipants] = useState<Participant[]>([]);
-  const [searchKeyword, setSearchKeyword] = useState('');
+  const [searchKeyword, setSearchKeyword] = useState(initialSearchId || '');
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [otherLocation, setOtherLocation] = useState('');
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
@@ -57,13 +58,22 @@ export function VoteForm({ onSuccess }: VoteFormProps) {
   // 載入初始參賽者列表
   useEffect(() => {
     const loadParticipants = async () => {
-      const response = await searchParticipants();
-      if (response.success && response.data) {
-        setParticipants(response.data.data);
+      // 如果有提供初始搜尋 ID，直接搜尋該 ID
+      if (initialSearchId) {
+        const response = await searchParticipants(initialSearchId);
+        if (response.success && response.data) {
+          setParticipants(response.data.data);
+        }
+      } else {
+        // 否則載入預設列表
+        const response = await searchParticipants();
+        if (response.success && response.data) {
+          setParticipants(response.data.data);
+        }
       }
     };
     loadParticipants();
-  }, [searchParticipants]);
+  }, [searchParticipants, initialSearchId]);
 
   const handleSearch = async () => {
     // 重新搜尋時清除目前選擇的 participantId

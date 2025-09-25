@@ -1,3 +1,5 @@
+'use client';
+
 import voteDinosaur from '@/assets/images/vote-dinosaur.png';
 import vote from '@/assets/images/vote.png';
 import VoteDialog from '@/components/dialogs/vote-dialog';
@@ -6,8 +8,13 @@ import { FixedBg } from '@/components/sections/fixed-bg';
 import { SkyScroll } from '@/components/sections/sky-scroll';
 import { WayScroll } from '@/components/sections/way-scroll';
 import Image from '@/lib/image';
+import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 
-const VotePage = () => {
+const VotePageContent = () => {
+  const searchParams = useSearchParams();
+  const shareId = searchParams.get('share');
+
   return (
     <div className="w-screen [scroll-margin-top:60px]" id="form">
       <FixedBg>
@@ -42,7 +49,7 @@ const VotePage = () => {
             }}
           ></div>
           <div className="relative z-10 mx-auto mt-8 max-w-3xl bg-sts-orange-100 p-5 nes-corners md:mt-14">
-            <VoteForm />
+            <VoteForm initialSearchId={shareId || undefined} />
           </div>
         </div>
       </div>
@@ -50,6 +57,14 @@ const VotePage = () => {
 
       <VoteDialog defaultOpen={true} />
     </div>
+  );
+};
+
+const VotePage = () => {
+  return (
+    <Suspense fallback={<div>載入中...</div>}>
+      <VotePageContent />
+    </Suspense>
   );
 };
 

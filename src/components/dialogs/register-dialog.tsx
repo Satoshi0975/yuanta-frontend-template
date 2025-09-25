@@ -11,14 +11,17 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area";
 import { useRegisterDialog } from '@/hooks/use-register-dialog';
 import type { RegisterDialogStep } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
+import { Copy, Share2, Vote } from 'lucide-react';
 import { useState } from 'react';
 import LoginForm from '../forms/login-form';
 import RegistrationForm from '../forms/registration-form';
 import { Button } from '../ui/button';
+import { Input } from '../ui/input';
 
 interface RegisterDialogProps {
   children?: React.ReactNode;
@@ -30,6 +33,7 @@ const RegisterDialog = ({
   initialStep = 'login',
 }: RegisterDialogProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [copySuccess, setCopySuccess] = useState(false);
 
   const {
     dialogState,
@@ -65,6 +69,43 @@ const RegisterDialog = ({
     }
   };
 
+  // 處理分享功能
+  const handleShare = async () => {
+    const shareContext = dialogState.data?.shareContext;
+    if (!shareContext) return;
+
+    // 檢查是否支援原生分享
+    if (navigator.share && /Mobi|Android/i.test(navigator.userAgent)) {
+      try {
+        await navigator.share({
+          title: '元大期貨人氣王競賽',
+          text: shareContext,
+        });
+      } catch (err) {
+        // 使用者取消分享或出現錯誤時，降級使用複製功能
+        console.error('原生分享失敗:', err);
+        handleCopyShare();
+      }
+    } else {
+      // 桌面版或不支援的裝置使用複製功能
+      handleCopyShare();
+    }
+  };
+
+  // 處理複製分享連結
+  const handleCopyShare = async () => {
+    const shareContext = dialogState.data?.shareContext;
+    if (shareContext) {
+      try {
+        await navigator.clipboard.writeText(shareContext);
+        setCopySuccess(true);
+        setTimeout(() => setCopySuccess(false), 2000);
+      } catch (err) {
+        console.error('複製失敗:', err);
+      }
+    }
+  };
+
   // 獲取內容組件
   const renderContent = () => {
     switch (dialogState.step) {
@@ -81,7 +122,9 @@ const RegisterDialog = ({
       case 'registration':
         return (
           <RegistrationForm
-            onSubmit={handleRegistration}
+            onSubmit={async (values) => {
+              await handleRegistration(values);
+            }}
             accountList={dialogState.data?.accounts || []}
           />
         );
@@ -89,7 +132,7 @@ const RegisterDialog = ({
       case 'success':
         return (
           <div className="bg-white p-6 px-5 text-center">
-            <div className="space-y-2 text-left text-base sm:text-xl">
+            <div className="space-y-4 text-left text-base sm:text-xl">
               <p className="text-2xl font-bold">
                 感謝報名！您的編號：
                 <span className="rounded-md bg-sts-blue-100 px-2 text-sts-blue-500">
@@ -104,6 +147,63 @@ const RegisterDialog = ({
                 </span>
                 一起為期貨戰士加油打氣~
               </p>
+
+              {/* 分享連結功能 */}
+              {dialogState.data?.shareContext && (
+                <div className="mt-4 space-y-3">
+                  <div className="hidden items-center gap-2 rounded border bg-gray-50 p-2">
+                    <Input
+                      value={dialogState.data.shareContext}
+                      readOnly
+                      className="hidden flex-1 border-none bg-transparent text-sm"
+                    />
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={handleCopyShare}
+                      className="flex items-center gap-1"
+                    >
+                      {copySuccess ? (
+                        <>
+                          <Share2 className="h-4 w-4" />
+                          已複製！
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="h-4 w-4" />
+                          複製連結
+                        </>
+                      )}
+                    </Button>
+                  </div>
+
+                  <div className="flex justify-center gap-2">
+                    <Button
+                      type="button"
+                      onClick={handleShare}
+                      className="flex items-center gap-2 rounded bg-green-500 px-4 py-2 text-sm text-white transition-colors hover:bg-green-600"
+                    >
+                      <Share2 className="h-4 w-4" />
+                      {copySuccess ? '已複製連結' : '分享給朋友'}
+                    </Button>
+
+                    <a
+                      href={
+                        dialogState.data.shareContext.match(
+                          /https?:\/\/[^\s]+/
+                        )?.[0] || '#'
+                      }
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded bg-blue-500 px-4 py-2 text-sm text-white transition-colors hover:bg-blue-600"
+                    >
+                      <Vote className="h-4 w-4" />
+                      前往投票
+                    </a>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         );
