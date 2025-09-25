@@ -71,12 +71,22 @@ export interface RankingItem {
 
 // 成績查詢相關
 export interface RecordResponse {
-  nickname: string;
-  fullAccount: string;
-  totalReturn: number;
-  ranking: number;
-  participantCount: number;
-  lastUpdateTime: string;
+  participantId: number; // 參賽者ID
+  nickname: string; // 參賽者暱稱
+  isNewCustomer: boolean; // 是否為新戶
+  totalTradeCount: number; // 總交易口數
+  thisMonthTradeDays: number; // 本月交易天數
+  totalRanking: number; // 總排名
+  totalScore: number; // 總積分
+  profitRateScore: number; // 報酬率積分
+  tradeCountScore: number; // 交易口數積分
+  absoluteProfitScore: number; // 絕對獲利積分
+  profitRateRanking: number; // 報酬率排名
+  profitRate: number; // 報酬率
+  tradeCountRanking: number; // 交易口數排名
+  tradeCount: number; // 交易口數
+  popularityRanking: number; // 人氣排名
+  totalVoteCount: number; // 總票數
 }
 
 // 版本資訊

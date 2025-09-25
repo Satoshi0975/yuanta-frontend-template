@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
+import RecordDialog from '../dialogs/record-dialog';
 
 export const LeftSideButtons: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -73,17 +74,18 @@ export const LeftSideButtons: React.FC = () => {
             </div>
           </button>
         </a>
-
-        <button
-          className="transition-all duration-300 hover:translate-x-[-15px] hover:shadow-xl"
-          // onClick={button.onClick}
-        >
-          <div className="nes-sm-corners cursor-pointer bg-sts-blue-300 p-1">
-            <span className="block h-full w-full bg-sts-blue-400 py-3 pl-1 pr-6">
-              成績查詢
-            </span>
-          </div>
-        </button>
+        <RecordDialog>
+          <button
+            className="transition-all duration-300 hover:translate-x-[-15px] hover:shadow-xl"
+            // onClick={button.onClick}
+          >
+            <div className="nes-sm-corners cursor-pointer bg-sts-blue-300 p-1">
+              <span className="block h-full w-full bg-sts-blue-400 py-3 pl-1 pr-6">
+                成績查詢
+              </span>
+            </div>
+          </button>
+        </RecordDialog>
         <button
           className="transition-all duration-300 hover:translate-x-[-15px] hover:shadow-xl"
           // onClick={button.onClick}
@@ -96,7 +98,6 @@ export const LeftSideButtons: React.FC = () => {
             </Link>
           </div>
         </button>
-
         <button
           className="transition-all duration-300 hover:translate-x-[-15px] hover:shadow-xl"
           // onClick={button.onClick}

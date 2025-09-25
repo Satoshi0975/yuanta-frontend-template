@@ -10,35 +10,35 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { useRegisterDialog } from '@/hooks/use-register-dialog';
-import type { RegisterDialogStep } from '@/lib/types';
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
+import { useRecordDialog } from '@/hooks/use-record-dialog';
+import type { RecordDialogStep } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import LoginForm from '../forms/login-form';
-import RegistrationForm from '../forms/registration-form';
+import RecordDisplay from '../record/record-display';
 import { Button } from '../ui/button';
 
-interface RegisterDialogProps {
+interface RecordDialogProps {
   children?: React.ReactNode;
-  initialStep?: RegisterDialogStep;
+  initialStep?: RecordDialogStep;
 }
 
-const RegisterDialog = ({
+const RecordDialog = ({
   children,
   initialStep = 'login',
-}: RegisterDialogProps) => {
+}: RecordDialogProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const {
     dialogState,
     isLoading,
     handleLogin,
-    handleRegistration,
+    handleAccountResults,
     resetDialog,
     goBack,
-  } = useRegisterDialog(initialStep);
+  } = useRecordDialog(initialStep);
 
   // 處理對話框開關
   const handleOpenChange = (open: boolean) => {
@@ -54,10 +54,8 @@ const RegisterDialog = ({
     switch (dialogState.step) {
       case 'login':
         return '帳號登入';
-      case 'registration':
-        return '活動報名';
-      case 'success':
-        return '歡迎勇者';
+      case 'record':
+        return '成績查詢';
       case 'error':
         return '發生錯誤';
       default:
@@ -78,34 +76,15 @@ const RegisterDialog = ({
           />
         );
 
-      case 'registration':
+      case 'record':
         return (
-          <RegistrationForm
-            onSubmit={handleRegistration}
-            accountList={dialogState.data?.accounts || []}
+          <RecordDisplay
+            accounts={dialogState.data?.accounts || []}
+            resultsData={dialogState.data?.resultsData}
+            selectedAccount={dialogState.data?.selectedAccountId}
+            isLoading={isLoading}
+            onAccountSelect={handleAccountResults}
           />
-        );
-
-      case 'success':
-        return (
-          <div className="bg-white p-6 px-5 text-center">
-            <div className="space-y-2 text-left text-base sm:text-xl">
-              <p className="text-2xl font-bold">
-                感謝報名！您的編號：
-                <span className="rounded-md bg-sts-blue-100 px-2 text-sts-blue-500">
-                  #{dialogState.data?.registrationData?.id}
-                </span>
-              </p>
-              <p>
-                歡迎分享給好朋友們，到人氣王專區為您投票，
-                <br />
-                <span className="font-extrabold">
-                  天天投票人，也能抽價值40萬好禮！{' '}
-                </span>
-                一起為期貨戰士加油打氣~
-              </p>
-            </div>
-          </div>
         );
 
       case 'error':
@@ -131,13 +110,18 @@ const RegisterDialog = ({
   };
 
   // 是否顯示返回按鈕
-  const showBackButton = dialogState.step === 'registration';
+  const showBackButton = dialogState.step === 'record';
+
   return (
     <Dialog onOpenChange={handleOpenChange} open={isOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent
         className={cn(
-          'z-[9999] mx-auto max-w-md rounded-lg border-none bg-sts-orange-200 ring-0 [&>button]:hidden'
+          'z-[9999] mx-auto rounded-lg border-none bg-sts-orange-200 ring-0 [&>button]:hidden',
+          {
+            'max-w-md': dialogState.step === 'login',
+            'max-w-2xl': dialogState.step === 'record',
+          }
         )}
       >
         <DialogHeader className="relative">
@@ -167,8 +151,13 @@ const RegisterDialog = ({
           </button>
 
           <DialogDescription asChild>
-            <div className="space-y-6 text-base text-sts-text nes-corners">
-              <ScrollArea className="max-h-[calc(100vh-180px)] overflow-y-auto bg-white">
+            <div
+              className={cn(
+                'max-w-full space-y-6 text-base text-sts-text',
+                dialogState.step === 'login' && 'bg-white nes-corners'
+              )}
+            >
+              <ScrollArea className="max-h-[calc(100vh-180px)] overflow-y-auto">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={dialogState.step}
@@ -181,6 +170,7 @@ const RegisterDialog = ({
                     {renderContent()}
                   </motion.div>
                 </AnimatePresence>
+                <ScrollBar hidden />
               </ScrollArea>
             </div>
           </DialogDescription>
@@ -190,4 +180,4 @@ const RegisterDialog = ({
   );
 };
 
-export default RegisterDialog;
+export default RecordDialog;

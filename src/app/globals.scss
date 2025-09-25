@@ -728,6 +728,21 @@
       min-width: calc(24 / 101 * 3.5rem);
       aspect-ratio: 24 / 101;
     }
+
+    &.nes-title-sm {
+      height: 3rem;
+      .section-left {
+        width: calc(24 / 101 * 3rem);
+        min-width: calc(24 / 101 * 3rem);
+      }
+      .section-middle {
+        min-width: calc(24 / 101 * 2.5rem);
+      }
+      .section-right {
+        width: calc(24 / 101 * 3rem);
+        min-width: calc(24 / 101 * 3rem);
+      }
+    }
   }
 
   @media (min-width: 768px) {
@@ -739,6 +754,17 @@
       .section-right {
         width: calc(24 / 101 * 4.75rem);
         min-width: calc(24 / 101 * 4.75rem);
+      }
+    }
+
+    .nes-title.nes-title-sm {
+      .section-left {
+        width: calc(24 / 101 * 3rem);
+        min-width: calc(24 / 101 * 3rem);
+      }
+      .section-right {
+        width: calc(24 / 101 * 3rem);
+        min-width: calc(24 / 101 * 3rem);
       }
     }
   }
