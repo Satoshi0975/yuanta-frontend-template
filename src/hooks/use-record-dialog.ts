@@ -13,13 +13,12 @@ const getMockRecordData = (fullAccount: string): RecordResponse => {
   const mockDataList: RecordResponse[] = [
     {
       participantId: 1,
-      nickname:
-        'fjdksla;fjkdls;ajfkdls;ajfkdls;jafkld;sjafkld;sajfklfjdksla;fjkdls;ajfkdls;ajfkdls;jafkld;sjafkld;sajfklfjdksla;fjkdls;ajfkdls;ajfkdls;jafkld;sjafkld;sajfkl',
+      nickname: 'ABC124',
       isNewCustomer: true,
-      totalTradeCount: 23.45,
+      totalTradeCount: 23.45 * 3,
       thisMonthTradeDays: 5,
       totalRanking: 5,
-      totalScore: 23.45,
+      totalScore: 23.45 * 3,
       profitRateScore: 23.45,
       tradeCountScore: 23.45,
       absoluteProfitScore: 23.45,
@@ -32,12 +31,12 @@ const getMockRecordData = (fullAccount: string): RecordResponse => {
     },
     {
       participantId: 2,
-      nickname: '投資高手',
+      nickname: 'moneyMoreMore',
       isNewCustomer: true,
-      totalTradeCount: 23.45,
+      totalTradeCount: 23.45 * 3,
       thisMonthTradeDays: 5,
       totalRanking: 5,
-      totalScore: 23.45,
+      totalScore: 23.45 * 3,
       profitRateScore: 23.45,
       tradeCountScore: 23.45,
       absoluteProfitScore: 23.45,
@@ -50,12 +49,12 @@ const getMockRecordData = (fullAccount: string): RecordResponse => {
     },
     {
       participantId: 3,
-      nickname: '穩健投資人',
+      nickname: 'IamTheUser1234',
       isNewCustomer: true,
-      totalTradeCount: 23.45,
+      totalTradeCount: 23.45 * 3,
       thisMonthTradeDays: 5,
       totalRanking: 5,
-      totalScore: 23.45,
+      totalScore: 23.45 * 3,
       profitRateScore: 23.45,
       tradeCountScore: 23.45,
       absoluteProfitScore: 23.45,
@@ -68,12 +67,12 @@ const getMockRecordData = (fullAccount: string): RecordResponse => {
     },
     {
       participantId: 4,
-      nickname: '新手勇者',
+      nickname: '111HowAreYou111',
       isNewCustomer: true,
-      totalTradeCount: 23.45,
+      totalTradeCount: 23.45 * 3,
       thisMonthTradeDays: 5,
       totalRanking: 5,
-      totalScore: 23.45,
+      totalScore: 23.45 * 3,
       profitRateScore: 23.45,
       tradeCountScore: 23.45,
       absoluteProfitScore: 23.45,
@@ -139,31 +138,49 @@ export const useRecordDialog = (initialStep: RecordDialogStep = 'login') => {
   }) => {
     setIsLoading(true);
     try {
-      const response = await apiClient.post<LoginResponse>(
-        '/api/login/futures',
-        values as LoginRequest
-      );
+      // 測試模式使用模擬資料
+      if (process.env.NEXT_PUBLIC_TEST_MODE === 'TRUE') {
+        // 模擬 API 延遲
+        await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      if (response.success && response.data) {
-        console.log(response.fieldErrors);
         setDialogState({
           step: 'record',
           data: {
-            user: response.data.user,
-            accounts: response.data.accounts,
+            user: {
+              username: 'testuser',
+              name: '測試使用者',
+              userId: 'A123456789',
+            },
+            accounts: ['F021000-1234567', 'F021000-1234568', 'F021000-1234569'],
           },
         });
       } else {
-        // 處理 fieldErrors - 如果有欄位錯誤，保持在登入頁面並顯示錯誤
-        setDialogState((prev) => ({
-          step: 'login',
-          data: {
-            ...prev.data,
-            ...(response.fieldErrors
-              ? { fieldErrors: response.fieldErrors }
-              : { errorMessage: response.message }),
-          },
-        }));
+        const response = await apiClient.post<LoginResponse>(
+          '/api/login/futures',
+          values as LoginRequest
+        );
+
+        if (response.success && response.data) {
+          console.log(response.fieldErrors);
+          setDialogState({
+            step: 'record',
+            data: {
+              user: response.data.user,
+              accounts: response.data.accounts,
+            },
+          });
+        } else {
+          // 處理 fieldErrors - 如果有欄位錯誤，保持在登入頁面並顯示錯誤
+          setDialogState((prev) => ({
+            step: 'login',
+            data: {
+              ...prev.data,
+              ...(response.fieldErrors
+                ? { fieldErrors: response.fieldErrors }
+                : { errorMessage: response.message }),
+            },
+          }));
+        }
       }
     } catch (error) {
       setError(error instanceof Error ? error.message : '登入失敗');

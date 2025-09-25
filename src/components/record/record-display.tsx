@@ -139,8 +139,9 @@ const RecordDisplay = ({
               <span className="font-bold text-sts-blue-500">
                 {resultsData.thisMonthTradeDays *
                   (resultsData.thisMonthTradeDays >= 15 ? 2 : 1)}
-              </span>
-              天次 機會
+                次
+              </span>{' '}
+              機會
             </p>
           </div>
 
@@ -200,7 +201,7 @@ const RecordDisplay = ({
                   alt="gold"
                   className="gold-rotate-3d h-4 w-auto"
                 />
-                <p>
+                <p className="break-keep">
                   報酬率：您的排名是第
                   <span className="font-bold text-sts-blue-500">
                     {resultsData.profitRateRanking}
@@ -218,7 +219,7 @@ const RecordDisplay = ({
                   alt="gold"
                   className="gold-rotate-3d h-4 w-auto"
                 />
-                <p>
+                <p className="break-keep">
                   口數王：您的排名是第
                   <span className="font-bold text-sts-blue-500">
                     {resultsData.tradeCountRanking}
@@ -235,7 +236,7 @@ const RecordDisplay = ({
                   alt="gold"
                   className="gold-rotate-3d h-4 w-auto"
                 />
-                <p>
+                <p className="break-keep">
                   人氣王：您的排名是第
                   <span className="font-bold text-sts-blue-500">
                     {resultsData.popularityRanking}

@@ -1,5 +1,6 @@
 import { apiClient } from '@/lib/api';
 import type {
+  ApiResponse,
   LoginRequest,
   LoginResponse,
   RegisterDialogStep,
@@ -7,6 +8,26 @@ import type {
   RegistrationResponse,
 } from '@/lib/types';
 import { useState } from 'react';
+
+const getMockLoginData = (): LoginResponse => ({
+  user: {
+    username: 'testuser',
+    name: '測試使用者',
+    userId: 'A123456789',
+  },
+  accounts: ['F021000-1234567', 'F021000-1234568', 'F021000-1234569'],
+});
+
+const getMockRegistrationData = (): ApiResponse<RegistrationResponse> => ({
+  success: true,
+  message: '報名成功',
+  data: {
+    id: 1,
+    nickname: 'testuser123',
+    fullAccount: 'F021000-1234567',
+    registrationTime: new Date().toISOString(),
+  },
+});
 
 interface RegisterDialogState {
   step: RegisterDialogStep;
@@ -54,31 +75,46 @@ export const useRegisterDialog = (
   }) => {
     setIsLoading(true);
     try {
-      const response = await apiClient.post<LoginResponse>(
-        '/api/login/futures',
-        values as LoginRequest
-      );
+      // 測試模式使用模擬資料
+      if (process.env.NEXT_PUBLIC_TEST_MODE === 'TRUE') {
+        // 模擬 API 延遲
+        await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      if (response.success && response.data) {
-        console.log(response.fieldErrors);
+        const mockData = getMockLoginData();
         setDialogState({
           step: 'registration',
           data: {
-            user: response.data.user,
-            accounts: response.data.accounts,
+            user: mockData.user,
+            accounts: mockData.accounts,
           },
         });
       } else {
-        // 處理 fieldErrors - 如果有欄位錯誤，保持在登入頁面並顯示錯誤
-        setDialogState((prev) => ({
-          step: 'login',
-          data: {
-            ...prev.data,
-            ...(response.fieldErrors
-              ? { fieldErrors: response.fieldErrors }
-              : { errorMessage: response.message }),
-          },
-        }));
+        const response = await apiClient.post<LoginResponse>(
+          '/api/login/futures',
+          values as LoginRequest
+        );
+
+        if (response.success && response.data) {
+          console.log(response.fieldErrors);
+          setDialogState({
+            step: 'registration',
+            data: {
+              user: response.data.user,
+              accounts: response.data.accounts,
+            },
+          });
+        } else {
+          // 處理 fieldErrors - 如果有欄位錯誤，保持在登入頁面並顯示錯誤
+          setDialogState((prev) => ({
+            step: 'login',
+            data: {
+              ...prev.data,
+              ...(response.fieldErrors
+                ? { fieldErrors: response.fieldErrors }
+                : { errorMessage: response.message }),
+            },
+          }));
+        }
       }
     } catch (error) {
       setError(error instanceof Error ? error.message : '登入失敗');
@@ -91,29 +127,44 @@ export const useRegisterDialog = (
   const handleRegistration = async (values: RegistrationRequest) => {
     setIsLoading(true);
     try {
-      const response = await apiClient.post<RegistrationResponse>(
-        '/api/registration',
-        values
-      );
+      // 測試模式使用模擬資料
+      if (process.env.NEXT_PUBLIC_TEST_MODE === 'TRUE') {
+        // 模擬 API 延遲
+        await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      if (response.success && response.data) {
+        const mockData = getMockRegistrationData();
         setDialogState((prev) => ({
           step: 'success',
           data: {
             ...prev.data,
-            registrationData: response.data,
+            registrationData: mockData.data,
           },
         }));
       } else {
-        // 如果有欄位錯誤，拋出包含 fieldErrors 的錯誤
-        if (response.fieldErrors) {
-          const error = new Error(response.message || '報名失敗');
-          (
-            error as unknown as { fieldErrors: Record<string, string> }
-          ).fieldErrors = response.fieldErrors;
-          throw error;
+        const response = await apiClient.post<RegistrationResponse>(
+          '/api/registration',
+          values
+        );
+
+        if (response.success && response.data) {
+          setDialogState((prev) => ({
+            step: 'success',
+            data: {
+              ...prev.data,
+              registrationData: response.data,
+            },
+          }));
         } else {
-          throw new Error(response.message || '報名失敗');
+          // 如果有欄位錯誤，拋出包含 fieldErrors 的錯誤
+          if (response.fieldErrors) {
+            const error = new Error(response.message || '報名失敗');
+            (
+              error as unknown as { fieldErrors: Record<string, string> }
+            ).fieldErrors = response.fieldErrors;
+            throw error;
+          } else {
+            throw new Error(response.message || '報名失敗');
+          }
         }
       }
     } catch (error) {
