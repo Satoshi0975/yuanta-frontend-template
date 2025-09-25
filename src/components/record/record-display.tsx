@@ -226,7 +226,7 @@ const RecordDisplay = ({
                   </span>
                   名，總交易口數：
                   <span className="font-bold text-sts-blue-500">
-                    {resultsData.tradeCount}
+                    {resultsData.totalTradeCount}
                   </span>
                 </p>
               </div>

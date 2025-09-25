@@ -670,13 +670,13 @@
 
     .section-left {
       @apply bg-contain bg-no-repeat;
-      background-image: url('/2025Contes/images/button/btn-left.png');
+      background-image: url('/2025Contest/images/button/btn-left.png');
       aspect-ratio: 78 / 137;
     }
 
     .section-middle {
       @apply flex items-center justify-center bg-repeat-x pb-10 pt-6 font-cubic text-white;
-      background-image: url('/2025Contes/images/button/btn-center.png');
+      background-image: url('/2025Contest/images/button/btn-center.png');
       background-size: auto 100%;
       width: fit-content;
       min-width: 100px;
@@ -687,18 +687,18 @@
 
     .section-right {
       @apply bg-contain bg-no-repeat;
-      background-image: url('/2025Contes/images/button/btn-right.png');
+      background-image: url('/2025Contest/images/button/btn-right.png');
       aspect-ratio: 78 / 137;
     }
     &.nes-button-secondary {
       .section-left {
-        background-image: url('/2025Contes/images/button-sec/btn-left.png');
+        background-image: url('/2025Contest/images/button-sec/btn-left.png');
       }
       .section-middle {
-        background-image: url('/2025Contes/images/button-sec/btn-center.png');
+        background-image: url('/2025Contest/images/button-sec/btn-center.png');
       }
       .section-right {
-        background-image: url('/2025Contes/images/button-sec/btn-right.png');
+        background-image: url('/2025Contest/images/button-sec/btn-right.png');
       }
     }
   } */
@@ -709,7 +709,7 @@
 
     .section-left {
       @apply bg-contain bg-no-repeat;
-      background-image: url('/2025Contes/title-bar/bar-left.svg');
+      background-image: url('/2025Contest/title-bar/bar-left.svg');
       width: calc(24 / 101 * 3.5rem);
       min-width: calc(24 / 101 * 3.5rem);
       aspect-ratio: 24 / 101;
@@ -717,13 +717,13 @@
 
     .section-middle {
       @apply -mx-[1px] flex min-w-[160px] items-center justify-center bg-cover bg-repeat-x font-cubic text-white md:min-w-[250px] lg:min-w-[300px];
-      background-image: url('/2025Contes/title-bar/bar-center.svg');
+      background-image: url('/2025Contest/title-bar/bar-center.svg');
       background-size: auto 100%;
     }
 
     .section-right {
       @apply bg-contain bg-no-repeat;
-      background-image: url('/2025Contes/title-bar/bar-right.svg');
+      background-image: url('/2025Contest/title-bar/bar-right.svg');
       width: calc(24 / 101 * 3.5rem);
       min-width: calc(24 / 101 * 3.5rem);
       aspect-ratio: 24 / 101;
@@ -773,7 +773,7 @@
     @apply relative m-auto flex cursor-pointer items-center justify-center overflow-visible border-none bg-repeat-x pb-10 pt-6 text-center font-cubic text-5xl text-white transition-transform duration-200 ease-in-out;
     filter: brightness(1.01);
 
-    background-image: url('/2025Contes/images/button/btn-center.png');
+    background-image: url('/2025Contest/images/button/btn-center.png');
     background-size: auto 100%;
     min-width: 100px;
     white-space: nowrap;
@@ -796,7 +796,7 @@
 
       height: 100%;
 
-      background-image: url('/2025Contes/images/button/btn-left.png');
+      background-image: url('/2025Contest/images/button/btn-left.png');
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center left;
@@ -817,7 +817,7 @@
 
       height: 100%;
 
-      background-image: url('/2025Contes/images/button/btn-right.png');
+      background-image: url('/2025Contest/images/button/btn-right.png');
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center right;
@@ -829,14 +829,14 @@
 
     /* 二級按鈕樣式 */
     &.nes-button-secondary {
-      background-image: url('/2025Contes/images/button-sec/btn-center.png');
+      background-image: url('/2025Contest/images/button-sec/btn-center.png');
 
       &::before {
-        background-image: url('/2025Contes/images/button-sec/btn-left.png');
+        background-image: url('/2025Contest/images/button-sec/btn-left.png');
       }
 
       &::after {
-        background-image: url('/2025Contes/images/button-sec/btn-right.png');
+        background-image: url('/2025Contest/images/button-sec/btn-right.png');
       }
     }
   }

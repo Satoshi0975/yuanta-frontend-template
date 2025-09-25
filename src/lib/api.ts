@@ -12,7 +12,7 @@ class ApiClient {
     endpoint: string,
     options: RequestInit = {}
   ): Promise<ApiResponse<T>> {
-    const url = `${this.baseURL}${endpoint}`;
+    const url = `${this.baseURL}${process.env.NEXT_PUBLIC_BASE_PATH || ''}${endpoint}`;
 
     const defaultOptions: RequestInit = {
       headers: {

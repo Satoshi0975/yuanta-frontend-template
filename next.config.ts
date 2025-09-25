@@ -17,11 +17,8 @@ const nextConfig: NextConfig = {
     }
     return [
       {
-        source: `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/api/:path*`,
+        source: '/api/:path*', // basePath 會自動處理，不需要手動加上
         destination: process.env.NEXT_PUBLIC_API_REWRITE || '',
-        // 'http://192.168.0.216:5000/api/:path*',
-        // 'http://10.211.55.3:5000/api/:path*'
-        // '',
       },
     ];
   },

@@ -74,19 +74,18 @@ export interface RecordResponse {
   participantId: number; // 參賽者ID
   nickname: string; // 參賽者暱稱
   isNewCustomer: boolean; // 是否為新戶
-  totalTradeCount: number; // 總交易口數
-  thisMonthTradeDays: number; // 本月交易天數
-  totalRanking: number; // 總排名
-  totalScore: number; // 總積分
-  profitRateScore: number; // 報酬率積分
-  tradeCountScore: number; // 交易口數積分
-  absoluteProfitScore: number; // 絕對獲利積分
-  profitRateRanking: number; // 報酬率排名
-  profitRate: number; // 報酬率
-  tradeCountRanking: number; // 交易口數排名
-  tradeCount: number; // 交易口數
-  popularityRanking: number; // 人氣排名
-  totalVoteCount: number; // 總票數
+  totalTradeCount: number; // 總交易口數(口數王)
+  thisMonthTradeDays: number; // 本月交易天數(每日任務)
+  totalRanking: number; // 總排名(主競賽)
+  totalScore: number; // 總積分(主競賽)
+  profitRateScore: number; // 報酬率積分(主競賽)
+  tradeCountScore: number; // 交易口數積分(主競賽)
+  absoluteProfitScore: number; // 絕對獲利積分(主競賽)
+  profitRateRanking: number; // 報酬率排名(報酬王)
+  profitRate: number; // 報酬率(報酬王)
+  tradeCountRanking: number; // 交易口數排名(口數王)
+  popularityRanking: number; // 人氣排名(人氣王)
+  totalVoteCount: number; // 總票數(人氣王)
 }
 
 // 版本資訊
