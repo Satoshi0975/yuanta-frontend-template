@@ -7,6 +7,7 @@ import Dinosaur from '@/assets/character/dinosaur.svg';
 import Hunter from '@/assets/character/hunter.svg';
 import Princess from '@/assets/character/princess.svg';
 import Wolf from '@/assets/character/wolf.svg';
+import sky2 from '@/assets/images/bg/sky2.png';
 import treasure from '@/assets/images/treasure.png';
 import { Button } from '@/components/nes/button';
 import Image from '@/lib/image';
@@ -14,7 +15,12 @@ import Link from 'next/link';
 
 export function VoteSection() {
   return (
-    <div className="relative z-20 flex h-screen w-full items-center bg-contain bg-repeat-x [background-image:url('/bg/sky2.png')]">
+    <div
+      className="relative z-20 flex h-screen w-full items-center bg-contain bg-repeat-x"
+      style={{
+        backgroundImage: `url(${sky2.src})`,
+      }}
+    >
       {/* 雲朵背景層 */}
       <div className="absolute inset-0 z-0 lg:hidden"></div>
       <div className="container">

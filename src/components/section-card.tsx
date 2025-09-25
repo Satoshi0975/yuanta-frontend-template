@@ -1,5 +1,6 @@
 import { Titlebar } from '@/components/nes/titlebar';
 import { ReactNode } from 'react';
+import groundImage from '@/assets/images/element/ground.png';
 
 interface SectionCardProps {
   title: string;
@@ -18,7 +19,7 @@ export function SectionCard({ title, children }: SectionCardProps) {
         <div
           className="absolute left-4 top-2 z-10 h-8 w-1/2 bg-[length:auto_40px] bg-repeat-x md:h-14 md:bg-[length:auto_64px]"
           style={{
-            backgroundImage: "url('/images/element/ground.png')",
+            backgroundImage: `url(${groundImage.src})`,
             backgroundPosition: 'left top',
           }}
         ></div>
@@ -27,7 +28,7 @@ export function SectionCard({ title, children }: SectionCardProps) {
         <div
           className="absolute right-4 top-2 z-10 h-8 w-1/2 bg-[length:auto_40px] bg-repeat-x md:h-14 md:bg-[length:auto_64px]"
           style={{
-            backgroundImage: "url('/images/element/ground.png')",
+            backgroundImage: `url(${groundImage.src})`,
             backgroundPosition: 'right top',
           }}
         ></div>

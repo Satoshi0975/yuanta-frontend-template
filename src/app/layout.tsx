@@ -1,3 +1,4 @@
+import sky from '@/assets/images/bg/sky.png';
 import { LeftSideButtons } from '@/components/sections/left-side-buttons';
 import { SkyScroll } from '@/components/sections/sky-scroll';
 import { CloudElements } from '@/components/ui/cloud-elements';
@@ -24,13 +25,13 @@ const cubic11 = localFont({
 });
 
 export const metadata: Metadata = {
-  title: '元大期貨｜2025春節不打烊',
+  title: '元大期貨｜2025 CME 交易競賽',
   description:
-    '台股休市11天，元大期貨春節不打烊，回饋好禮達百萬元！交易選擇豐富(國外期權或CFD槓桿)商品，指定戶交易一筆送200元，還有機會獲得黃金牌及蘋果好禮。',
+    '想賺獎金？想被看見？參加Super Yuanta交易任務，交易CME商品、投票人氣王，就有機會登上排行榜，抱回萬元好禮！',
   openGraph: {
-    title: '元大期貨｜2025春節不打烊',
+    title: '元大期貨｜2025 CME 交易競賽',
     description:
-      '台股休市11天，元大期貨春節不打烊，回饋好禮達百萬元！交易選擇豐富(國外期權或CFD槓桿)商品，指定戶交易一筆送200元，還有機會獲得黃金牌及蘋果好禮。',
+      '想賺獎金？想被看見？參加Super Yuanta交易任務，交易CME商品、投票人氣王，就有機會登上排行榜，抱回萬元好禮！',
   },
 };
 
@@ -58,7 +59,12 @@ export default function RootLayout({
         <Navbar />
         <main className="relative min-h-screen w-full max-w-full">
           {/* 固定背景層 - 最底層 */}
-          <div className="sticky inset-0 top-0 z-0 h-screen w-screen bg-contain bg-repeat-x [background-image:url('/bg/sky.png')]">
+          <div
+            className="sticky inset-0 top-0 z-0 h-screen w-screen bg-contain bg-repeat-x"
+            style={{
+              backgroundImage: `url(${sky.src})`,
+            }}
+          >
             <HeroBackground />
             <SkyScroll size={160} baseSpeed={0.1} numberOfClouds={6} />
             <CloudElements />

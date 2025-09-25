@@ -20,7 +20,7 @@ const getMockLoginData = (): LoginResponse => ({
 
 const getShareContext = (id: number, nickname: string): string => {
   const baseUrl = window.location.origin;
-  const path = process.env.NEXT_PUBLIC_PATH;
+  const path = process.env.NEXT_PUBLIC_PATH || '';
   return `我參加元大期貨人氣王競賽🔥
 我是 #${id} ${nickname} 快來幫我投票！
 🗳️ ${baseUrl}/${path}/vote?share=${id} 

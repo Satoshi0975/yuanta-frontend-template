@@ -1,4 +1,5 @@
 // import Cloud from '@/assets/cloud.svg';
+import sky2 from '@/assets/images/bg/sky2.png';
 import mapSM from '@/assets/images/map-sm.png';
 import map from '@/assets/images/map.png';
 import { BounceLeftOnScroll } from '@/components/animation-container';
@@ -9,7 +10,12 @@ import { SkyScroll } from './sky-scroll';
 
 export function HeroSection() {
   return (
-    <div className="relative -mt-[100svh] flex h-screen w-full items-center bg-contain bg-repeat-x [background-image:url('/bg/sky2.png')]">
+    <div
+      className="relative -mt-[100svh] flex h-screen w-full items-center bg-contain bg-repeat-x"
+      style={{
+        backgroundImage: `url(${sky2.src})`,
+      }}
+    >
       {/* 雲朵背景層 */}
       <div className="absolute inset-0 z-0">
         <SkyScroll

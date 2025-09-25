@@ -1,5 +1,6 @@
 'use client';
 
+import runwayImage from '@/assets/images/bg/runway.png';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ButtonSideButtons } from './button-side-buttons';
 
@@ -14,24 +15,40 @@ export const WayScroll = () => {
       {/* 陰影效果 */}
       <div className="pointer-events-none relative w-full overflow-hidden pt-10">
         <motion.div
-          className="my-drop-shadow absolute bottom-0 mx-auto mt-10 h-32 w-[3000px] bg-[url('/images/bg/runway.png')] bg-left-bottom bg-repeat-x [background-size:auto_50%] md:h-40"
-          style={{ x: runwayX }}
+          className="my-drop-shadow absolute bottom-0 mx-auto mt-10 h-32 w-[3000px] bg-left-bottom bg-repeat-x md:h-40"
+          style={{
+            x: runwayX,
+            backgroundImage: `url(${runwayImage.src})`,
+            backgroundSize: 'auto 50%',
+          }}
         />
         <motion.div
-          className="absolute bottom-0 mx-auto mt-10 h-32 w-[3000px] bg-[url('/images/bg/runway.png')] bg-left-bottom bg-repeat-x [background-size:auto_50%] [filter:blur(3px)] md:h-40"
-          style={{ x: runwayX }}
+          className="absolute bottom-0 mx-auto mt-10 h-32 w-[3000px] bg-left-bottom bg-repeat-x [filter:blur(3px)] md:h-40"
+          style={{
+            x: runwayX,
+            backgroundImage: `url(${runwayImage.src})`,
+            backgroundSize: 'auto 50%',
+          }}
         />
         {/* 跑道背景 */}
         <motion.div
-          className="mx-auto h-16 w-[3000px] bg-[url('/images/bg/runway.png')] bg-left bg-repeat-x [background-size:auto_100%] md:h-20"
-          style={{ x: runwayX }}
+          className="mx-auto h-16 w-[3000px] bg-left bg-repeat-x md:h-20"
+          style={{
+            x: runwayX,
+            backgroundImage: `url(${runwayImage.src})`,
+            backgroundSize: 'auto 100%',
+          }}
         />
       </div>
       {/* 按鈕背景（手機版） */}
       <div className="-mb-[1px] w-full overflow-hidden">
         <motion.div
-          className="mx-auto h-[48px] w-[3000px] bg-[url('/images/bg/runway.png')] bg-left-bottom bg-repeat-x [background-size:116%_700%] md:hidden"
-          style={{ x: runwayX }}
+          className="mx-auto h-[48px] w-[3000px] bg-left-bottom bg-repeat-x md:hidden"
+          style={{
+            x: runwayX,
+            backgroundImage: `url(${runwayImage.src})`,
+            backgroundSize: '116% 700%',
+          }}
         />
       </div>
 
