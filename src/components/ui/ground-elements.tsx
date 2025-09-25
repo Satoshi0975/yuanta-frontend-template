@@ -3,16 +3,36 @@ import Hunter from '@/assets/character/hunter.svg';
 import Princess from '@/assets/character/princess.svg';
 import Wolf from '@/assets/character/wolf.svg';
 import Gold from '@/assets/gold.svg';
+import ground from '@/assets/images/element/ground.png';
+import ice from '@/assets/images/element/ice.png';
+import grass from '@/assets/images/element/grass.png';
+import grass2 from '@/assets/images/element/grass2.png';
 
 export function GroundElements() {
   return (
     <div className="h-30 absolute bottom-0 left-0 flex w-full items-end">
       {/* Left section */}
       <div className="relative h-full w-full lg:w-[45%]">
-        <div className="absolute bottom-0 left-0 h-10 w-full bg-[url('/images/element/ground.png')] bg-right bg-repeat-x [background-size:auto_100%] lg:h-16"></div>
-        <div className="absolute bottom-0 left-[20%] h-10 w-[45%] bg-[url('/images/element/ice.png')] bg-no-repeat [background-size:auto_100%] lg:h-16"></div>
-        <div className="absolute bottom-10 right-72 h-12 w-60 bg-[url('/images/element/grass.png')] bg-no-repeat [background-size:auto_100%] lg:bottom-16 lg:h-16"></div>
-        <div className="absolute bottom-10 right-0 h-12 w-32 bg-[url('/images/element/grass2.png')] bg-no-repeat [background-size:auto_100%] lg:bottom-16 lg:h-16"></div>
+        <div className="absolute bottom-0 left-0 h-10 w-full bg-right bg-repeat-x [background-size:auto_100%] lg:h-16"
+          style={{
+            backgroundImage: `url(${ground.src})`,
+          }}
+        ></div>
+        <div className="absolute bottom-0 left-[20%] h-10 w-[45%] bg-no-repeat [background-size:auto_100%] lg:h-16"
+          style={{
+            backgroundImage: `url(${ice.src})`,
+          }}
+        ></div>
+        <div className="absolute bottom-10 right-72 h-12 w-60 bg-no-repeat [background-size:auto_100%] lg:bottom-16 lg:h-16"
+          style={{
+            backgroundImage: `url(${grass.src})`,
+          }}
+        ></div>
+        <div className="absolute bottom-10 right-0 h-12 w-32 bg-no-repeat [background-size:auto_100%] lg:bottom-16 lg:h-16"
+          style={{
+            backgroundImage: `url(${grass2.src})`,
+          }}
+        ></div>
 
         {/* Desktop characters and elements */}
         <Gold className="absolute bottom-24 right-3 hidden w-12 lg:block gold-rotate-3d" />

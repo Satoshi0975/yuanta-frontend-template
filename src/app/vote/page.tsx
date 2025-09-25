@@ -1,5 +1,6 @@
 'use client';
 
+import ground from '@/assets/images/element/ground.png';
 import voteDinosaur from '@/assets/images/vote-dinosaur.png';
 import vote from '@/assets/images/vote.png';
 import VoteDialog from '@/components/dialogs/vote-dialog';
@@ -44,7 +45,7 @@ const VotePageContent = () => {
           <div
             className="absolute left-4 top-0 z-10 mt-[1px] h-8 w-[calc(100%-32px)] bg-[length:auto_40px] bg-repeat-x md:h-14 md:bg-[length:auto_64px]"
             style={{
-              backgroundImage: "url('/images/element/ground.png')",
+              backgroundImage: `url(${ground.src})`,
               backgroundPosition: 'left top',
             }}
           ></div>
