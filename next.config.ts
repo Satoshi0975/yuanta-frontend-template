@@ -2,8 +2,8 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   output: 'export',
-  basePath: process.env.NEXT_PUBLIC_BASE_PATH,
-  assetPrefix: process.env.NEXT_PUBLIC_BASE_PATH,
+  basePath: '/2025Contest', //process.env.NEXT_PUBLIC_BASE_PATH,
+  assetPrefix: '/2025Contest', //process.env.NEXT_PUBLIC_BASE_PATH,
   webpack: (config) => {
     config.module.rules.push({
       test: /\.svg$/i,
