@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/select';
 import Image from '@/lib/image';
 import type { AccountInfo, RecordResponse } from '@/lib/types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Titlebar from '../nes/titlebar';
 
 interface RecordDisplayProps {
@@ -31,6 +31,13 @@ const RecordDisplay = ({
   const [selectedValue, setSelectedValue] = useState<string>(
     selectedAccount || ''
   );
+
+  // 當 selectedAccount prop 改變時，更新本地狀態
+  useEffect(() => {
+    if (selectedAccount) {
+      setSelectedValue(selectedAccount);
+    }
+  }, [selectedAccount]);
 
   const handleAccountChange = (value: string) => {
     setSelectedValue(value);

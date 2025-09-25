@@ -139,6 +139,12 @@ export const useRecordDialog = (initialStep: RecordDialogStep = 'login') => {
         // 模擬 API 延遲
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
+        const accounts = [
+          'F021000-1234567',
+          'F021000-1234568',
+          'F021000-1234569',
+        ];
+
         setDialogState({
           step: 'record',
           data: {
@@ -147,9 +153,14 @@ export const useRecordDialog = (initialStep: RecordDialogStep = 'login') => {
               name: '測試使用者',
               userId: 'A123456789',
             },
-            accounts: ['F021000-1234567', 'F021000-1234568', 'F021000-1234569'],
+            accounts: accounts,
           },
         });
+
+        // 如果帳號列表不為空，自動選擇第一個帳號並載入成績
+        if (accounts.length > 0) {
+          await handleGetResults(accounts[0]);
+        }
       } else {
         const response = await apiClient.post<LoginResponse>(
           '/api/login/futures',
@@ -158,6 +169,7 @@ export const useRecordDialog = (initialStep: RecordDialogStep = 'login') => {
 
         if (response.success && response.data) {
           console.log(response.fieldErrors);
+
           setDialogState({
             step: 'record',
             data: {
@@ -165,6 +177,11 @@ export const useRecordDialog = (initialStep: RecordDialogStep = 'login') => {
               accounts: response.data.accounts,
             },
           });
+
+          // 如果帳號列表不為空，自動選擇第一個帳號並載入成績
+          if (response.data.accounts && response.data.accounts.length > 0) {
+            await handleGetResults(response.data.accounts[0]);
+          }
         } else {
           // 處理 fieldErrors - 如果有欄位錯誤，保持在登入頁面並顯示錯誤
           setDialogState((prev) => ({
