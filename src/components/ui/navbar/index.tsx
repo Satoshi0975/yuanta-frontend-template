@@ -3,6 +3,7 @@ import Image from '@/lib/image';
 import Link from 'next/link';
 import MediaLinks from './media-links';
 import Menu from './menu';
+import RecordDialog from '@/components/dialogs/record-dialog';
 
 const Navbar = () => {
   // const [active, setActive] = useState('');
@@ -62,9 +63,11 @@ const Navbar = () => {
             <li className="border-gray-300 px-3 last:border-r-0 hover:animate-pixel-glitch">
               <Link href="#registration">競賽報名</Link>
             </li>
-            <li className="border-gray-300 px-3 last:border-r-0 hover:animate-pixel-glitch">
-              <Link href="">成績查詢</Link>
-            </li>
+            <RecordDialog>
+              <li className="border-gray-300 px-3 last:border-r-0 hover:animate-pixel-glitch cursor-pointer">
+                成績查詢
+              </li>
+            </RecordDialog>
             <li className="border-gray-300 px-3 last:border-r-0 hover:animate-pixel-glitch">
               <Link href="#vote">人氣投票</Link>
             </li>

@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
+import RecordDialog from '../dialogs/record-dialog';
 import RegisterDialog from '../dialogs/register-dialog';
 
 export const ButtonSideButtons: React.FC = () => {
@@ -10,16 +11,18 @@ export const ButtonSideButtons: React.FC = () => {
   return (
     <div className="absolute bottom-0 left-0 right-0 z-50 w-screen md:hidden">
       <div className="grid grid-cols-3 gap-1 py-1 font-cubic text-xl text-white">
-        <button
-          className="w-full transition-all duration-300 hover:shadow-xl"
-          // onClick={button.onClick}
-        >
-          <div className="nes-sm-corners cursor-pointer bg-sts-blue-300 p-1">
-            <span className="block h-full w-full text-nowrap bg-sts-blue-400">
-              成績查詢
-            </span>
-          </div>
-        </button>
+        <RecordDialog>
+          <button
+            className="w-full transition-all duration-300 hover:shadow-xl"
+            // onClick={button.onClick}
+          >
+            <div className="nes-sm-corners cursor-pointer bg-sts-blue-300 p-1">
+              <span className="block h-full w-full text-nowrap bg-sts-blue-400">
+                成績查詢
+              </span>
+            </div>
+          </button>
+        </RecordDialog>
         <Link
           href={pathname === '/vote' ? '/' : '/#vote'}
           className="block w-full text-center transition-all duration-300 hover:shadow-xl"

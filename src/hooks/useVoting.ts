@@ -8,6 +8,46 @@ import type {
 } from '@/lib/types';
 import { useCallback, useState } from 'react';
 
+// 模擬參賽者資料
+const getMockParticipants = (keyword?: string): Participant[] => {
+  const allParticipants: Participant[] = [
+    {
+      id: 1,
+      nickname: 'ABC124',
+    },
+    {
+      id: 2,
+      nickname: 'moneyMoreMore',
+    },
+    {
+      id: 3,
+      nickname: 'IamTheUser1234',
+    },
+    {
+      id: 4,
+      nickname: '111HowAreYou111',
+    },
+    {
+      id: 5,
+      nickname: 'TraderPro',
+    },
+    {
+      id: 6,
+      nickname: 'test123',
+    },
+    {
+      id: 7,
+      nickname: 'SuperTrader2024',
+    },
+  ];
+
+  if (!keyword) return allParticipants;
+
+  return allParticipants.filter((p) =>
+    p.nickname.toLowerCase().includes(keyword.toLowerCase())
+  );
+};
+
 interface UseVotingResult {
   isLoading: boolean;
   error: string | null;
@@ -32,17 +72,30 @@ export function useVoting(): UseVotingResult {
     setError(null);
 
     try {
-      const url = keyword
-        ? `${API_ENDPOINTS.SEARCH_PARTICIPANTS}?keyword=${encodeURIComponent(keyword)}`
-        : API_ENDPOINTS.SEARCH_PARTICIPANTS;
+      // 測試模式使用模擬資料
+      if (process.env.NEXT_PUBLIC_TEST_MODE === 'TRUE') {
+        // 模擬 API 延遲
+        await new Promise((resolve) => setTimeout(resolve, 800));
 
-      const response = await apiClient.get<{ data: Participant[] }>(url);
+        const mockParticipants = getMockParticipants(keyword);
+        return {
+          success: true,
+          message: '搜尋成功',
+          data: { data: mockParticipants },
+        };
+      } else {
+        const url = keyword
+          ? `${API_ENDPOINTS.SEARCH_PARTICIPANTS}?keyword=${encodeURIComponent(keyword)}`
+          : API_ENDPOINTS.SEARCH_PARTICIPANTS;
 
-      if (!response.success) {
-        setError(response.message);
+        const response = await apiClient.get<{ data: Participant[] }>(url);
+
+        if (!response.success) {
+          setError(response.message);
+        }
+
+        return response;
       }
-
-      return response;
     } catch (err) {
       const errorMessage =
         err instanceof Error ? err.message : '搜尋參賽者失敗';
@@ -62,13 +115,25 @@ export function useVoting(): UseVotingResult {
     setError(null);
 
     try {
-      const response = await apiClient.post<null>(API_ENDPOINTS.VOTE, data);
+      // 測試模式使用模擬資料
+      if (process.env.NEXT_PUBLIC_TEST_MODE === 'TRUE') {
+        // 模擬 API 延遲
+        await new Promise((resolve) => setTimeout(resolve, 800));
 
-      if (!response.success) {
-        setError(response.message);
+        return {
+          success: true,
+          message: '投票成功',
+          data: null,
+        };
+      } else {
+        const response = await apiClient.post<null>(API_ENDPOINTS.VOTE, data);
+
+        if (!response.success) {
+          setError(response.message);
+        }
+
+        return response;
       }
-
-      return response;
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : '投票失敗';
       setError(errorMessage);

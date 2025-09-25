@@ -23,11 +23,13 @@ import { Button } from '../ui/button';
 interface RecordDialogProps {
   children?: React.ReactNode;
   initialStep?: RecordDialogStep;
+  onOpen?: () => void;
 }
 
 const RecordDialog = ({
   children,
   initialStep = 'login',
+  onOpen,
 }: RecordDialogProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -44,6 +46,9 @@ const RecordDialog = ({
   const handleOpenChange = (open: boolean) => {
     if (!open) {
       resetDialog();
+    }
+    if (open) {
+      onOpen?.();
     }
     console.log('handleOpenChange', open);
     setIsOpen(open);

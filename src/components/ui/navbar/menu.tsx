@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 import MediaLinks from './media-links';
 import MenuTrigger from './menu-trigger';
 import { SkyScroll } from '@/components/sections/sky-scroll';
+import RecordDialog from '@/components/dialogs/record-dialog';
 
 const PIXEL_GRID = 2; // 像素網格大小
 const TICK_INTERVAL = 100; // 每個 tick 間隔 (毫秒)
@@ -120,12 +121,11 @@ const Menu = () => {
               >
                 <Link href="/#registration">競賽報名</Link>
               </li>
-              <li
-                className="border-b-2 border-sts-blue-600 p-2 text-gray-900"
-                onClick={() => setOpen((o) => !o)}
-              >
-                <Link href="">成績查詢</Link>
-              </li>
+                <li className="border-b-2 border-sts-blue-600 p-2 text-gray-900">
+                  <RecordDialog>
+                    <button>成績查詢</button>
+                  </RecordDialog>
+                </li>
               <li
                 className="border-b-2 border-sts-blue-600 p-2 text-gray-900"
                 onClick={() => setOpen((o) => !o)}
