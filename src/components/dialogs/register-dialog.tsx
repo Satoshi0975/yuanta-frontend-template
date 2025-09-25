@@ -11,7 +11,6 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area";
 import { useRegisterDialog } from '@/hooks/use-register-dialog';
 import type { RegisterDialogStep } from '@/lib/types';
 import { cn } from '@/lib/utils';
