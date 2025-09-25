@@ -1,7 +1,7 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  output: 'export',
+  // output: 'export',
   basePath: '/2025Contest', //process.env.NEXT_PUBLIC_BASE_PATH,
   assetPrefix: '/2025Contest', //process.env.NEXT_PUBLIC_BASE_PATH,
   webpack: (config) => {
