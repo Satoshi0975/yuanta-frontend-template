@@ -56,7 +56,7 @@ const RecordDisplay = ({
   // };
 
   return (
-    <div className="text-sts-text">
+    <div className="max-w-full text-sts-text">
       {/* 帳號選擇區塊 */}
       <div className="mb-6 flex items-baseline gap-3">
         <label className="mb-2 block text-nowrap font-medium">選擇帳號</label>
@@ -213,7 +213,9 @@ const RecordDisplay = ({
                   <span className="font-bold text-sts-blue-500">
                     {resultsData.profitRateRanking}
                   </span>
-                  名，報酬率：
+                  名，
+                  <br className="md:hidden" />
+                  報酬率：
                   <span className="font-bold text-sts-blue-500">
                     {resultsData.profitRate}
                   </span>
@@ -231,7 +233,9 @@ const RecordDisplay = ({
                   <span className="font-bold text-sts-blue-500">
                     {resultsData.tradeCountRanking}
                   </span>
-                  名，總交易口數：
+                  名，
+                  <br className="md:hidden" />
+                  總交易口數：
                   <span className="font-bold text-sts-blue-500">
                     {resultsData.totalTradeCount}
                   </span>
@@ -248,7 +252,9 @@ const RecordDisplay = ({
                   <span className="font-bold text-sts-blue-500">
                     {resultsData.popularityRanking}
                   </span>
-                  名，總票數：
+                  名，
+                  <br className="md:hidden" />
+                  總票數：
                   <span className="font-bold text-sts-blue-500">
                     {resultsData.totalVoteCount}
                   </span>
