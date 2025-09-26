@@ -11,7 +11,7 @@ export const WayScroll = () => {
   const runwayX = useTransform(scrollYProgress, [0, 1], [0, -1000]);
 
   return (
-    <div className="safari-sticky pointer-events-none sticky bottom-0 z-50 w-screen">
+    <div className="safari-sticky sticky bottom-0 z-50 w-screen">
       {/* 陰影效果 */}
       <div className="pointer-events-none relative w-full overflow-hidden pt-10">
         <motion.div
