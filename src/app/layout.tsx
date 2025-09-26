@@ -6,6 +6,7 @@ import Footer from '@/components/ui/footer';
 import { GroundElements } from '@/components/ui/ground-elements';
 import { HeroBackground } from '@/components/ui/hero-background';
 import Navbar from '@/components/ui/navbar';
+import { getOpenGraphImageUrl } from '@/lib/og';
 import { GoogleTagManager } from '@next/third-parties/google';
 import type { Metadata, Viewport } from 'next';
 import { Noto_Sans_TC } from 'next/font/google';
@@ -32,6 +33,22 @@ export const metadata: Metadata = {
     title: '元大期貨｜2025 CME 交易競賽',
     description:
       '想賺獎金？想被看見？參加Super Yuanta交易任務，交易CME商品、投票人氣王，就有機會登上排行榜，抱回萬元好禮！',
+    images: [
+      {
+        url: getOpenGraphImageUrl('/images/og-l.png'),
+        width: 1200,
+        height: 630,
+        type: 'image/png',
+        alt: '元大期貨｜2025 CME 交易競賽',
+      },
+      {
+        url: getOpenGraphImageUrl('/images/og-m.png'),
+        width: 600,
+        height: 600,
+        type: 'image/png',
+        alt: '元大期貨｜2025 CME 交易競賽',
+      },
+    ],
   },
 };
 
