@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import Image from '@/lib/image';
 import { cn } from '@/lib/utils';
 import { Triangle } from 'lucide-react';
+import Link from 'next/link';
 import { useState } from 'react';
 
 const Information = () => {
@@ -211,7 +212,11 @@ const Information = () => {
           <h5 className="mt-2">- 人氣王排名：</h5>
           <div className="pl-6">
             <p>
-              透過[連結點我]投票方式，獲得人氣投票數最高者，可獲得相對應獎金。
+              透過
+              <Link href="/vote" className="underline">
+                [連結點我]
+              </Link>
+              投票方式，獲得人氣投票數最高者，可獲得相對應獎金。
             </p>
           </div>
         </div>
