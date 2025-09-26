@@ -434,7 +434,7 @@ export function VoteForm({ onSuccess, initialSearchId }: VoteFormProps) {
                           field.onChange(parseInt(value))
                         }
                         value={field.value?.toString() ?? ''}
-                        className="grid max-h-60 grid-cols-2 gap-2 overflow-y-auto"
+                        className="grid max-h-60 grid-cols-1 gap-2 overflow-y-auto md:grid-cols-2"
                         disabled={isLoading}
                       >
                         {participants.map((participant) => (
@@ -449,7 +449,7 @@ export function VoteForm({ onSuccess, initialSearchId }: VoteFormProps) {
                             />
                             <label
                               htmlFor={`participant-${participant.id}`}
-                              className="w-full cursor-pointer select-none text-sm font-bold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                              className="w-full cursor-pointer select-none truncate text-sm font-bold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                             >
                               {`#${participant.id}  ${participant.nickname}`}
                             </label>
