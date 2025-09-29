@@ -61,7 +61,7 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="border-gray-300 px-3 last:border-r-0 hover:animate-pixel-glitch">
-              <Link href="#registration">競賽報名</Link>
+              <Link href="/#registration">競賽報名</Link>
             </li>
             <RecordDialog>
               <li className="border-gray-300 px-3 last:border-r-0 hover:animate-pixel-glitch cursor-pointer">
