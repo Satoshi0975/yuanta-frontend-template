@@ -138,7 +138,7 @@ const VoteDialog = ({ children, defaultOpen = false }: VoteDialogProps) => {
       open={isOpen}
     >
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="z-[9999] mx-auto max-h-screen max-w-md rounded-lg border-none bg-sts-orange-200 ring-0 [&>button]:hidden">
+      <DialogContent className="z-[9999] mx-auto max-h-screen max-w-4xl rounded-lg border-none bg-sts-orange-200 ring-0 [&>button]:hidden">
         <DialogHeader>
           <DialogTitle
             className="mx-auto mb-3 w-fit bg-sts-red-200 px-5 py-3 text-center text-xl text-white nes-corners"
