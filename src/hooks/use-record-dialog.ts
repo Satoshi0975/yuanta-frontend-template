@@ -97,6 +97,7 @@ interface RecordDialogState {
     accounts?: LoginResponse['accounts'];
     selectedAccountId?: string;
     resultsData?: RecordResponse;
+    noDataMessage?: string;
     errorMessage?: string;
     fieldErrors?: Record<string, string>;
   };
@@ -221,6 +222,7 @@ export const useRecordDialog = (initialStep: RecordDialogStep = 'login') => {
             ...prev.data,
             selectedAccountId: fullAccount,
             resultsData: mockData,
+            noDataMessage: undefined,
           },
         }));
       } else {
@@ -234,6 +236,22 @@ export const useRecordDialog = (initialStep: RecordDialogStep = 'login') => {
               ...prev.data,
               selectedAccountId: fullAccount,
               resultsData: response.data as RecordResponse,
+              noDataMessage: undefined,
+            },
+          }));
+        } else if (
+          !response.success &&
+          (response.errorCode === 'NO_REGISTER' ||
+            response.errorCode === 'NO_RECORD')
+        ) {
+          // 查無成績時，保持在 record 頁面，清除結果資料並設置提示訊息
+          setDialogState((prev) => ({
+            step: 'record',
+            data: {
+              ...prev.data,
+              selectedAccountId: fullAccount,
+              resultsData: undefined,
+              noDataMessage: response.message || '尚無成績資料或尚未報名',
             },
           }));
         } else {
@@ -241,6 +259,7 @@ export const useRecordDialog = (initialStep: RecordDialogStep = 'login') => {
         }
       }
     } catch (error) {
+      // 真正的錯誤（如網路錯誤）才跳到 error 頁面
       setError(error instanceof Error ? error.message : '查詢失敗');
     } finally {
       setIsLoading(false);

@@ -18,6 +18,7 @@ interface RecordDisplayProps {
   resultsData?: RecordResponse;
   selectedAccount?: string;
   isLoading: boolean;
+  noDataMessage?: string;
   onAccountSelect: (fullAccount: string) => void;
 }
 
@@ -26,6 +27,7 @@ const RecordDisplay = ({
   resultsData,
   selectedAccount,
   isLoading,
+  noDataMessage,
   onAccountSelect,
 }: RecordDisplayProps) => {
   const [selectedValue, setSelectedValue] = useState<string>(
@@ -265,8 +267,15 @@ const RecordDisplay = ({
         </div>
       )}
 
+      {/* 查無成績時的提示 */}
+      {!isLoading && !resultsData && selectedAccount && noDataMessage && (
+        <div className="py-8 text-center">
+          <p className="text-orange-600">{noDataMessage}</p>
+        </div>
+      )}
+
       {/* 無選擇帳號時的提示 */}
-      {!isLoading && !resultsData && accounts.length > 0 && (
+      {!isLoading && !resultsData && accounts.length > 0 && !selectedAccount && (
         <div className="py-8 text-center">
           <p className="text-gray-600">請選擇帳號以查詢成績</p>
         </div>

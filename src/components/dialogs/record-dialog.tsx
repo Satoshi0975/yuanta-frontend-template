@@ -88,6 +88,7 @@ const RecordDialog = ({
             resultsData={dialogState.data?.resultsData}
             selectedAccount={dialogState.data?.selectedAccountId}
             isLoading={isLoading}
+            noDataMessage={dialogState.data?.noDataMessage}
             onAccountSelect={handleAccountResults}
           />
         );
