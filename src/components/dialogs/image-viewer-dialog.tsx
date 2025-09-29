@@ -34,7 +34,7 @@ const ImageViewerDialog = ({
           {children}
         </div>
       </DialogTrigger>
-      <DialogContent className="z-[9999] mx-auto h-[90vh] max-w-[95vw] rounded-lg border-none bg-white p-4 pt-10 ring-0 md:max-w-5xl">
+      <DialogContent className="z-[9999] mx-auto h-[90vh] max-w-full rounded-lg border-none bg-white p-4 pt-10 ring-0 md:max-w-7xl">
         <div className="h-full w-full overflow-auto">
           <Image
             src={src}
