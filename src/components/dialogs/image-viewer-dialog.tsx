@@ -1,6 +1,11 @@
 'use client';
 
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import Image from '@/lib/image';
 import { cn } from '@/lib/utils';
 import type { StaticImageData } from 'next/image';
@@ -35,6 +40,7 @@ const ImageViewerDialog = ({
         </div>
       </DialogTrigger>
       <DialogContent className="z-[9999] mx-auto h-[90vh] max-w-full rounded-lg border-none bg-white p-4 pt-10 ring-0 md:max-w-7xl">
+        <DialogTitle className="hidden"></DialogTitle>
         <div className="h-full w-full overflow-auto">
           <Image
             src={src}
