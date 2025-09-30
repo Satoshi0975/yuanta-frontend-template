@@ -41,7 +41,7 @@ class ApiClient {
       const data = await response.json();
 
       // 如果 HTTP 狀態碼不是 2xx，但後端返回了 JSON，使用後端的錯誤訊息
-      if (!response.ok && data.success === false) {
+      if (data.success === false) {
         return data;
       }
 

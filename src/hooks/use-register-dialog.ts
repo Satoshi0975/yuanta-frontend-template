@@ -127,7 +127,9 @@ export const useRegisterDialog = (
         }
       }
     } catch (error) {
-      setError(error instanceof Error ? error.message : '登入失敗');
+      setError(
+        error instanceof Error ? error.message : '系統錯誤，請稍後再試。'
+      );
     } finally {
       setIsLoading(false);
     }
@@ -186,7 +188,7 @@ export const useRegisterDialog = (
             ).fieldErrors = response.fieldErrors;
             throw error;
           } else {
-            throw new Error(response.message || '報名失敗');
+            throw new Error(response.message || '系統錯誤，請稍後再試。');
           }
         }
       }

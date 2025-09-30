@@ -196,8 +196,8 @@ export const useRecordDialog = (initialStep: RecordDialogStep = 'login') => {
           }));
         }
       }
-    } catch (error) {
-      setError(error instanceof Error ? error.message : '登入失敗');
+    } catch {
+      setError('系統錯誤，請稍後再試。');
     } finally {
       setIsLoading(false);
     }
@@ -258,9 +258,9 @@ export const useRecordDialog = (initialStep: RecordDialogStep = 'login') => {
           throw new Error(response.message || '查詢失敗');
         }
       }
-    } catch (error) {
+    } catch {
       // 真正的錯誤（如網路錯誤）才跳到 error 頁面
-      setError(error instanceof Error ? error.message : '查詢失敗');
+      setError('查詢失敗，請稍後再試。');
     } finally {
       setIsLoading(false);
     }
