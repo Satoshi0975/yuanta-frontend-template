@@ -11,16 +11,19 @@ import { Input } from '@/components/ui/input';
 import { loginSchema, type LoginFormData } from '@/lib/validations';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { LoaderCircle, Lock, UserCircle2 } from 'lucide-react';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
-import Captcha from '../captcha';
+import Captcha, { CaptchaRef } from '../captcha';
 
 interface LoginInFormProps {
-  onSubmit: (values: {
-    username: string;
-    password: string;
-    captcha: string;
-  }) => Promise<void>;
+  onSubmit: (
+    values: {
+      username: string;
+      password: string;
+      captcha: string;
+    },
+    onLoginFailed: () => void
+  ) => Promise<void>;
   isLoading?: boolean;
   error?: string | null;
   fieldErrors?: Record<string, string>;
@@ -41,6 +44,8 @@ const LoginInForm = ({
     },
   });
 
+  const captchaRef = useRef<CaptchaRef>(null);
+
   // 當 fieldErrors 改變時，設置表單錯誤
   useEffect(() => {
     // 先清除所有之前的 server 錯誤
@@ -58,12 +63,11 @@ const LoginInForm = ({
   }, [fieldErrors, form]);
 
   const handleSubmit = async (values: LoginFormData) => {
-    try {
-      await onSubmit(values);
-    } catch {
-      // 登入失敗時重新整理驗證碼
+    await onSubmit(values, () => {
+      // 登入失敗的回調：刷新驗證碼並清空欄位
+      captchaRef.current?.handleRefresh();
       form.setValue('captcha', '');
-    }
+    });
   };
 
   return (
@@ -138,7 +142,7 @@ const LoginInForm = ({
                     />
                   </FormControl>
 
-                  <Captcha />
+                  <Captcha ref={captchaRef} />
                 </div>
                 <FormMessage />
               </FormItem>

@@ -78,11 +78,14 @@ export const useRegisterDialog = (
   };
 
   // 處理登入
-  const handleLogin = async (values: {
-    username: string;
-    password: string;
-    captcha: string;
-  }) => {
+  const handleLogin = async (
+    values: {
+      username: string;
+      password: string;
+      captcha: string;
+    },
+    onLoginFailed?: () => void
+  ) => {
     setIsLoading(true);
     try {
       // 測試模式使用模擬資料
@@ -105,7 +108,6 @@ export const useRegisterDialog = (
         );
 
         if (response.success && response.data) {
-          console.log(response.fieldErrors);
           setDialogState({
             step: 'registration',
             data: {
@@ -114,6 +116,9 @@ export const useRegisterDialog = (
             },
           });
         } else {
+          // 登入失敗 - 呼叫回調
+          onLoginFailed?.();
+
           // 處理 fieldErrors - 如果有欄位錯誤，保持在登入頁面並顯示錯誤
           setDialogState((prev) => ({
             step: 'login',
@@ -127,6 +132,8 @@ export const useRegisterDialog = (
         }
       }
     } catch (error) {
+      // 發生錯誤 - 呼叫回調
+      onLoginFailed?.();
       setError(
         error instanceof Error ? error.message : '系統錯誤，請稍後再試。'
       );

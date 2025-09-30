@@ -29,7 +29,7 @@ const ScoreExplanationDialog = ({ children }: ScoreExplanationDialogProps) => {
                       </span>{' '}
                       +{' '}
                       <span className="rounded-md bg-sts-blue-400 px-2 py-0.5">
-                        證券
+                        選擇權
                       </span>{' '}
                       總積分 = <br className="md:hidden" />①{' '}
                       <span className="underline">報酬率</span>積分 +{' '}
