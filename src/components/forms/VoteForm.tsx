@@ -190,7 +190,7 @@ export function VoteForm({ onSuccess, initialSearchId }: VoteFormProps) {
                     className="gold-rotate-3d h-5 w-auto"
                   />
                   <span>
-                    是否為期貨戶{' '}
+                    是否有元大期貨帳戶{' '}
                     <span className="text-sm font-normal text-gray-400">
                       必填
                     </span>

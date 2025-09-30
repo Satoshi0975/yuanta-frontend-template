@@ -142,7 +142,7 @@ const RegisterDialog = ({
                 歡迎分享給好朋友們，到人氣王專區為您投票，
                 <br />
                 <span className="font-extrabold">
-                  天天投票人，也能抽價值40萬好禮！{' '}
+                  天天投票，抽總價值4萬好禮！{' '}
                 </span>
                 一起為期貨戰士加油打氣~
               </p>
