@@ -4,7 +4,7 @@ import gold from '@/assets/images/element/gold.png';
 import hard from '@/assets/images/element/hard.png';
 import start from '@/assets/images/element/start.png';
 import ticket from '@/assets/images/element/ticket.png';
-import towHard from '@/assets/images/element/tow-hard.png';
+// import towHard from '@/assets/images/element/tow-hard.png';
 import Image from '@/lib/image';
 import Wolf from '@/assets/character/wolf.svg';
 import { Button } from '../nes/button';
@@ -83,7 +83,7 @@ export function DecorationIcons({ variant, className = '' }: DecorationIconsProp
             <Image src={gold} alt="gold" className="hidden h-8 w-auto sm:block gold-rotate-3d" />
             <Image src={towHard} alt="towHard" className="h-8 w-auto" /> */}
               <RankingDialog>
-                <Button variant="secondary" className="ml-auto mt-3 pb-2 pt-1 text-xl md:mr-3">主任務即時排名</Button>
+                <Button variant="secondary" className="ml-auto mt-3 pb-2 pt-1 text-xl md:mr-3">主要任務即時</Button>
               </RankingDialog>
           </div>
         </div>

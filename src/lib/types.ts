@@ -95,6 +95,7 @@ export interface VersionResponse {
 
 // 排名查詢相關
 export interface RankingData {
+  id: number;
   ranking: number;
   participantNickname: string;
   score: number;

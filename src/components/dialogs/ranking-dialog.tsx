@@ -82,44 +82,110 @@ const THEME_COLORS: Record<TitleColor, ColorClasses> = {
 const mockRankingData: RankingResponse = {
   mainRankingList: [
     {
+      id: 847,
       ranking: 1,
-      participantNickname: '交易達人交易達人交易達人交易達人交易達人交易達人',
+      participantNickname: 'TradeMasterProMaxUltraSuper2024',
       score: 1250.5,
     },
-    { ranking: 2, participantNickname: '投資高手', score: 1180.25 },
-    { ranking: 3, participantNickname: '期貨王者', score: 1150.75 },
-    { ranking: 4, participantNickname: '獲利專家', score: 1120.0 },
     {
+      id: 235,
+      ranking: 2,
+      participantNickname: 'InvestorPro88',
+      score: 1180.2528,
+    },
+    {
+      id: 672,
+      ranking: 3,
+      participantNickname: 'FuturesKing99',
+      score: 1150.75008,
+    },
+    {
+      id: 491,
+      ranking: 4,
+      participantNickname: 'ProfitExpert2024',
+      score: 1120.0,
+    },
+    {
+      id: 128,
       ranking: 5,
-      participantNickname:
-        '穩健投資交易達人交易達人交易達人交易達人交易達人交易達人',
+      participantNickname: 'StableInvestorProMaxEliteTrader',
       score: 1095.5,
     },
-    { ranking: 6, participantNickname: '市場先鋒', score: 1070.25 },
-    { ranking: 7, participantNickname: '交易戰神', score: 1045.0 },
-    { ranking: 8, participantNickname: '期貨達人', score: 1020.75 },
-    { ranking: 9, participantNickname: '投資贏家', score: 995.5 },
-    { ranking: 10, participantNickname: '操盤高手', score: 970.25 },
-    { ranking: 11, participantNickname: '獲利大師', score: 945.0 },
-    { ranking: 12, participantNickname: '交易精英', score: 920.75 },
-    { ranking: 13, participantNickname: '市場贏家', score: 895.5 },
-    { ranking: 14, participantNickname: '期貨專家', score: 870.25 },
-    { ranking: 15, participantNickname: '投資達人', score: 845.0 },
-    { ranking: 16, participantNickname: '交易大師', score: 820.75 },
-    { ranking: 17, participantNickname: '獲利高手', score: 795.5 },
-    { ranking: 18, participantNickname: '穩定獲利', score: 770.25 },
-    { ranking: 19, participantNickname: '市場專家', score: 745.0 },
-    { ranking: 20, participantNickname: '期貨贏家', score: 720.5 },
+    {
+      id: 903,
+      ranking: 6,
+      participantNickname: 'MarketPioneer',
+      score: 1070.25,
+    },
+    {
+      id: 567,
+      ranking: 7,
+      participantNickname: 'TradeWarrior77',
+      score: 1045.0283,
+    },
+    {
+      id: 342,
+      ranking: 8,
+      participantNickname: 'FuturesMaster',
+      score: 1020.75,
+    },
+    { id: 789, ranking: 9, participantNickname: 'InvestWinner', score: 995.5 },
+    {
+      id: 156,
+      ranking: 10,
+      participantNickname: 'TradingPro123',
+      score: 970.25,
+    },
+    { id: 621, ranking: 11, participantNickname: 'ProfitGuru88', score: 945.0 },
+    {
+      id: 438,
+      ranking: 12,
+      participantNickname: 'TradeElite99',
+      score: 920.75,
+    },
+    { id: 874, ranking: 13, participantNickname: 'MarketWinner', score: 895.5 },
+    {
+      id: 293,
+      ranking: 14,
+      participantNickname: 'FuturesExpert',
+      score: 870.25,
+    },
+    { id: 715, ranking: 15, participantNickname: 'InvestMaster', score: 845.0 },
+    { id: 526, ranking: 16, participantNickname: 'TradingGuru', score: 820.75 },
+    { id: 981, ranking: 17, participantNickname: 'ProfitHunter', score: 795.5 },
+    {
+      id: 364,
+      ranking: 18,
+      participantNickname: 'StableProfit',
+      score: 770.25,
+    },
+    { id: 207, ranking: 19, participantNickname: 'MarketExpert', score: 745.0 },
+    { id: 658, ranking: 20, participantNickname: 'FuturesWin', score: -720.5 },
   ],
   profitRateRankingList: [
-    { ranking: 1, participantNickname: '報酬之王', score: 85.67 },
-    { ranking: 2, participantNickname: '獲利高手', score: 72.45 },
-    { ranking: 3, participantNickname: '投資達人', score: 68.23 },
+    {
+      id: 412,
+      ranking: 1,
+      participantNickname: 'ReturnKing2024',
+      score: 85.67,
+    },
+    {
+      id: 736,
+      ranking: 2,
+      participantNickname: 'ProfitMaster88',
+      score: 72.45,
+    },
+    { id: 289, ranking: 3, participantNickname: 'InvestPro99', score: -68.233 },
   ],
   tradeCountRankingList: [
-    { ranking: 1, participantNickname: '交易狂人', score: 9876 },
-    { ranking: 2, participantNickname: '頻繁交易', score: 8543 },
-    { ranking: 3, participantNickname: '活躍投資', score: 7892 },
+    { id: 594, ranking: 1, participantNickname: 'ActiveTrader99', score: 9876 },
+    { id: 821, ranking: 2, participantNickname: 'FrequentTrade', score: 8543 },
+    {
+      id: 167,
+      ranking: 3,
+      participantNickname: 'BusyInvestor',
+      score: -7892.55666,
+    },
   ],
 };
 
@@ -166,10 +232,14 @@ const SmallRankingCard = ({
       {item.ranking}
     </div>
     <div className="min-w-0 flex-1 truncate text-left font-medium">
-      {item.participantNickname}
+      #{item.id} {item.participantNickname}
     </div>
     <div className="flex-shrink-0 font-sans text-lg font-bold text-sts-text">
-      {item.score.toLocaleString()} {scoreLabel}
+      {item.score.toLocaleString(undefined, {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2,
+      })}{' '}
+      {scoreLabel}
     </div>
   </div>
 );
@@ -196,7 +266,7 @@ const LargeRankingCard = ({
     )}
   >
     <h3 className="truncate py-5 text-center text-xl font-bold">
-      {item.participantNickname}
+      #{item.id} {item.participantNickname}
     </h3>
     <Image
       src={getRankImage(item.ranking)}
@@ -223,7 +293,11 @@ const LargeRankingCard = ({
           colors.text
         )}
       >
-        {item.score.toLocaleString()} {scoreLabel}
+        {item.score.toLocaleString(undefined, {
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 2,
+        })}{' '}
+        {scoreLabel}
       </div>
     </div>
   </div>
@@ -249,6 +323,7 @@ const RankingDialog = ({ children }: RankingDialogProps) => {
 
       // 正式模式：呼叫 API
       const response = await apiClient.get<RankingResponse>('/api/ranking');
+      console.log(response);
       if (response.success && response.data) {
         setRankingData(response.data);
       } else {
@@ -287,7 +362,7 @@ const RankingDialog = ({ children }: RankingDialogProps) => {
               <>
                 {/* 主競賽排名 - 顯示前20名 */}
                 <div className="mb-8">
-                  <h3 className="mb-4 text-left font-cubic text-3xl font-bold text-sts-text">
+                  <h3 className="mb-4 text-left font-cubic text-xl font-bold text-sts-text sm:text-3xl">
                     主要任務 | TOP20排名
                   </h3>
 
@@ -340,7 +415,7 @@ const RankingDialog = ({ children }: RankingDialogProps) => {
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                   {/* 報酬率排名 - 只顯示前三名 */}
                   <div className="mb-8">
-                    <h3 className="mb-4 text-left font-cubic text-3xl font-bold text-sts-text">
+                    <h3 className="mb-4 text-left font-cubic text-xl font-bold text-sts-text sm:text-3xl">
                       報酬率王排名
                     </h3>
                     <div className="grid grid-cols-1 gap-2">
@@ -367,7 +442,7 @@ const RankingDialog = ({ children }: RankingDialogProps) => {
 
                   {/* 交易口數排名 - 只顯示前三名 */}
                   <div className="mb-8">
-                    <h3 className="mb-4 text-left font-cubic text-3xl font-bold text-sts-text">
+                    <h3 className="mb-4 text-left font-cubic text-xl font-bold text-sts-text sm:text-3xl">
                       口數王排名
                     </h3>
                     <div className="grid grid-cols-1 gap-2">
