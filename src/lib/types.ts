@@ -93,6 +93,19 @@ export interface VersionResponse {
   version: string;
 }
 
+// 排名查詢相關
+export interface RankingData {
+  ranking: number;
+  participantNickname: string;
+  score: number;
+}
+
+export interface RankingResponse {
+  mainRankingList: RankingData[];
+  profitRateRankingList: RankingData[];
+  tradeCountRankingList: RankingData[];
+}
+
 // 對話框狀態管理
 export type RegisterDialogStep = 'login' | 'registration' | 'success' | 'error';
 

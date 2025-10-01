@@ -9,6 +9,7 @@ import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogContent,
+  AlertDialogDescription,
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
@@ -51,7 +52,7 @@ export function VoteForm({ onSuccess, initialSearchId }: VoteFormProps) {
       voterPhone: '',
       hasFuturesAccount: undefined,
       location: undefined,
-      hasSecuritiesAccount: false,
+      hasSecuritiesAccount: undefined,
     },
   });
 
@@ -235,168 +236,211 @@ export function VoteForm({ onSuccess, initialSearchId }: VoteFormProps) {
               </FormItem>
             )}
           />
-
-          <FormField
-            control={form.control}
-            name="location"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="-ml-1 flex items-center gap-2 font-cubic text-lg font-bold">
-                  <Image
-                    src={gold}
-                    alt="gold"
-                    className="gold-rotate-3d h-5 w-auto"
-                  />
-                  想了解更多期貨內容，請問居住地區？
-                </FormLabel>
-                <FormDescription>
-                  (※勾選此項，我們將由專人致電聯繫，提供期貨相關資訊。)
-                </FormDescription>
-                <FormControl>
-                  <div className="space-y-3">
-                    <RadioGroup
-                      onValueChange={(value) => {
-                        if (value !== '其他') {
-                          setOtherLocation('');
-                          field.onChange(value);
-                        } else {
-                          field.onChange(otherLocation || '其他');
-                        }
-                      }}
-                      value={
-                        field.value === otherLocation && otherLocation
-                          ? '其他'
-                          : (field.value ?? '')
-                      }
-                      className="grid grid-cols-3 gap-3"
-                      disabled={isLoading}
-                    >
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem
-                          value="台北"
-                          id="location-taipei"
-                          className="rounded-none border-2 border-black bg-white data-[state=checked]:bg-black"
-                        />
-                        <label
-                          htmlFor="location-taipei"
-                          className="cursor-pointer select-none text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                        >
-                          台北
-                        </label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem
-                          value="新竹"
-                          id="location-hsinchu"
-                          className="rounded-none border-2 border-black bg-white data-[state=checked]:bg-black"
-                        />
-                        <label
-                          htmlFor="location-hsinchu"
-                          className="cursor-pointer select-none text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                        >
-                          新竹
-                        </label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem
-                          value="台中"
-                          id="location-taichung"
-                          className="rounded-none border-2 border-black bg-white data-[state=checked]:bg-black"
-                        />
-                        <label
-                          htmlFor="location-taichung"
-                          className="cursor-pointer select-none text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                        >
-                          台中
-                        </label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem
-                          value="台南"
-                          id="location-tainan"
-                          className="rounded-none border-2 border-black bg-white data-[state=checked]:bg-black"
-                        />
-                        <label
-                          htmlFor="location-tainan"
-                          className="cursor-pointer select-none text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                        >
-                          台南
-                        </label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem
-                          value="高雄"
-                          id="location-kaohsiung"
-                          className="rounded-none border-2 border-black bg-white data-[state=checked]:bg-black"
-                        />
-                        <label
-                          htmlFor="location-kaohsiung"
-                          className="cursor-pointer select-none text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                        >
-                          高雄
-                        </label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem
-                          value="其他"
-                          id="location-other"
-                          className="rounded-none border-2 border-black bg-white data-[state=checked]:bg-black"
-                        />
-                        <label
-                          htmlFor="location-other"
-                          className="cursor-pointer select-none text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                        >
-                          其他
-                        </label>
-                      </div>
-                    </RadioGroup>
-
-                    {/* 當選擇「其他」時顯示輸入框 */}
-                    {(field.value === '其他' ||
-                      field.value === otherLocation) && (
-                      <Input
-                        placeholder="請輸入您的居住地區"
-                        value={otherLocation}
-                        onChange={(e) => {
-                          const value = e.target.value;
-                          setOtherLocation(value);
-                          field.onChange(value || '其他');
-                        }}
-                        disabled={isLoading}
-                        className="mt-2 w-full max-w-xs rounded-none border-2 border-black bg-white"
+          {form.watch('hasFuturesAccount') === false && (
+            <>
+              <FormField
+                control={form.control}
+                name="location"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="-ml-1 flex items-center gap-2 font-cubic text-lg font-bold">
+                      <Image
+                        src={gold}
+                        alt="gold"
+                        className="gold-rotate-3d h-5 w-auto"
                       />
-                    )}
-                  </div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+                      想了解更多期貨內容，請問居住地區？
+                    </FormLabel>
+                    <FormDescription>
+                      (※勾選此項，我們將由專人致電聯繫，提供期貨相關資訊。)
+                    </FormDescription>
+                    <FormControl>
+                      <div className="space-y-3">
+                        <RadioGroup
+                          onValueChange={(value) => {
+                            if (value !== '其他') {
+                              setOtherLocation('');
+                              field.onChange(value);
+                            } else {
+                              field.onChange(otherLocation || '其他');
+                            }
+                          }}
+                          value={
+                            field.value === otherLocation && otherLocation
+                              ? '其他'
+                              : (field.value ?? '')
+                          }
+                          className="grid grid-cols-3 gap-3"
+                          disabled={isLoading}
+                        >
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem
+                              value="台北"
+                              id="location-taipei"
+                              className="rounded-none border-2 border-black bg-white data-[state=checked]:bg-black"
+                              onClick={(e) => {
+                                if (field.value === '台北') {
+                                  e.preventDefault();
+                                  field.onChange(undefined);
+                                }
+                              }}
+                            />
+                            <label
+                              htmlFor="location-taipei"
+                              className="cursor-pointer select-none text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                            >
+                              台北
+                            </label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem
+                              value="新竹"
+                              id="location-hsinchu"
+                              className="rounded-none border-2 border-black bg-white data-[state=checked]:bg-black"
+                              onClick={(e) => {
+                                if (field.value === '新竹') {
+                                  e.preventDefault();
+                                  field.onChange(undefined);
+                                }
+                              }}
+                            />
+                            <label
+                              htmlFor="location-hsinchu"
+                              className="cursor-pointer select-none text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                            >
+                              新竹
+                            </label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem
+                              value="台中"
+                              id="location-taichung"
+                              className="rounded-none border-2 border-black bg-white data-[state=checked]:bg-black"
+                              onClick={(e) => {
+                                if (field.value === '台中') {
+                                  e.preventDefault();
+                                  field.onChange(undefined);
+                                }
+                              }}
+                            />
+                            <label
+                              htmlFor="location-taichung"
+                              className="cursor-pointer select-none text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                            >
+                              台中
+                            </label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem
+                              value="台南"
+                              id="location-tainan"
+                              className="rounded-none border-2 border-black bg-white data-[state=checked]:bg-black"
+                              onClick={(e) => {
+                                if (field.value === '台南') {
+                                  e.preventDefault();
+                                  field.onChange(undefined);
+                                }
+                              }}
+                            />
+                            <label
+                              htmlFor="location-tainan"
+                              className="cursor-pointer select-none text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                            >
+                              台南
+                            </label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem
+                              value="高雄"
+                              id="location-kaohsiung"
+                              className="rounded-none border-2 border-black bg-white data-[state=checked]:bg-black"
+                              onClick={(e) => {
+                                if (field.value === '高雄') {
+                                  e.preventDefault();
+                                  field.onChange(undefined);
+                                }
+                              }}
+                            />
+                            <label
+                              htmlFor="location-kaohsiung"
+                              className="cursor-pointer select-none text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                            >
+                              高雄
+                            </label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem
+                              value="其他"
+                              id="location-other"
+                              className="rounded-none border-2 border-black bg-white data-[state=checked]:bg-black"
+                              onClick={(e) => {
+                                if (
+                                  field.value === otherLocation &&
+                                  otherLocation
+                                ) {
+                                  e.preventDefault();
+                                  field.onChange(undefined);
+                                  setOtherLocation('');
+                                }
+                              }}
+                            />
+                            <label
+                              htmlFor="location-other"
+                              className="cursor-pointer select-none text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                            >
+                              其他
+                            </label>
+                          </div>
+                        </RadioGroup>
 
-          <FormField
-            control={form.control}
-            name="hasSecuritiesAccount"
-            render={({ field }) => (
-              <FormItem className="!mt-3">
-                <div className="flex items-center space-x-2">
-                  <Checkbox
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                    id="has-securities-account"
-                    className="rounded-none border-2 border-black bg-white data-[state=checked]:bg-black"
-                    disabled={isLoading}
-                  />
-                  <label
-                    htmlFor="has-securities-account"
-                    className="cursor-pointer select-none text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                  >
-                    本身就有元大證券帳戶，想加開期貨戶
-                  </label>
-                </div>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+                        {/* 當選擇「其他」時顯示輸入框 */}
+                        {(field.value === '其他' ||
+                          field.value === otherLocation) && (
+                          <Input
+                            placeholder="請輸入您的居住地區"
+                            value={otherLocation}
+                            onChange={(e) => {
+                              const value = e.target.value;
+                              setOtherLocation(value);
+                              field.onChange(value || '其他');
+                            }}
+                            disabled={isLoading}
+                            className="mt-2 w-full max-w-xs rounded-none border-2 border-black bg-white"
+                          />
+                        )}
+                      </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="hasSecuritiesAccount"
+                render={({ field }) => (
+                  <FormItem className="!mt-3">
+                    <div className="flex items-center space-x-2">
+                      <Checkbox
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                        id="has-securities-account"
+                        className="rounded-none border-2 border-black bg-white data-[state=checked]:bg-black"
+                        disabled={isLoading}
+                      />
+                      <label
+                        htmlFor="has-securities-account"
+                        className="cursor-pointer select-none text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      >
+                        本身就有元大證券帳戶，想加開期貨戶
+                      </label>
+                    </div>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </>
+          )}
 
           {/* 參賽者搜尋和選擇 */}
           <div className="space-y-3">
@@ -496,7 +540,12 @@ export function VoteForm({ onSuccess, initialSearchId }: VoteFormProps) {
               投票成功！
             </AlertDialogTitle>
           </AlertDialogHeader>
-          <div className="flex justify-center pt-4">
+          <div className="flex flex-col items-center justify-center pt-4">
+            <AlertDialogDescription className="-mt-4 mb-3 text-center text-lg text-sts-text">
+              歡迎明日再來投票
+              <br />
+              日日投 中獎機率越高～
+            </AlertDialogDescription>
             <AlertDialogAction
               onClick={() => setShowSuccessDialog(false)}
               className="nes-sm-corners border-black bg-sts-blue-300 px-6 py-2 font-cubic font-bold hover:bg-sts-blue-400"
