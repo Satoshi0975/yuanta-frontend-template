@@ -353,7 +353,9 @@ const RankingDialog = ({ children }: RankingDialogProps) => {
         <div className="mx-1 h-full">
           <ScrollArea className="h-full max-h-[calc(100vh-200px)] p-1">
             {isLoading && (
-              <div className="py-8 text-center text-sts-text">載入中...</div>
+              <div className="py-8 text-center font-cubic text-2xl font-bold text-gray-600">
+                載入中...
+              </div>
             )}
             {error && (
               <div className="py-8 text-center text-red-500">{error}</div>
@@ -471,7 +473,7 @@ const RankingDialog = ({ children }: RankingDialogProps) => {
             )}
             <ScrollBar />
           </ScrollArea>
-          <p className="mt-2 text-sm text-gray-500">
+          <p className="pb-2 text-sm text-gray-500">
             * 以活動結束為憑，排名僅供參考。
           </p>
         </div>
