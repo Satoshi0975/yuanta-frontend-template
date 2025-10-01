@@ -5,8 +5,9 @@ import { SectionCard } from '@/components/section-card';
 import { DecorationIcons } from '@/components/ui/decoration-icons';
 import { PrizeTable } from '@/components/ui/prize-table';
 import Image from '@/lib/image';
-import ScoreExplanationDialog from '../dialogs/score-explanation-dialog';
 import OtherRanksDialog from '../dialogs/other-ranks-dialog';
+import RankingDialog from '../dialogs/ranking-dialog';
+import ScoreExplanationDialog from '../dialogs/score-explanation-dialog';
 
 export function MainMissionSection() {
   const mainPrizeData = [
@@ -121,6 +122,11 @@ export function MainMissionSection() {
               data={rightTableData}
             />
           </div>
+          <RankingDialog>
+            <Button className="mx-auto mt-3 pb-4 pt-2 text-2xl">
+              主要任務排名
+            </Button>
+          </RankingDialog>
         </div>
       </SectionCard>
     </BounceOnScroll>
