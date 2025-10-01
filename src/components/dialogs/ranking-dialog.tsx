@@ -59,19 +59,19 @@ const RANK_COLORS: Record<1 | 2 | 3, Omit<ColorClasses, 'rankBg'>> = {
 
 const THEME_COLORS: Record<TitleColor, ColorClasses> = {
   green: {
-    border: 'border-sts-green-200',
+    border: 'nes-sts-green-300',
     bg: 'bg-sts-green-200',
     text: 'text-sts-green-500',
     rankBg: 'bg-sts-green-200',
   },
   orange: {
-    border: 'border-sts-orange-400',
+    border: 'nes-sts-gray-400',
     bg: 'bg-sts-orange-400',
     text: 'text-sts-orange-500',
     rankBg: 'bg-sts-orange-400',
   },
   blue: {
-    border: 'border-sts-blue-500',
+    border: 'nes-sts-gray-200',
     bg: 'bg-sts-blue-500',
     text: 'text-sts-blue-500',
     rankBg: 'bg-sts-blue-500',
@@ -227,7 +227,7 @@ const SmallRankingCard = ({
     className="nes-sm-corners flex items-center gap-3 bg-white p-3"
   >
     <div
-      className={`flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full font-cubic font-bold text-white ${colors.rankBg || colors.bg}`}
+      className={`flex h-10 w-10 flex-shrink-0 flex-nowrap items-center justify-center rounded-full font-cubic text-xl font-bold text-white nes-corners ${colors.rankBg || colors.bg}`}
     >
       {item.ranking}
     </div>
