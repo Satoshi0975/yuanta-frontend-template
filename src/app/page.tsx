@@ -4,6 +4,7 @@ import { FixedBg } from '@/components/sections/fixed-bg';
 import { HeroSection } from '@/components/sections/hero-section';
 import HowToCreateAccount from '@/components/sections/how-to-create-account';
 import { MainMissionSection } from '@/components/sections/main-mission-section';
+import { MainRankingSection } from '@/components/sections/main-ranking-section';
 import { NewbieVillageSection } from '@/components/sections/newbie-village-section';
 import { PopularityRankingSection } from '@/components/sections/popularity-ranking-section';
 import { SkyScroll } from '@/components/sections/sky-scroll';
@@ -31,6 +32,7 @@ export default function Home() {
                 <DailyMissionSection />
               </div>
               <MainMissionSection />
+              <MainRankingSection />
               <PopularityRankingSection />
             </div>
             <WayScroll />

@@ -7,9 +7,10 @@ import ticket from '@/assets/images/element/ticket.png';
 import towHard from '@/assets/images/element/tow-hard.png';
 import Image from '@/lib/image';
 import Wolf from '@/assets/character/wolf.svg';
+import Princess from '@/assets/character/princess.svg';
 
 interface DecorationIconsProps {
-  variant: 'newbie' | 'daily' | 'main' | 'popularity';
+  variant: 'newbie' | 'daily' | 'main' | 'popularity' | 'main-ranking';
   className?: string;
 }
 
@@ -79,6 +80,27 @@ export function DecorationIcons({ variant, className = '' }: DecorationIconsProp
             <Image src={gold} alt="gold" className="hidden h-8 w-auto sm:block gold-rotate-3d" />
             <Image src={gold} alt="gold" className="hidden h-8 w-auto sm:block gold-rotate-3d" />
             <Image src={gold} alt="gold" className="hidden h-8 w-auto sm:block gold-rotate-3d" />
+            <Image src={towHard} alt="towHard" className="h-8 w-auto" />
+          </div>
+        </div>
+      );
+
+    case 'main-ranking':
+      return (
+        <div className={`mx-3 mb-4 flex h-12 items-center justify-between gap-3 ${className}`}>
+          <div className="flex gap-3">
+            <Image src={fire} alt="fire" className="hidden h-8 w-auto sm:block gold-rotate-3d" />
+            <Image src={gold} alt="gold" className="hidden h-8 w-auto sm:block gold-rotate-3d" />
+            <Image src={gold} alt="gold" className="hidden h-8 w-auto sm:block gold-rotate-3d" />
+            <Image src={hard} alt="hard"  className="h-8 w-auto " />
+          </div>
+          <div className="relative ml-6 mr-6 flex h-12 w-24">
+            <Princess className="absolute -bottom-5 right-0 h-20 w-auto items-baseline" />
+          </div>
+          <div className="flex gap-3">
+            <Image src={gold} alt="gold" className="hidden h-8 w-auto sm:block gold-rotate-3d" />
+            <Image src={gold} alt="gold" className="hidden h-8 w-auto sm:block gold-rotate-3d" />
+            <Image src={towHard} alt="towHard" className="hidden h-8 w-auto sm:block gold-rotate-3d" />
             <Image src={towHard} alt="towHard" className="h-8 w-auto" />
           </div>
         </div>
