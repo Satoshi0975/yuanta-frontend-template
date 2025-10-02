@@ -340,8 +340,9 @@ const SubRankingSection = ({
   <div className="space-y-3">
     <SubRankingHeader title={title} color={color} />
     <div className="grid grid-cols-1 gap-2">
-      {[1, 2, 3].map((rank) => {
-        const item = data?.find((d) => d.ranking === rank);
+      {[0, 1, 2].map((index) => {
+        const item = data?.[index];
+        const rank = index + 1;
         const colors = getColorClasses(rank, color, false);
         return (
           <SmallRankingCard
