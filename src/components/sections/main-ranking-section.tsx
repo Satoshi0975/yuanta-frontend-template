@@ -24,7 +24,6 @@ interface ColorClasses {
 }
 
 // 常數定義
-const TOP_THREE_COUNT = 3;
 
 const RANK_IMAGES = {
   1: first,
@@ -73,113 +72,116 @@ const THEME_COLORS: Record<TitleColor, ColorClasses> = {
 
 // 測試模式的假資料
 const mockRankingData: RankingResponse = {
-  mainRankingList: [
-    {
-      id: 847,
-      ranking: 1,
-      participantNickname: 'TradeMasterProMaxUltraSuper2024',
-      score: 1250.5,
-    },
-    {
-      id: 235,
-      ranking: 2,
-      participantNickname: 'InvestorPro88',
-      score: 1180.2528,
-    },
-    {
-      id: 672,
-      ranking: 3,
-      participantNickname: 'FuturesKing99',
-      score: 1150.75008,
-    },
-    {
-      id: 491,
-      ranking: 4,
-      participantNickname: 'ProfitExpert2024',
-      score: 1120.0,
-    },
-    {
-      id: 128,
-      ranking: 5,
-      participantNickname: 'StableInvestorProMaxEliteTrader',
-      score: 1095.5,
-    },
-    {
-      id: 903,
-      ranking: 6,
-      participantNickname: 'MarketPioneer',
-      score: 1070.25,
-    },
-    {
-      id: 567,
-      ranking: 7,
-      participantNickname: 'TradeWarrior77',
-      score: 1045.0283,
-    },
-    {
-      id: 342,
-      ranking: 8,
-      participantNickname: 'FuturesMaster',
-      score: 1020.75,
-    },
-    { id: 789, ranking: 9, participantNickname: 'InvestWinner', score: 995.5 },
-    {
-      id: 156,
-      ranking: 10,
-      participantNickname: 'TradingPro123',
-      score: 970.25,
-    },
-    { id: 621, ranking: 11, participantNickname: 'ProfitGuru88', score: 945.0 },
-    {
-      id: 438,
-      ranking: 12,
-      participantNickname: 'TradeElite99',
-      score: 920.75,
-    },
-    { id: 874, ranking: 13, participantNickname: 'MarketWinner', score: 895.5 },
-    {
-      id: 293,
-      ranking: 14,
-      participantNickname: 'FuturesExpert',
-      score: 870.25,
-    },
-    { id: 715, ranking: 15, participantNickname: 'InvestMaster', score: 845.0 },
-    { id: 526, ranking: 16, participantNickname: 'TradingGuru', score: 820.75 },
-    { id: 981, ranking: 17, participantNickname: 'ProfitHunter', score: 795.5 },
-    {
-      id: 364,
-      ranking: 18,
-      participantNickname: 'StableProfit',
-      score: 770.25,
-    },
-    { id: 207, ranking: 19, participantNickname: 'MarketExpert', score: 745.0 },
-    { id: 658, ranking: 20, participantNickname: 'FuturesWin', score: -720.5 },
-  ],
-  profitRateRankingList: [
-    {
-      id: 412,
-      ranking: 1,
-      participantNickname: 'ReturnKing2024',
-      score: 85.67,
-    },
-    {
-      id: 736,
-      ranking: 2,
-      participantNickname: 'ProfitMaster88',
-      score: 72.45,
-    },
-    { id: 289, ranking: 3, participantNickname: 'InvestPro99', score: -68.233 },
-  ],
-  tradeCountRankingList: [
-    { id: 594, ranking: 1, participantNickname: 'ActiveTrader99', score: 9876 },
-    { id: 821, ranking: 2, participantNickname: 'FrequentTrade', score: 8543 },
-    {
-      id: 167,
-      ranking: 3,
-      participantNickname: 'BusyInvestor',
-      score: -7892.55666,
-    },
-  ],
+  mainRankingList: [],
+  profitRateRankingList: [],
+  tradeCountRankingList: [],
+  // mainRankingList: [
+  //   {
+  //     id: 847,
+  //     ranking: 1,
+  //     participantNickname: 'TradeMasterProMaxUltraSuper2024',
+  //     score: 1250.5,
+  //   },
+  //   {
+  //     id: 235,
+  //     ranking: 2,
+  //     participantNickname: 'InvestorPro88',
+  //     score: 1180.2528,
+  //   },
+  //   {
+  //     id: 672,
+  //     ranking: 3,
+  //     participantNickname: 'FuturesKing99',
+  //     score: 1150.75008,
+  //   },
+  //   {
+  //     id: 491,
+  //     ranking: 4,
+  //     participantNickname: 'ProfitExpert2024',
+  //     score: 1120.0,
+  //   },
+  //   {
+  //     id: 128,
+  //     ranking: 5,
+  //     participantNickname: 'StableInvestorProMaxEliteTrader',
+  //     score: 1095.5,
+  //   },
+  //   {
+  //     id: 903,
+  //     ranking: 6,
+  //     participantNickname: 'MarketPioneer',
+  //     score: 1070.25,
+  //   },
+  //   {
+  //     id: 567,
+  //     ranking: 7,
+  //     participantNickname: 'TradeWarrior77',
+  //     score: 1045.0283,
+  //   },
+  //   {
+  //     id: 342,
+  //     ranking: 8,
+  //     participantNickname: 'FuturesMaster',
+  //     score: 1020.75,
+  //   },
+  //   { id: 789, ranking: 9, participantNickname: 'InvestWinner', score: 995.5 },
+  //   {
+  //     id: 156,
+  //     ranking: 10,
+  //     participantNickname: 'TradingPro123',
+  //     score: 970.25,
+  //   },
+  //   { id: 621, ranking: 11, participantNickname: 'ProfitGuru88', score: 945.0 },
+  //   {
+  //     id: 438,
+  //     ranking: 12,
+  //     participantNickname: 'TradeElite99',
+  //     score: 920.75,
+  //   },
+  //   { id: 874, ranking: 13, participantNickname: 'MarketWinner', score: 895.5 },
+  //   {
+  //     id: 293,
+  //     ranking: 14,
+  //     participantNickname: 'FuturesExpert',
+  //     score: 870.25,
+  //   },
+  //   { id: 715, ranking: 15, participantNickname: 'InvestMaster', score: 845.0 },
+  //   { id: 526, ranking: 16, participantNickname: 'TradingGuru', score: 820.75 },
+  //   { id: 981, ranking: 17, participantNickname: 'ProfitHunter', score: 795.5 },
+  //   {
+  //     id: 364,
+  //     ranking: 18,
+  //     participantNickname: 'StableProfit',
+  //     score: 770.25,
+  //   },
+  //   { id: 207, ranking: 19, participantNickname: 'MarketExpert', score: 745.0 },
+  //   { id: 658, ranking: 20, participantNickname: 'FuturesWin', score: -720.5 },
+  // ],
+  // profitRateRankingList: [
+  //   {
+  //     id: 412,
+  //     ranking: 1,
+  //     participantNickname: 'ReturnKing2024',
+  //     score: 85.67,
+  //   },
+  //   {
+  //     id: 736,
+  //     ranking: 2,
+  //     participantNickname: 'ProfitMaster88',
+  //     score: 72.45,
+  //   },
+  //   { id: 289, ranking: 3, participantNickname: 'InvestPro99', score: -68.233 },
+  // ],
+  // tradeCountRankingList: [
+  //   { id: 594, ranking: 1, participantNickname: 'ActiveTrader99', score: 9876 },
+  //   { id: 821, ranking: 2, participantNickname: 'FrequentTrade', score: 8543 },
+  //   {
+  //     id: 167,
+  //     ranking: 3,
+  //     participantNickname: 'BusyInvestor',
+  //     score: -7892.55666,
+  //   },
+  // ],
 };
 
 // 工具函數
@@ -203,7 +205,7 @@ const getColorClasses = (
 
 // 子元件：小排名卡片
 interface SmallRankingCardProps {
-  ranking?: number;
+  ranking: number;
   item?: RankingData;
   colors: ColorClasses;
   scoreLabel: string;
@@ -218,13 +220,13 @@ const SmallRankingCard = ({
   titleKey,
 }: SmallRankingCardProps) => (
   <div
-    key={`${titleKey}-${item ? item.ranking : ranking}`}
+    key={`${titleKey}-${ranking}`}
     className="nes-sm-corners flex items-center gap-3 bg-white p-3"
   >
     <div
       className={`flex h-10 w-10 flex-shrink-0 flex-nowrap items-center justify-center rounded-full font-cubic text-xl font-bold text-white nes-corners ${colors.rankBg || colors.bg}`}
     >
-      {item ? item.ranking : ranking}
+      {ranking}
     </div>
     <div className="min-w-0 flex-1 truncate text-left font-medium">
       {item ? '#' + item.id + ' ' + item.participantNickname : '--'}
@@ -244,7 +246,7 @@ const SmallRankingCard = ({
 // 子元件：大排名卡片
 interface LargeRankingCardProps {
   item?: RankingData;
-  ranking?: number;
+  ranking: number;
   colors: ColorClasses;
   scoreLabel: string;
   titleKey: string;
@@ -266,8 +268,8 @@ const LargeRankingCard = ({
       {item ? '#' + item.id + ' ' + item.participantNickname : '-'}
     </h3>
     <Image
-      src={getRankImage(item ? item.ranking : (ranking as number))}
-      alt={`第${item ? item.ranking : ranking}名`}
+      src={getRankImage(ranking)}
+      alt={`第${item ? ranking : '--'}名`}
       className="mx-auto h-36 w-auto md:h-24 lg:h-36"
     />
     <div
@@ -388,10 +390,7 @@ export function MainRankingSection() {
     fetchRankingData();
   }, [fetchRankingData]);
 
-  const mainRankingTop3 = rankingData?.mainRankingList.slice(
-    0,
-    TOP_THREE_COUNT
-  );
+  const mainRankingTop3 = rankingData?.mainRankingList.slice(0, 3);
   const mainRanking4to5 = rankingData?.mainRankingList.slice(3, 5);
   const mainRankingRest = rankingData?.mainRankingList.slice(5);
 
@@ -411,7 +410,7 @@ export function MainRankingSection() {
           <div className="mb-8">
             <div className="mx-auto grid max-w-3xl grid-cols-1 gap-6 py-5 font-cubic md:grid-cols-3">
               {[1, 2, 3].map((rank) => {
-                const item = mainRankingTop3?.find((d) => d.ranking === rank);
+                const item = mainRankingTop3?.[rank - 1];
                 const colors = getColorClasses(rank, 'blue', true);
                 return (
                   <LargeRankingCard
@@ -429,11 +428,12 @@ export function MainRankingSection() {
             {/* 第4-5名小卡片 - 固定顯示 */}
             {mainRanking4to5 && mainRanking4to5.length > 0 && (
               <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
-                {mainRanking4to5.map((item) => {
-                  const colors = getColorClasses(item.ranking, 'blue', true);
+                {mainRanking4to5.map((item, i) => {
+                  const colors = getColorClasses(i + 4, 'blue', true);
                   return (
                     <SmallRankingCard
-                      key={`main-${item.ranking}`}
+                      key={`main-${i + 4}`}
+                      ranking={i + 4}
                       item={item}
                       colors={colors}
                       scoreLabel="分"
@@ -449,15 +449,12 @@ export function MainRankingSection() {
               <>
                 {showRestRankings && (
                   <div className="mt-2 grid grid-cols-1 gap-2 md:grid-cols-2">
-                    {mainRankingRest.map((item) => {
-                      const colors = getColorClasses(
-                        item.ranking,
-                        'blue',
-                        true
-                      );
+                    {mainRankingRest.map((item, i) => {
+                      const colors = getColorClasses(i + 6, 'blue', true);
                       return (
                         <SmallRankingCard
-                          key={`main-${item.ranking}`}
+                          key={`main-${i + 6}`}
+                          ranking={i + 6}
                           item={item}
                           colors={colors}
                           scoreLabel="分"
