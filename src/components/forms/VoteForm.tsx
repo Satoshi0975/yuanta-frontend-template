@@ -259,6 +259,20 @@ export function VoteForm({ onSuccess, initialSearchId }: VoteFormProps) {
 
           <FormField
             control={form.control}
+            name="otpCode"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>驗證碼</FormLabel>
+                <FormControl>
+                  <Input placeholder="請輸入簡訊驗證碼" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
             name="hasFuturesAccount"
             render={({ field }) => (
               <FormItem>
@@ -592,19 +606,6 @@ export function VoteForm({ onSuccess, initialSearchId }: VoteFormProps) {
               )}
             />
           </div>
-          <FormField
-            control={form.control}
-            name="otpCode"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>驗證碼</FormLabel>
-                <FormControl>
-                  <Input placeholder="請輸入手機驗證碼" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
 
           {submitError && (
             <div className="rounded border border-red-200 bg-red-50 p-3 text-sm text-red-600">
