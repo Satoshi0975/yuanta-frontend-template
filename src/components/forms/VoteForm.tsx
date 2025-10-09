@@ -13,6 +13,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
+import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
   Form,
@@ -28,6 +29,8 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 
 import gold from '@/assets/images/element/gold.png';
 import { useVoting } from '@/hooks/useVoting';
+import { apiClient } from '@/lib/api';
+import { API_ENDPOINTS } from '@/lib/constants';
 import Image from '@/lib/image';
 import type { Participant } from '@/lib/types';
 import { voteSchema, type VoteFormData } from '@/lib/validations';
@@ -37,6 +40,11 @@ interface VoteFormProps {
   initialSearchId?: string;
 }
 
+interface SessionIdResponse {
+  sessionID: string;
+  systemMessage: string;
+}
+
 export function VoteForm({ onSuccess, initialSearchId }: VoteFormProps) {
   const { isLoading, searchParticipants, vote, clearError } = useVoting();
   const [participants, setParticipants] = useState<Participant[]>([]);
@@ -44,6 +52,11 @@ export function VoteForm({ onSuccess, initialSearchId }: VoteFormProps) {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [otherLocation, setOtherLocation] = useState('');
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
+  const [isSendingOtp, setIsSendingOtp] = useState(false);
+  const [otpMessage, setOtpMessage] = useState<{
+    type: 'success' | 'error';
+    text: string;
+  } | null>(null);
 
   const form = useForm<VoteFormData>({
     resolver: zodResolver(voteSchema),
@@ -53,8 +66,45 @@ export function VoteForm({ onSuccess, initialSearchId }: VoteFormProps) {
       hasFuturesAccount: undefined,
       location: undefined,
       hasSecuritiesAccount: undefined,
+      sessionId: '',
+      otpCode: '',
     },
   });
+
+  const getSessionId = async (mobile: string) => {
+    setIsSendingOtp(true);
+    setOtpMessage(null);
+
+    try {
+      const response = await apiClient.post<SessionIdResponse>(
+        API_ENDPOINTS.SEND_OTP,
+        { phoneNumber: mobile }
+      );
+      console.log(mobile);
+      console.log(response);
+
+      if (response.success && response?.data?.sessionID) {
+        form.setValue('sessionId', response.data?.sessionID);
+        setOtpMessage({
+          type: 'success',
+          text: response?.data?.systemMessage || '驗證碼已發送至您的手機',
+        });
+      } else {
+        setOtpMessage({
+          type: 'error',
+          text: response?.data?.systemMessage || '發送驗證碼失敗，請稍後再試',
+        });
+      }
+    } catch (error) {
+      console.error('發送驗證碼錯誤:', error);
+      setOtpMessage({
+        type: 'error',
+        text: '發送驗證碼時發生錯誤，請稍後再試',
+      });
+    } finally {
+      setIsSendingOtp(false);
+    }
+  };
 
   // 載入初始參賽者列表
   useEffect(() => {
@@ -103,8 +153,10 @@ export function VoteForm({ onSuccess, initialSearchId }: VoteFormProps) {
       const response = await vote(values);
 
       if (response.success) {
+        console.log(response);
         setShowSuccessDialog(true);
         form.reset();
+        setOtpMessage(null);
         onSuccess?.();
       } else {
         setSubmitError(response.message);
@@ -150,33 +202,59 @@ export function VoteForm({ onSuccess, initialSearchId }: VoteFormProps) {
           <FormField
             control={form.control}
             name="voterPhone"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="-ml-1 flex items-center gap-2 font-cubic text-lg font-bold">
-                  <Image
-                    src={gold}
-                    alt="gold"
-                    className="gold-rotate-3d h-5 w-auto"
-                  />
-                  手機號碼
-                  <span className="text-sm font-normal text-gray-400">
-                    必填
-                  </span>
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    className="w-full max-w-52 rounded-none border-2 border-black bg-white"
-                    placeholder="0900000000"
-                    {...field}
-                    disabled={isLoading}
-                  />
-                </FormControl>
-                <FormDescription>
-                  若中獎，屆時會以此手機號碼聯繫得獎者。
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
+            render={({ field }) => {
+              const voterPhone = form.watch('voterPhone') || '';
+              const isPhoneValid = /^09\d{8}$/.test(voterPhone);
+
+              return (
+                <FormItem>
+                  <FormLabel className="-ml-1 flex items-center gap-2 font-cubic text-lg font-bold">
+                    <Image
+                      src={gold}
+                      alt="gold"
+                      className="gold-rotate-3d h-5 w-auto"
+                    />
+                    手機號碼
+                    <span className="text-sm font-normal text-gray-400">
+                      必填
+                    </span>
+                  </FormLabel>
+
+                  <FormControl>
+                    <div className="flex items-center space-x-2">
+                      <Input
+                        className="w-full max-w-52 rounded-none border-2 border-black bg-white"
+                        placeholder="0900000000"
+                        {...field}
+                        disabled={isLoading}
+                      />
+                      <Button
+                        type="button"
+                        disabled={!isPhoneValid || isSendingOtp}
+                        onClick={() => getSessionId(voterPhone)}
+                      >
+                        {isSendingOtp ? '發送中...' : '獲取驗證碼'}
+                      </Button>
+                    </div>
+                  </FormControl>
+                  <FormDescription>
+                    若中獎，屆時會以此手機號碼聯繫得獎者。
+                  </FormDescription>
+                  {otpMessage && (
+                    <p
+                      className={`text-sm ${
+                        otpMessage.type === 'error'
+                          ? 'text-red-600'
+                          : 'text-green-600'
+                      }`}
+                    >
+                      {otpMessage.text}
+                    </p>
+                  )}
+                  <FormMessage />
+                </FormItem>
+              );
+            }}
           />
 
           <FormField
@@ -514,6 +592,19 @@ export function VoteForm({ onSuccess, initialSearchId }: VoteFormProps) {
               )}
             />
           </div>
+          <FormField
+            control={form.control}
+            name="otpCode"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>驗證碼</FormLabel>
+                <FormControl>
+                  <Input placeholder="請輸入手機驗證碼" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
           {submitError && (
             <div className="rounded border border-red-200 bg-red-50 p-3 text-sm text-red-600">

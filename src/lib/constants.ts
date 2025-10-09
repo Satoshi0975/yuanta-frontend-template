@@ -1,5 +1,8 @@
 // API 端點常數
 export const API_ENDPOINTS = {
+  // 寄送OTP
+  SEND_OTP: '/api/OTP/send',
+
   // 驗證碼
   CAPTCHA: '/api/captcha',
 

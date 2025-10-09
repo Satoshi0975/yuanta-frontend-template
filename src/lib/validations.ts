@@ -56,6 +56,8 @@ export const voteSchema = z.object({
     })
     .int()
     .positive('請選擇參賽者'),
+  sessionId: z.string(),
+  otpCode: z.string().min(1, '請輸入手機驗證碼'),
 });
 
 // 成績查詢驗證
