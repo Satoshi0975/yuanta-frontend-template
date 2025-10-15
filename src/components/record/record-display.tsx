@@ -234,7 +234,7 @@ const RecordDisplay = ({
                   <span className="font-bold text-sts-blue-500">
                     {resultsData.profitRate}
                   </span>
-                  ％ 累計總分：
+                  ％ 報酬率積分：
                   <span className="font-bold text-sts-blue-500">
                     {resultsData.profitRateScore}
                   </span>
