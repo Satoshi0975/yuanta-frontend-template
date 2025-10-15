@@ -262,9 +262,23 @@ export function VoteForm({ onSuccess, initialSearchId }: VoteFormProps) {
             name="otpCode"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>驗證碼</FormLabel>
+                <FormLabel className="-ml-1 flex items-center gap-2 font-cubic text-lg font-bold">
+                  <Image
+                    src={gold}
+                    alt="gold"
+                    className="gold-rotate-3d h-5 w-auto"
+                  />
+                  簡訊驗證碼
+                  <span className="text-sm font-normal text-gray-400">
+                    必填
+                  </span>
+                </FormLabel>
                 <FormControl>
-                  <Input placeholder="請輸入簡訊驗證碼" {...field} />
+                  <Input
+                    className="w-full max-w-52 rounded-none border-2 border-black bg-white"
+                    placeholder="請輸入簡訊驗證碼"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

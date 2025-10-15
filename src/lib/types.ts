@@ -99,6 +99,7 @@ export interface RankingData {
   ranking: number;
   participantNickname: string;
   score: number;
+  currentValue?: number;
 }
 
 export interface RankingResponse {

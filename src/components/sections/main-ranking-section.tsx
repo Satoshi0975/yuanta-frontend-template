@@ -72,116 +72,134 @@ const THEME_COLORS: Record<TitleColor, ColorClasses> = {
 
 // 測試模式的假資料
 const mockRankingData: RankingResponse = {
-  mainRankingList: [],
-  profitRateRankingList: [],
-  tradeCountRankingList: [],
-  // mainRankingList: [
-  //   {
-  //     id: 847,
-  //     ranking: 1,
-  //     participantNickname: 'TradeMasterProMaxUltraSuper2024',
-  //     score: 1250.5,
-  //   },
-  //   {
-  //     id: 235,
-  //     ranking: 2,
-  //     participantNickname: 'InvestorPro88',
-  //     score: 1180.2528,
-  //   },
-  //   {
-  //     id: 672,
-  //     ranking: 3,
-  //     participantNickname: 'FuturesKing99',
-  //     score: 1150.75008,
-  //   },
-  //   {
-  //     id: 491,
-  //     ranking: 4,
-  //     participantNickname: 'ProfitExpert2024',
-  //     score: 1120.0,
-  //   },
-  //   {
-  //     id: 128,
-  //     ranking: 5,
-  //     participantNickname: 'StableInvestorProMaxEliteTrader',
-  //     score: 1095.5,
-  //   },
-  //   {
-  //     id: 903,
-  //     ranking: 6,
-  //     participantNickname: 'MarketPioneer',
-  //     score: 1070.25,
-  //   },
-  //   {
-  //     id: 567,
-  //     ranking: 7,
-  //     participantNickname: 'TradeWarrior77',
-  //     score: 1045.0283,
-  //   },
-  //   {
-  //     id: 342,
-  //     ranking: 8,
-  //     participantNickname: 'FuturesMaster',
-  //     score: 1020.75,
-  //   },
-  //   { id: 789, ranking: 9, participantNickname: 'InvestWinner', score: 995.5 },
-  //   {
-  //     id: 156,
-  //     ranking: 10,
-  //     participantNickname: 'TradingPro123',
-  //     score: 970.25,
-  //   },
-  //   { id: 621, ranking: 11, participantNickname: 'ProfitGuru88', score: 945.0 },
-  //   {
-  //     id: 438,
-  //     ranking: 12,
-  //     participantNickname: 'TradeElite99',
-  //     score: 920.75,
-  //   },
-  //   { id: 874, ranking: 13, participantNickname: 'MarketWinner', score: 895.5 },
-  //   {
-  //     id: 293,
-  //     ranking: 14,
-  //     participantNickname: 'FuturesExpert',
-  //     score: 870.25,
-  //   },
-  //   { id: 715, ranking: 15, participantNickname: 'InvestMaster', score: 845.0 },
-  //   { id: 526, ranking: 16, participantNickname: 'TradingGuru', score: 820.75 },
-  //   { id: 981, ranking: 17, participantNickname: 'ProfitHunter', score: 795.5 },
-  //   {
-  //     id: 364,
-  //     ranking: 18,
-  //     participantNickname: 'StableProfit',
-  //     score: 770.25,
-  //   },
-  //   { id: 207, ranking: 19, participantNickname: 'MarketExpert', score: 745.0 },
-  //   { id: 658, ranking: 20, participantNickname: 'FuturesWin', score: -720.5 },
-  // ],
-  // profitRateRankingList: [
-  //   {
-  //     id: 412,
-  //     ranking: 1,
-  //     participantNickname: 'ReturnKing2024',
-  //     score: 85.67,
-  //   },
-  //   {
-  //     id: 736,
-  //     ranking: 2,
-  //     participantNickname: 'ProfitMaster88',
-  //     score: 72.45,
-  //   },
-  //   { id: 289, ranking: 3, participantNickname: 'InvestPro99', score: -68.233 },
-  // ],
-  // tradeCountRankingList: [
-  //   { id: 594, ranking: 1, participantNickname: 'ActiveTrader99', score: 9876 },
-  //   { id: 821, ranking: 2, participantNickname: 'FrequentTrade', score: 8543 },
-  //   {
-  //     id: 167,
-  //     ranking: 3,
-  //     participantNickname: 'BusyInvestor',
-  //     score: -7892.55666,
-  //   },
-  // ],
+  // mainRankingList: [],
+  // profitRateRankingList: [],
+  // tradeCountRankingList: [],
+  mainRankingList: [
+    {
+      id: 847,
+      ranking: 1,
+      participantNickname: 'TradeMasterProMaxUltraSuper2024',
+      score: 1250.5,
+    },
+    {
+      id: 235,
+      ranking: 2,
+      participantNickname: 'InvestorPro88',
+      score: 1180.2528,
+    },
+    {
+      id: 672,
+      ranking: 3,
+      participantNickname: 'FuturesKing99',
+      score: 1150.75008,
+    },
+    {
+      id: 491,
+      ranking: 4,
+      participantNickname: 'ProfitExpert2024',
+      score: 1120.0,
+    },
+    {
+      id: 128,
+      ranking: 5,
+      participantNickname: 'StableInvestorProMaxEliteTrader',
+      score: 1095.5,
+    },
+    {
+      id: 903,
+      ranking: 6,
+      participantNickname: 'MarketPioneer',
+      score: 1070.25,
+    },
+    {
+      id: 567,
+      ranking: 7,
+      participantNickname: 'TradeWarrior77',
+      score: 1045.0283,
+    },
+    {
+      id: 342,
+      ranking: 8,
+      participantNickname: 'FuturesMaster',
+      score: 1020.75,
+    },
+    { id: 789, ranking: 9, participantNickname: 'InvestWinner', score: 995.5 },
+    {
+      id: 156,
+      ranking: 10,
+      participantNickname: 'TradingPro123',
+      score: 970.25,
+    },
+    { id: 621, ranking: 11, participantNickname: 'ProfitGuru88', score: 945.0 },
+    {
+      id: 438,
+      ranking: 12,
+      participantNickname: 'TradeElite99',
+      score: 920.75,
+    },
+    { id: 874, ranking: 13, participantNickname: 'MarketWinner', score: 895.5 },
+    {
+      id: 293,
+      ranking: 14,
+      participantNickname: 'FuturesExpert',
+      score: 870.25,
+    },
+    { id: 715, ranking: 15, participantNickname: 'InvestMaster', score: 845.0 },
+    { id: 526, ranking: 16, participantNickname: 'TradingGuru', score: 820.75 },
+    { id: 981, ranking: 17, participantNickname: 'ProfitHunter', score: 795.5 },
+    {
+      id: 364,
+      ranking: 18,
+      participantNickname: 'StableProfit',
+      score: 770.25,
+    },
+    { id: 207, ranking: 19, participantNickname: 'MarketExpert', score: 745.0 },
+    { id: 658, ranking: 20, participantNickname: 'FuturesWin', score: -720.5 },
+  ],
+  profitRateRankingList: [
+    {
+      id: 412,
+      ranking: 1,
+      participantNickname: 'ReturnKing2024',
+      score: 85.67,
+      currentValue: 100,
+    },
+    {
+      id: 736,
+      ranking: 2,
+      participantNickname: 'ProfitMaster88',
+      score: 72.45,
+      currentValue: 90,
+    },
+    {
+      id: 289,
+      ranking: 3,
+      participantNickname: 'InvestPro99',
+      score: -68.233,
+      currentValue: 80.4789,
+    },
+  ],
+  tradeCountRankingList: [
+    {
+      id: 594,
+      ranking: 1,
+      participantNickname: 'ActiveTrader99',
+      score: 9876,
+    },
+    {
+      id: 821,
+      ranking: 2,
+      participantNickname: 'FrequentTrade',
+      score: 8543,
+    },
+    {
+      id: 167,
+      ranking: 3,
+      participantNickname: 'BusyInvestor',
+      score: -7892.55666,
+    },
+  ],
 };
 
 // 工具函數
@@ -221,7 +239,7 @@ const SmallRankingCard = ({
 }: SmallRankingCardProps) => (
   <div
     key={`${titleKey}-${ranking}`}
-    className="nes-sm-corners flex items-center gap-3 bg-white p-3"
+    className="nes-sm-corners flex h-16 items-center gap-3 bg-white p-3"
   >
     <div
       className={`flex h-10 w-10 flex-shrink-0 flex-nowrap items-center justify-center rounded-full font-cubic text-xl font-bold text-white nes-corners ${colors.rankBg || colors.bg}`}
@@ -231,14 +249,21 @@ const SmallRankingCard = ({
     <div className="min-w-0 flex-1 truncate text-left font-medium">
       {item ? '#' + item.id + ' ' + item.participantNickname : '--'}
     </div>
-    <div className="flex-shrink-0 font-sans text-lg font-bold text-sts-text">
-      {item
-        ? item.score.toLocaleString(undefined, {
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 2,
-          })
-        : '--'}{' '}
-      {scoreLabel}
+    <div className="flex flex-shrink-0 flex-col text-right font-sans text-lg font-bold text-sts-text sm:flex-row">
+      <p>
+        {item
+          ? item.score.toLocaleString(undefined, {
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 2,
+            })
+          : '--'}{' '}
+        {scoreLabel}
+        {item?.currentValue && (
+          <p className="text-xs text-gray-500">
+            當日報酬率 {item?.currentValue.toFixed(0)}%
+          </p>
+        )}
+      </p>
     </div>
   </div>
 );
@@ -483,7 +508,7 @@ export function MainRankingSection() {
               title="報酬率王排名"
               data={rankingData?.profitRateRankingList ?? null}
               color="green"
-              scoreLabel="%"
+              scoreLabel="分"
               titleKey="profit"
             />
             <SubRankingSection

@@ -168,15 +168,23 @@ const RecordDisplay = ({
                   {resultsData.totalScore}
                 </div>
               </div>
-              <div className="nes-sm-corners flex h-12 flex-nowrap bg-white text-xl">
-                <div className="flex h-full w-[40%] min-w-[100px] flex-shrink-0 items-center bg-[#D88600] px-3 font-bold text-white">
-                  <p className="truncate">排名</p>
+              <div>
+                <div className="nes-sm-corners flex h-12 flex-nowrap bg-white text-xl">
+                  <div className="flex h-full w-[40%] min-w-[100px] flex-shrink-0 items-center bg-[#D88600] px-3 font-bold text-white">
+                    <p className="truncate">排名</p>
+                  </div>
+                  <div className="flex h-full w-full items-center justify-end bg-white px-3 font-sans font-bold text-[#D88600]">
+                    {resultsData.totalTradeCount >= 200
+                      ? resultsData.totalRanking
+                      : '資格不符'}
+                  </div>
                 </div>
-                <div className="flex h-full w-full items-center justify-end bg-white px-3 font-sans font-bold text-[#D88600]">
-                  {resultsData.totalRanking}
-                </div>
+                <p className="mt-1 text-left text-xs text-red-500">
+                  *交易200口以上，始符合獲獎資格。
+                </p>
               </div>
             </div>
+
             <div className="grid grid-cols-1 gap-x-2 gap-y-2 text-lg font-medium md:grid-cols-3 md:text-base">
               <p>
                 報酬率積分：
@@ -211,15 +219,24 @@ const RecordDisplay = ({
                   className="gold-rotate-3d h-4 w-auto"
                 />
                 <p className="break-keep">
-                  報酬率：您的排名是第
-                  <span className="font-bold text-sts-blue-500">
-                    {resultsData.profitRateRanking}
-                  </span>
-                  名，
-                  <br className="md:hidden" />
                   報酬率：
+                  {resultsData.totalRanking >= 200 && (
+                    <>
+                      您的排名是第
+                      <span className="font-bold text-sts-blue-500">
+                        {resultsData.profitRateRanking}
+                      </span>
+                      名，
+                    </>
+                  )}
+                  <br className="md:hidden" />
+                  當日報酬率：
                   <span className="font-bold text-sts-blue-500">
                     {resultsData.profitRate}
+                  </span>
+                  ％ 累計總分：
+                  <span className="font-bold text-sts-blue-500">
+                    {resultsData.profitRateScore}
                   </span>
                   ％
                 </p>
@@ -231,11 +248,16 @@ const RecordDisplay = ({
                   className="gold-rotate-3d h-4 w-auto"
                 />
                 <p className="break-keep">
-                  口數王：您的排名是第
-                  <span className="font-bold text-sts-blue-500">
-                    {resultsData.tradeCountRanking}
-                  </span>
-                  名，
+                  口數王：
+                  {resultsData.totalRanking >= 200 && (
+                    <>
+                      您的排名是第
+                      <span className="font-bold text-sts-blue-500">
+                        {resultsData.tradeCountRanking}
+                      </span>
+                      名，
+                    </>
+                  )}
                   <br className="md:hidden" />
                   總交易口數：
                   <span className="font-bold text-sts-blue-500">
@@ -262,6 +284,9 @@ const RecordDisplay = ({
                   </span>
                 </p>
               </div>
+              <p className="mt-1 text-center text-xs text-red-500">
+                *交易200口以上，始符合報酬率、口數王獲獎資格。
+              </p>
             </div>
           </div>
         </div>
@@ -275,11 +300,14 @@ const RecordDisplay = ({
       )}
 
       {/* 無選擇帳號時的提示 */}
-      {!isLoading && !resultsData && accounts.length > 0 && !selectedAccount && (
-        <div className="py-8 text-center">
-          <p className="text-gray-600">請選擇帳號以查詢成績</p>
-        </div>
-      )}
+      {!isLoading &&
+        !resultsData &&
+        accounts.length > 0 &&
+        !selectedAccount && (
+          <div className="py-8 text-center">
+            <p className="text-gray-600">請選擇帳號以查詢成績</p>
+          </div>
+        )}
 
       {/* 無帳號時的提示 */}
       {!isLoading && accounts.length === 0 && (
