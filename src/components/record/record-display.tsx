@@ -238,7 +238,6 @@ const RecordDisplay = ({
                   <span className="font-bold text-sts-blue-500">
                     {resultsData.profitRateScore}
                   </span>
-                  ％
                 </p>
               </div>
               <div className="flex items-baseline gap-2 text-left text-lg">

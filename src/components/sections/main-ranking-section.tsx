@@ -258,11 +258,11 @@ const SmallRankingCard = ({
             })
           : '--'}{' '}
         {scoreLabel}
-        {item?.currentValue && (
+        {item?.currentValue !== null && item?.currentValue !== undefined ? (
           <p className="text-xs text-gray-500">
-            當日報酬率 {item?.currentValue.toFixed(0)}%
+            當日報酬率 {item.currentValue.toFixed(0)}%
           </p>
-        )}
+        ) : null}
       </p>
     </div>
   </div>
