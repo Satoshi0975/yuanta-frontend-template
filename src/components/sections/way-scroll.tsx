@@ -2,7 +2,6 @@
 
 import runwayImage from '@/assets/images/bg/runway.png';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ButtonSideButtons } from './button-side-buttons';
 
 export const WayScroll = () => {
   const { scrollYProgress } = useScroll();
@@ -43,16 +42,16 @@ export const WayScroll = () => {
       {/* 按鈕背景（手機版） */}
       <div className="-mb-[1px] w-full overflow-hidden">
         <motion.div
-          className="mx-auto h-[48px] w-[3000px] bg-left-bottom bg-repeat-x md:hidden"
+          className="mx-auto hidden h-[16px] w-[3000px] bg-left-bottom bg-repeat-x"
           style={{
             x: runwayX,
             backgroundImage: `url(${runwayImage.src})`,
-            backgroundSize: '116% 700%',
+            backgroundSize: 'auto 100%',
           }}
         />
       </div>
 
-      <ButtonSideButtons />
+      {/* <ButtonSideButtons /> */}
       <div className="absolute top-full z-0 -mt-[1px] h-32 w-full bg-white" />
     </div>
   );

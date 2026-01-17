@@ -2,8 +2,6 @@ import Logo from '@/assets/logo.png';
 import Image from '@/lib/image';
 import Link from 'next/link';
 import MediaLinks from './media-links';
-import Menu from './menu';
-import RecordDialog from '@/components/dialogs/record-dialog';
 
 const Navbar = () => {
   // const [active, setActive] = useState('');
@@ -39,7 +37,7 @@ const Navbar = () => {
       <div className="fixed left-0 right-0 top-0 z-[99] w-screen bg-white px-5 py-3 shadow-md md:px-7 md:py-4">
         <nav className="container flex items-center justify-between">
           <h1 className="">
-            <Link href="/" className="">
+            <Link href="/form" className="">
               <Image
                 src={Logo}
                 className="w-28 cursor-pointer md:w-44"
@@ -49,7 +47,7 @@ const Navbar = () => {
               />
             </Link>
           </h1>
-          <ul className="hidden w-full items-center justify-end pr-5 text-lg font-bold text-primary lg:flex font-cubic">
+          {/* <ul className="hidden w-full items-center justify-end pr-5 text-lg font-bold text-primary lg:flex font-cubic">
             <li className="border-gray-300 px-3 last:border-r-0 hover:animate-pixel-glitch">
               
               <Link 
@@ -71,11 +69,11 @@ const Navbar = () => {
             <li className="border-gray-300 px-3 last:border-r-0 hover:animate-pixel-glitch">
               <Link href="#vote">人氣投票</Link>
             </li>
-          </ul>
+          </ul> */}
           <ul className="space-x-3 hidden lg:flex">
             <MediaLinks />
           </ul>
-          <Menu />
+          {/* <Menu /> */}
         </nav>
       </div>
     </>

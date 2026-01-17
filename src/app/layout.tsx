@@ -1,5 +1,4 @@
 import sky from '@/assets/images/bg/sky.png';
-import { LeftSideButtons } from '@/components/sections/left-side-buttons';
 import { SkyScroll } from '@/components/sections/sky-scroll';
 import { CloudElements } from '@/components/ui/cloud-elements';
 import Footer from '@/components/ui/footer';
@@ -77,7 +76,7 @@ export default function RootLayout({
           </div>
           <div className="fixed top-full z-[999] h-screen w-full bg-black" />
         </main>
-        <LeftSideButtons />
+        {/* <LeftSideButtons /> */}
         <Footer />
       </body>
     </html>
