@@ -229,7 +229,11 @@ export function InformationForm() {
           </AlertDialogHeader>
           <div className="flex flex-col items-center justify-center pt-4">
             <AlertDialogDescription className="-mt-4 mb-3 text-center text-lg text-sts-text">
-              文案文案
+              感謝填寫資訊！
+              <br />
+              電子禮券將於30天內寄送到您填寫的手機簡訊，請留意訊息。
+              <br />
+              有任何問題請洽活動小組（02-2717-6000 #7213蘇小姐）
             </AlertDialogDescription>
             <AlertDialogAction
               onClick={() => setShowSuccessDialog(false)}
